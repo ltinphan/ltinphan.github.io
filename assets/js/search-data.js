@@ -443,8 +443,8 @@ ninja.data = [{
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/announcement_advantech2025/";
-            },},{id: "projects-quadruped-robot",
-          title: 'Quadruped Robot',
+            },},{id: "projects-running-quadruped-robot",
+          title: 'Running Quadruped Robot',
           description: "High-speed Quadruped with Articulated Spine",
           section: "Projects",handler: () => {
               window.location.href = "/projects/1_project/";
