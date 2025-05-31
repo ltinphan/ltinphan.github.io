@@ -1,33 +1,66 @@
 ---
 layout: post
-title: A long announcement with details
-date: 2015-11-07 16:11:00-0400
+title: A talk at Konica Minolta Vietnam Event
+date: 2025-03-21 16:11:00-0400
 inline: false
 related_posts: false
 ---
 
-Announcements and news can be much longer than just quick inline posts. In fact, they can have all the features available for the standard blog posts. See below.
+A talk at Konica Minolta Vietnam Event to collaboration with Konica Minolta and Jaka to provide full solutions on manipulated tasks and moving missions in manufacturing applications.
 
 ---
 
-Jean shorts raw denim Vice normcore, art party High Life PBR skateboard stumptown vinyl kitsch. Four loko meh 8-bit, tousled banh mi tilde forage Schlitz dreamcatcher twee 3 wolf moon. Chambray asymmetrical paleo salvia, sartorial umami four loko master cleanse drinking vinegar brunch. <a href="https://www.pinterest.com">Pinterest</a> DIY authentic Schlitz, hoodie Intelligentsia butcher trust fund brunch shabby chic Kickstarter forage flexitarian. Direct trade <a href="https://en.wikipedia.org/wiki/Cold-pressed_juice">cold-pressed</a> meggings stumptown plaid, pop-up taxidermy. Hoodie XOXO fingerstache scenester Echo Park. Plaid ugh Wes Anderson, freegan pug selvage fanny pack leggings pickled food truck DIY irony Banksy.
+![Konica Minolta Vietnam Event](/assets/img/konica_event_2025_1.png)
+*Figure: Konica Minolta Vietnam Event.*
 
-#### Hipster list
+### About Next Robotics
 
-<ul>
-    <li>brunch</li>
-    <li>fixie</li>
-    <li>raybans</li>
-    <li>messenger bag</li>
-</ul>
+Next Robotics specializes in Robotics & AI products for smart manufacturing, offering:
 
-Hoodie Thundercats retro, tote bag 8-bit Godard craft beer gastropub. Truffaut Tumblr taxidermy, raw denim Kickstarter sartorial dreamcatcher. Quinoa chambray slow-carb salvia readymade, bicycle rights 90's yr typewriter selfies letterpress cardigan vegan.
+- **Autonomous Mobile Robots (NextAMR)**
+- **AI-powered Inspection Systems (NextSight)**
+- **AI-based Video Analytics Platform (NextEye)**
 
+Their mission is to bridge industry and smart technology, serve as a reliable smart manufacturing partner, and contribute to Vietnam's innovation hub. Services include consulting, design, simulation, implementation, IT integration (WMS/MES), and system stabilization.
+
+### Core Technologies
+
+- **Artificial Intelligence (AI):** Focuses on deep learning, reasoning, and high-value tasks.
+- **Autonomous Driving (AD):** Enables systems to make execution decisions without human intervention.
+
+### NextAMR
+
+- **Capabilities:** Move everything with one click.
+- **Product Roadmap:** Includes factory pulling/lifting, warehouse lifting, roller AMR, auto pallet mover, and more.
+- **End-to-End Solution:** Features safety devices, pallet management, WMS integration, fleet management, robot controller, task processor, and communication APIs.
+
+### NextFleet
+
+A multi-robot management system supporting:
+
+- Multiple navigation modes (QR, SLAM)
+- Various robot types (AMR, forklifts)
+- Integration with WMS, ERP, and external devices
+
+### Case Studies & Advantages
+
+- Simulation and deployment in real-world scenarios
+- Applications with high racks
+- Solution advantages: adaptability, high storage capability, high throughput, optimized design, AI visual recognition, and excellent ROI
+
+### Collaboration
+
+A partnership between Konica Minolta, JAKA, and Next Robotics.
+
+### Key Issues Addressed
+
+Next Robotics aims to solve:
+
+1. Workforce dependence
+2. Limited connectivity
+3. Lack of self-correction/autonomous operation
+4. Shortage of highly qualified experts/workforce
 ---
 
-Pug heirloom High Life vinyl swag, single-origin coffee four dollar toast taxidermy reprehenderit fap distillery master cleanse locavore. Est anim sapiente leggings Brooklyn ea. Thundercats locavore excepteur veniam eiusmod. Raw denim Truffaut Schlitz, migas sapiente Portland VHS twee Bushwick Marfa typewriter retro id keytar.
-
-> We do not grow absolutely, chronologically. We grow sometimes in one dimension, and not in another, unevenly. We grow partially. We are relative. We are mature in one realm, childish in another.
-> —Anais Nin
-
-Fap aliqua qui, scenester pug Echo Park polaroid irony shabby chic ex cardigan church-key Odd Future accusamus. Blog stumptown sartorial squid, gastropub duis aesthetic Truffaut vero. Pinterest tilde twee, odio mumblecore jean shorts lumbersexual.
+![Konica Minolta Vietnam Event](/assets/img/konica_event_2025_2.png)
+*Figure: Presentation in the Konica Minolta Vietnam Event.*
