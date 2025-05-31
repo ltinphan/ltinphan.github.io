@@ -30,13 +30,6 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/projects/";
           },
-        },{id: "nav-repositories",
-          title: "repositories",
-          description: "Edit the `_data/repositories.yml` and change the `github_users` and `github_repos` lists to include your own GitHub profile and repositories.",
-          section: "Navigation",
-          handler: () => {
-            window.location.href = "/repositories/";
-          },
         },{id: "nav-cv",
           title: "cv",
           description: "The data was updated in January 2025",
@@ -431,24 +424,25 @@ ninja.data = [{
           window.location.href = "/blog/2015/formatting-and-links/";
         
       },
-    },{id: "news-join-nextg-fpt-software-for-developing-autonomous-vehicles",
+    },{id: "news-join-rapyuta-robotics-based-in-tokyo-japan",
+          title: 'Join Rapyuta Robotics based in Tokyo Japan',
+          description: "",
+          section: "News",},{id: "news-join-vinai-for-developing-autopilot-features-on-autonomous-driving-cars",
+          title: 'Join VinAI for developing Autopilot features on autonomous driving cars',
+          description: "",
+          section: "News",},{id: "news-join-nextg-fpt-software-for-developing-autonomous-vehicles",
           title: 'Join NextG-FPT Software for developing autonomous vehicles',
           description: "",
           section: "News",},{id: "news-a-talk-at-konica-minolta-vietnam-event",
           title: 'A talk at Konica Minolta Vietnam Event',
           description: "",
           section: "News",handler: () => {
-              window.location.href = "/news/announcement_2/";
-            },},{id: "news-a-talk-at-konica-minolta-vietnam-event",
-          title: 'A talk at Konica Minolta Vietnam Event',
-          description: "",
-          section: "News",handler: () => {
-              window.location.href = "/news/announcement_sample/";
+              window.location.href = "/news/announcement_konica2025/";
             },},{id: "news-a-talk-about-robotics-solutions-for-smart-manufacturing-at-advantech-webinar",
           title: 'A talk about Robotics Solutions for Smart Manufacturing at Advantech Webinar',
           description: "",
           section: "News",handler: () => {
-              window.location.href = "/news/announcement_3/";
+              window.location.href = "/news/announcement_advantech2025/";
             },},{id: "projects-project-1",
           title: 'project 1',
           description: "with background image",
@@ -502,32 +496,11 @@ ninja.data = [{
           window.open("mailto:%6C%75%6F%6E%67%74%69%6E@%67%6D%61%69%6C.%63%6F%6D", "_blank");
         },
       },{
-        id: 'social-facebook',
-        title: 'Facebook',
-        section: 'Socials',
-        handler: () => {
-          window.open("https://facebook.com/", "_blank");
-        },
-      },{
-        id: 'social-inspire',
-        title: 'Inspire HEP',
-        section: 'Socials',
-        handler: () => {
-          window.open("https://inspirehep.net/authors/1010907", "_blank");
-        },
-      },{
         id: 'social-linkedin',
         title: 'LinkedIn',
         section: 'Socials',
         handler: () => {
           window.open("https://www.linkedin.com/in/luongtinphan", "_blank");
-        },
-      },{
-        id: 'social-rss',
-        title: 'RSS Feed',
-        section: 'Socials',
-        handler: () => {
-          window.open("/feed.xml", "_blank");
         },
       },{
         id: 'social-scholar',
