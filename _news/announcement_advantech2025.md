@@ -1,6 +1,6 @@
 ---
 layout: post
-title: A talk about Robotics Solutions for Smart Manufacturing at Advantech Webinar
+title: My talk about Robotics Solutions for Smart Manufacturing at Advantech Webinar
 date: 2025-05-29 07:59:00-0400
 inline: false
 related_posts: false
@@ -10,7 +10,16 @@ A talk about "Robotics Solutions for Smart Manufacturing" at Advantech Vietnam's
 
 ---
 ![Advantech Vietnam Webinar](/assets/img/advantech_event_2025.png)
-*Figure: Presentation in the Konica Minolta Vietnam Event.*
+*Figure: Advantech Vietnam Webine.*
+
+<div class="row">
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.liquid loading="eager" path="assets/img/advantech_event_2025.png" title="example image" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>
+<div class="caption">
+    Advantech Vietnam Webinar.
+</div>
 
 The presentation by Dr. Phan Luong Tin of Next Robotics Jsc, dated May 29, 2025, focusing on robotics solutions for smart manufacturing.
 
