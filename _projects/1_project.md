@@ -1,11 +1,12 @@
 ---
 layout: page
-title: Quadruped Robot
+title: Running Quadruped Robot
 description: High-speed Quadruped with Articulated Spine
 img: assets/img/quadruped_spine.png
 importance: 1
 category: Ph.D research
 related_publications: true
+
 ---
 
 Development of high-speed running quadruped with articulated spinal joint
@@ -14,11 +15,11 @@ Development of high-speed running quadruped with articulated spinal joint
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/5.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid loading="eager" path="assets/img/quadruped_spine.png" title="example image" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 <div class="caption">
-    This image can also have a caption. It's like magic.
+    High-speed quadruped robot with an articulated spinal join located in the body.
 </div>
 
 In this research, the effect of whole body compliance on the quadruped running was investigated and the principles of design & control of the whole body was implemented. 
