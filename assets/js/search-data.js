@@ -433,19 +433,19 @@ ninja.data = [{
           section: "News",},{id: "news-join-nextg-fpt-software-for-developing-autonomous-vehicles",
           title: 'Join NextG-FPT Software for developing autonomous vehicles',
           description: "",
-          section: "News",},{id: "news-a-talk-at-konica-minolta-vietnam-event",
-          title: 'A talk at Konica Minolta Vietnam Event',
+          section: "News",},{id: "news-my-talk-at-konica-minolta-vietnam-event",
+          title: 'My talk at Konica Minolta Vietnam Event',
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/announcement_konica2025/";
-            },},{id: "news-a-talk-about-robotics-solutions-for-smart-manufacturing-at-advantech-webinar",
-          title: 'A talk about Robotics Solutions for Smart Manufacturing at Advantech Webinar',
+            },},{id: "news-my-talk-about-robotics-solutions-for-smart-manufacturing-at-advantech-webinar",
+          title: 'My talk about Robotics Solutions for Smart Manufacturing at Advantech Webinar',
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/announcement_advantech2025/";
-            },},{id: "projects-project-1",
-          title: 'project 1',
-          description: "with background image",
+            },},{id: "projects-quadruped-robot",
+          title: 'Quadruped Robot',
+          description: "High-speed Quadruped with Articulated Spine",
           section: "Projects",handler: () => {
               window.location.href = "/projects/1_project/";
             },},{id: "projects-project-2",
