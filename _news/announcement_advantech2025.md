@@ -14,7 +14,6 @@ A talk about "Robotics Solutions for Smart Manufacturing" at Advantech Vietnam's
 
 The presentation by Dr. Phan Luong Tin of Next Robotics Jsc, dated May 29, 2025, focusing on robotics solutions for smart manufacturing.
 
-
 ## Key Points from the Presentation
 
 - **Next Robotics:** Vietnam-based InTech company specializing in smart manufacturing solutions. Core technologies include robotics, AI, and software engineering. Products: NextAMR (Autonomous Mobile Robots), NextSight (AI-powered Inspection Systems), and NextEye (AI-based Video Analytics Platform).
