@@ -1,97 +1,110 @@
 - title: General Information
   type: map
   contents:
-    - name: Full Name
-      value: Albert Einstein
-    - name: Date of Birth
-      value: 14th March 1879
+    - name: Full Name in Vietnamese
+      value: Phan Lương Tín
+    - name: Full Name in English
+      value: Luong Tin Phan, in short Tin Phan
     - name: Languages
-      value: English, German
+      value: English, Vietnamese, Korean(reading and writing), French(reading and writing)
 
 - title: Education
   type: time_table
   contents:
     - title: PhD
-      institution: University of Zurich, Zurich, Switzerland
-      year: 1905
+      institution: Sungkyunkwan University, Suwon, South Korea
+      year: 2020
       description:
-        - Description 1.
-        - Description 2.
-        - title: Description 3.
+        - A PhD student in the Department of Mechanical Engineering.
+        - Research on quadruped locomotion and control.
+        - title: Thesis on Running Quadruped with Articulated Spine
           contents:
-            - Sub-description 1.
-            - Sub-description 2.
-    - title: Federal teaching diploma
-      institution: Eidgenössische Technische Hochschule, Zurich, Switzerland
-      year: 1900
+            - Dynamics of Running Quadruped with Articulated Spine.
+            - Control Strategy for Running Quadruped.
+    - title: Bachelor of Engineering
+      institution: Danang University of Technology, Danang, Vietnam
+      year: 2012
       description:
-        - Description 1.
-        - Description 2.
+        - A student of the PFIEV program which is a cooperation program between the French Ministry of Foreign Affairs and the Vietnamese Ministry of Education and Training.
+        - Major in Automatic Control
 
 - title: Experience
   type: time_table
   contents:
-    - title: Professor of Theoretical Physics
-      institution: Institute for Advanced Study, Princeton University
-      year: 1933 - 1955
+    - title: Robotics Engineer
+      institution: Rapyuta Robotics, Tokyo, Japan
+      year: 2020 - 2021
       description:
-        - Description 1.
-        - Description 2.
-        - title: Description 3.
+        - Developed and implemented AMR motion algorithms for various applications.
+        - Collaborated with cross-functional teams to enhance AMR capabilities.
+        - title: Multiple Projects.
           contents:
-            - Sub-description 1.
-            - Sub-description 2.
-    - title: Visiting Professor
-      institution: California Institute of Technology, Pasadena, California, US
-      year: 1933
+            - Autonomous mobile robots.
+            - Autonomous forklifts.
+    - title: Robotics Engineer/Researcher
+      institution: VinAI Research, Hanoi, Vietnam
+      year: 2021
       description:
-        - Description 1.
-        - Description 2.
+        - Developed motion planning algorithms for autonomous driving.
+        - Developed and implemented a novel trajectory optimization method.
 
-    - title: Director
-      institution: Kaiser Wilhelm Institute for Physics, Berlin, Germany.
-      year: 1917-1933
-
-    - title: Professor of Theoretical Physics
-      institution: Karl-Ferdinand University, Prague, Czechoslovakia
-      year: 1911 - 1917
+    - title: Solution Architect
+      institution: NextG, FPT Software, Ho Chi Minh, Vietnam.
+      year: 2021-2022
       description:
+        - Designed and implemented solutions for various clients.
+        - Collaborated with cross-functional teams to deliver high-quality solutions.
+        - title: Multiple Projects.
+          contents:
+            - Autonomous mobile robots.
+            - Autonomous driving cars.
 
-    - title: Associate Professor of Theoretical Physics
-      institution: University of Zurich, Zurich, Switzerland
-      year: 1909 - 1911
-
-- title: Open Source Projects
-  type: time_table
-  contents:
-    - title: <a href="https://github.com/alshedivat/al-folio">al-folio</a>
-      year: 2015-now
-      description: A beautiful, simple, clean, and responsive Jekyll theme for academics.
+    - title: Senior Robotics Engineer/Tech Lead
+      institution: Next Robotics, Ho Chi Minh, Vietnam
+      year: 2022 - present
+      description:
+        - Leading a team of robotics engineers to develop and implement advanced robotics solutions.
+        - Collaborating with cross-functional teams to deliver high-quality solutions.
+        - Managing multiple projects in AMR solutions in various industries (e.g., warehouse, manufacturing, semiconductor).
+        - title: Multiple Projects.
+          contents:
+            - Autonomous mobile robots.
+            - Autonomous forklifts.
 
 - title: Honors and Awards
   type: time_table
   contents:
-    - year: 1921
+    - year: 2023
       items:
-        - Nobel Prize in Physics
-        - Matteucci Medal
-    - year: 2029
+        - NextAMR - Top 10 Qualcomm Vietnam Innovation Challenge
+    - year: 2022
       items:
-        - Max Planck Medal
+        - NextAMR - Sao Khuê 2022
+    - year: 2021
+      items:
+        - Silver Prize - OpenCV Spatial AI Challenge 2021
+    - year: 2013
+      items:
+        - Full scholarship for the Ph.D program from Sungkyunkwan University.
 
 - title: Academic Interests
   type: nested_list
   contents:
-    - title: Topic 1.
+    - title: Legged Robots.
       items:
-        - Description 1.
-        - Description 2.
-    - title: Topic 2.
+        - Quadruped Robot: Dynamics and Control.
+        - Quadruped Robot: Gait Planning and Optimization.
+    - title: Autonomous Driving Vehicle.
       items:
-        - Description 1.
-        - Description 2.
+        - Autonomous Driving: Perception and Navigation.
+        - Autonomous Driving: Path Planning and Control.
+        - Quadruped Robot: Gait Planning and Optimization.
+    - title: Autonomous Mobile Robots.
+      items:
+        - Autonomous Mobile Robots.
+        - Fleet Management System.
 
 - title: Other Interests
   type: list
   contents:
-    - <u>Hobbies:</u> Hobby 1, Hobby 2, etc.
+    - <u>Hobbies:</u> Sports, Music, Reading.
