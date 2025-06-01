@@ -4,7 +4,7 @@ title: Running Quadruped Robot
 description: High-speed Quadruped with Articulated Spine
 img: assets/img/quadruped_spine.png
 importance: 1
-category: Ph.D research
+category: Ph.D
 related_publications: true
 
 ---
