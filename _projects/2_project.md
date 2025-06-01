@@ -2,7 +2,7 @@
 layout: page
 title: Trajectory planning for mobile robot
 description: using Model Predictive Control to avoid obstacles
-img: assets/img/quadruped_spine.png
+img: assets/img/mpc_vehicle.png
 importance: 2
 category: Ph.D
 related_publications: true

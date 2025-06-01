@@ -2,11 +2,11 @@
 layout: page
 title: The Fleet Management System for autonomous mobile robots
 description: at Next Robotics - FPT Software (NextG) spin-off
-img: assets/img/nextg_amr.png
+img: assets/img/nextamr_fleet.png
 importance: 1
 category: work
-related_publications: true
-giscus_comments: true
+related_publications: false
+giscus_comments: false
 ---
 Development of the Vietnam's first Fleet Management System for coordinating multiple autonomous mobile robots (AMRs) in warehouses and manufacturing zones
 ---

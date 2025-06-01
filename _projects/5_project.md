@@ -5,8 +5,8 @@ description: at NextG - FPT Software
 img: assets/img/nextg_remoteparking.png
 importance: 1
 category: work
-related_publications: true
-giscus_comments: true
+related_publications: false
+giscus_comments: false
 ---
 Development of the Vietnam's first Auto Parking feature for autonomous driving vehicles
 ---
