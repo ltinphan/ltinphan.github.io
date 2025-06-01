@@ -448,34 +448,34 @@ ninja.data = [{
           description: "High-speed Quadruped with Articulated Spine",
           section: "Projects",handler: () => {
               window.location.href = "/projects/1_project/";
-            },},{id: "projects-project-2",
-          title: 'project 2',
-          description: "a project with a background image and giscus comments",
+            },},{id: "projects-trajectory-planning-for-mobile-robot",
+          title: 'Trajectory planning for mobile robot',
+          description: "using Model Predictive Control to avoid obstacles",
           section: "Projects",handler: () => {
               window.location.href = "/projects/2_project/";
-            },},{id: "projects-project-3-with-very-long-name",
-          title: 'project 3 with very long name',
-          description: "a project that redirects to another website",
+            },},{id: "projects-autonomous-mobile-robot-and-forklift",
+          title: 'Autonomous Mobile Robot and Forklift',
+          description: "at Rapyuta Robotics",
           section: "Projects",handler: () => {
               window.location.href = "/projects/3_project/";
-            },},{id: "projects-project-4",
-          title: 'project 4',
-          description: "another without an image",
+            },},{id: "projects-autonomous-driving-car",
+          title: 'Autonomous Driving Car',
+          description: "at VinAI",
           section: "Projects",handler: () => {
               window.location.href = "/projects/4_project/";
-            },},{id: "projects-project-5",
-          title: 'project 5',
-          description: "a project with a background image",
+            },},{id: "projects-autonomous-parking-feature",
+          title: 'Autonomous Parking Feature',
+          description: "at NextG - FPT Software",
           section: "Projects",handler: () => {
               window.location.href = "/projects/5_project/";
-            },},{id: "projects-project-6",
-          title: 'project 6',
-          description: "a project with no image",
+            },},{id: "projects-autonomous-mobile-robot-amr-for-warehouses-and-manufacturing-zones",
+          title: 'Autonomous Mobile Robot (AMR) for warehouses and manufacturing zones',
+          description: "at NextG - FPT Software",
           section: "Projects",handler: () => {
               window.location.href = "/projects/6_project/";
-            },},{id: "projects-project-7",
-          title: 'project 7',
-          description: "with background image",
+            },},{id: "projects-the-fleet-management-system-for-autonomous-mobile-robots",
+          title: 'The Fleet Management System for autonomous mobile robots',
+          description: "at Next Robotics - FPT Software (NextG) spin-off",
           section: "Projects",handler: () => {
               window.location.href = "/projects/7_project/";
             },},{id: "projects-project-8",
