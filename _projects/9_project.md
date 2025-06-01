@@ -4,7 +4,8 @@ title: project 9
 description: another project with an image 🎉
 img: assets/img/6.jpg
 importance: 4
-category: fun
+category: others
+giscus_comments: true
 ---
 
 Every project has a beautiful feature showcase page.
