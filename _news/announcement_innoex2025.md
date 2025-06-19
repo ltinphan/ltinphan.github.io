@@ -9,8 +9,8 @@ related_posts: false
 I was invited on behalf of NextRobotics as a Alumni of the QVIC2023 to the InnoEx & Qualcomm event "Edge AI: The Era of Intelligent Connectivity for Every Device" held at Rex Hotel, HCM on Jun 19th, 2025.
 
 ---
-![InnoEx & Qualcomm event](/assets/img/innoex-qualcomm2025.jpg)
-*Figure: InnoEx & Qualcomm event*
+<!-- ![InnoEx & Qualcomm event](/assets/img/innoex-qualcomm2025.jpg)
+*Figure: InnoEx & Qualcomm event* -->
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
