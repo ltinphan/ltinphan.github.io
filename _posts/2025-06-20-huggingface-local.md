@@ -1,12 +1,14 @@
 ---
 layout: post
 title: Run Huggingface Models Locally For Free
-date: 2025-06-20 15:09:00
+date: 2025-06-15 15:09:00
 description: a step-to-step guideline to run huggingface models locally
-tags: formatting code
-categories: AI
+tags: AI code
+categories: external-services
 featured: true
 ---
+
+````markdown
 
 # Hugging Face Explained: Run AI Models Locally For Free
 
@@ -85,3 +87,5 @@ Every model on the Hugging Face Hub has a "model card" containing important info
 ## Conclusion
 
 You are now equipped with the essential tools and knowledge to start integrating Hugging Face models into your own AI applications.
+
+````
