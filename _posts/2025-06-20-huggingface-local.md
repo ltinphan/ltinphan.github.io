@@ -7,9 +7,6 @@ tags: AI code
 categories: external-services
 featured: true
 ---
-
-# Hugging Face Explained: Run AI Models Locally For Free
-
 If you've been following AI advancements in the open-source space, you've likely heard of Hugging Face. This French-American company is dedicated to open-source machine learning tools, particularly focusing on natural language processing. Hugging Face is named after a cute emoji.
 
 ## Hugging Face's Core Offerings
@@ -64,19 +61,19 @@ To enable the `pipeline` function (discussed next) to load models, you'll also n
 The `pipeline` function, imported from the Hugging Face Transformers library, is a high-level helper function that simplifies the use of pre-trained models for common tasks. It automates processes like loading the appropriate model, tokenizing input, running the model, and formatting output, requiring only a few lines of code.
 
 ### Example: Sentiment Analysis with DistilBERT
-````markdown
 
-Here’s how you can use the `pipeline` function for sentiment analysis:
-1.  **Import the pipeline**: `from transformers import pipeline`.
-2.  **Load the pre-trained model**: Use `pipeline` with the `sentiment-analysis` parameter and 
-specify a model like `"distilbert-base-uncased-finetuned-sst2-english"`.
-    *   `DistilBERT` is a smaller, faster version of the BERT model.
-    *   `base uncased` means it processes lowercase text and disregards capitalization.
-    *   `fine-tuned on SST2` indicates it was specifically trained for sentiment classification using the SST2 dataset.
-    This setup creates a ready-to-use tool to determine if a sentence's sentiment is positive or negative.
-3.  **Analyze text**: Store your desired text in a variable (e.g., `inputtext`), then call the `pipeline` with this variable and print the output.
-4.  **Run the code**: Ensure the correct Conda environment is active. If using VS Code, select the appropriate Python interpreter via the command palette (Shift+Command+P). Execute the Python file from the terminal (e.g., `python your_file_name.py`).
-````
+Here's how you can use the `pipeline` function for sentiment analysis:
+
+1. **Import the pipeline**: `from transformers import pipeline`.
+2. **Load the pre-trained model**: Use `pipeline` with the `sentiment-analysis` parameter and specify a model like `"distilbert-base-uncased-finetuned-sst2-english"`.
+   - `DistilBERT` is a smaller, faster version of the BERT model.
+   - `base uncased` means it processes lowercase text and disregards capitalization.
+   - `fine-tuned on SST2` indicates it was specifically trained for sentiment classification using the SST2 dataset.
+   
+   This setup creates a ready-to-use tool to determine if a sentence's sentiment is positive or negative.
+
+3. **Analyze text**: Store your desired text in a variable (e.g., `inputtext`), then call the `pipeline` with this variable and print the output.
+4. **Run the code**: Ensure the correct Conda environment is active. If using VS Code, select the appropriate Python interpreter via the command palette (Shift+Command+P). Execute the Python file from the terminal (e.g., `python your_file_name.py`).
 
 The model will return the sentiment analysis. For example, it identified one text as negative with 99.96% confidence and another positive sentence confidently as positive. The process demonstrates how straightforward it is to get a pre-trained model running using Hugging Face libraries. A dependency conflict (Keras) was resolved by installing the recommended version during one execution.
 
