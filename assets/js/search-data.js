@@ -102,6 +102,11 @@ ninja.data = [{
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/announcement_advantech2025/";
+            },},{id: "news-invited-to-the-innoex-amp-qualcomm-event",
+          title: 'Invited to the InnoEx &amp;amp; Qualcomm event',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/announcement_innoex2025/";
             },},{id: "projects-running-quadruped-robot",
           title: 'Running Quadruped Robot',
           description: "High-speed Quadruped with Articulated Spine",
