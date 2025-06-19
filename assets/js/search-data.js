@@ -72,7 +72,18 @@ ninja.data = [{
               handler: () => {
                 window.location.href = "/blog/";
               },
-            },{id: "news-join-rapyuta-robotics-based-in-tokyo-japan",
+            },{id: "post-run-huggingface-models-locally-for-free",
+      
+        title: "Run Huggingface Models Locally For Free",
+      
+      description: "a step-to-step guideline to run huggingface models locally",
+      section: "Posts",
+      handler: () => {
+        
+          window.location.href = "/blog/2025/huggingface-local/";
+        
+      },
+    },{id: "news-join-rapyuta-robotics-based-in-tokyo-japan",
           title: 'Join Rapyuta Robotics based in Tokyo Japan',
           description: "",
           section: "News",},{id: "news-join-vinai-for-developing-autopilot-features-on-autonomous-driving-cars",
