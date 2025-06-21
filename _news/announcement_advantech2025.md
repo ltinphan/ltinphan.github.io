@@ -39,3 +39,8 @@ The presentation by Dr. Phan Luong Tin of Next Robotics Jsc, dated May 29, 2025,
 - **Applications:** Robotic solutions for industries such as distribution centers, automotive, textile, and semiconductor.
 
 The presentation highlights the challenges and solutions in deploying autonomous mobile robots for smart manufacturing.
+
+
+<div class="embed-responsive embed-responsive-16by9 my-4">
+    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/fA1dsyU4b0Q?si=KU5HXjJ7UwkfTDv9" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
