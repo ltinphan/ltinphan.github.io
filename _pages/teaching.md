@@ -6,7 +6,6 @@ description: Materials for courses I taught as a lecturer
 nav: true
 nav_order: 6
 ---
-# Courses I taught
 Math for Computer Science (Toán cho khoa học máy tính)  
 Introduction to Artificial Intelligence (Trí tuệ nhân tạo)   
 Control Systems (Lý thuyết điều khiển tự động)   
