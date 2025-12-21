@@ -9,8 +9,9 @@ related_posts: false
 A talk about "Robotics Solutions for Smart Manufacturing" at Advantech Vietnam's Webinar :sparkles: :smile:
 
 ---
+
 ![Advantech Vietnam Webinar](/assets/img/advantech_event_2025.png)
-*Figure: Advantech Vietnam Webine.*
+_Figure: Advantech Vietnam Webine._
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
@@ -39,7 +40,6 @@ The presentation by Dr. Phan Luong Tin of Next Robotics Jsc, dated May 29, 2025,
 - **Applications:** Robotic solutions for industries such as distribution centers, automotive, textile, and semiconductor.
 
 The presentation highlights the challenges and solutions in deploying autonomous mobile robots for smart manufacturing.
-
 
 <div class="embed-responsive embed-responsive-16by9 my-4">
     <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/fA1dsyU4b0Q?si=KU5HXjJ7UwkfTDv9" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>

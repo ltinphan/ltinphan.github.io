@@ -8,8 +8,8 @@ category: work
 related_publications: false
 giscus_comments: false
 ---
-Development of the Vietnam's first AMR for warehouses and manufacturing zones
----
+
+## Development of the Vietnam's first AMR for warehouses and manufacturing zones
 
 As a Solution Architect, I contributed in designing the system architect and developing the algorithms for the motion planning and control module of the AMR for smooth maneuvering motion and safety feature.
 

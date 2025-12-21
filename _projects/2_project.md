@@ -6,15 +6,13 @@ img: assets/img/mpc_vehicle.png
 importance: 2
 category: Ph.D
 related_publications: true
+---
+
+Development of trajectory planning for mobile robot to avoid obstalces smoothly using Model Predictive Control
 
 ---
 
-Development of trajectory planning for mobile robot to avoid obstalces smoothly using Model Predictive Control 
-
----
-
-
-In this work, an autonomous mobile robot was model as the figure below. 
+In this work, an autonomous mobile robot was model as the figure below.
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">

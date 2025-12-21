@@ -9,11 +9,12 @@ related_publications: true
 giscus_comments: true
 ---
 
-Development of the Vietnam's first AutoPilot feature for autonomous driving vehicles
----
+## Development of the Vietnam's first AutoPilot feature for autonomous driving vehicles
+
 I contributed in developing the algorithms for the motion planning and control module.
 
 The autonomous vehicle was able to drive upto 50km/h in public roads in an island in Vietnam. The work went viral in social media.
+
 <div class="embed-responsive embed-responsive-16by9 my-4">
     <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/RZoli9RyG9s?si=jNP_F7TDgxdRn2Jd" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>

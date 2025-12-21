@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Invited to the VietLeap AI Accelerator Opening Ceremony event 
+title: Invited to the VietLeap AI Accelerator Opening Ceremony event
 date: 2025-11-04 07:59:00-0400
 inline: false
 related_posts: false
@@ -9,6 +9,7 @@ related_posts: false
 On behalf of NextRobotics, I have been invited to attend the VietLeap AI Accelerator program for the top 11 startups in the field of Robotics and AI in Vietnam, in Hanoi on November 4, 2025.
 
 ---
+
 <!-- ![Vietleap AI event](/assets/img/VietleapNov2025_1_reduced.jpeg)
 *Figure: Vietleap AI event* -->
 

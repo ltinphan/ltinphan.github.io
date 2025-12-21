@@ -6,11 +6,10 @@ img: assets/img/rapyuta.jpeg
 importance: 1
 category: work
 related_publications: true
-
 ---
 
-Development of robot behaviors and motion solutions for mobile robots operated for warehouse and construction applications
----
+## Development of robot behaviors and motion solutions for mobile robots operated for warehouse and construction applications
+
 One of the work was selected as Silver Prize in OpenCV Spatial AI Competition 2020. The work was aimed for realtime pallet recognition in autonomous forklifts
 
 <div class="embed-responsive embed-responsive-16by9 my-4">

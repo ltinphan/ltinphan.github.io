@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Invited to the InnoEx & Qualcomm event 
+title: Invited to the InnoEx & Qualcomm event
 date: 2025-06-19 07:59:00-0400
 inline: false
 related_posts: false
@@ -9,6 +9,7 @@ related_posts: false
 I was invited on behalf of NextRobotics as a Alumni of the QVIC2023 to the InnoEx & Qualcomm event "Edge AI: The Era of Intelligent Connectivity for Every Device" held at Rex Hotel, HCM on Jun 19th, 2025.
 
 ---
+
 <!-- ![InnoEx & Qualcomm event](/assets/img/innoex-qualcomm2025.jpg)
 *Figure: InnoEx & Qualcomm event* -->
 

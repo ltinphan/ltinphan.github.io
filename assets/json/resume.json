@@ -85,13 +85,7 @@
       "name": "Robotics",
       "level": "Master",
       "icon": "fa-solid fa-hashtag",
-      "keywords": [
-        "Robotics Engineering",
-        "Artificial Intelligence",
-        "Computer Vision",
-        "Autonomous Driving",
-        "Legged Robotics"
-      ]
+      "keywords": ["Robotics Engineering", "Artificial Intelligence", "Computer Vision", "Autonomous Driving", "Legged Robotics"]
     }
   ],
   "languages": [
@@ -120,13 +114,7 @@
     {
       "name": "Robotics",
       "icon": "fa-solid fa-tag",
-      "keywords": [
-        "Robotics Engineering",
-        "Artificial Intelligence",
-        "Computer Vision",
-        "Autonomous Driving",
-        "Legged Robotics"
-      ]
+      "keywords": ["Robotics Engineering", "Artificial Intelligence", "Computer Vision", "Autonomous Driving", "Legged Robotics"]
     }
   ]
   // "references": [
