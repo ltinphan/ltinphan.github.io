@@ -107,6 +107,11 @@ ninja.data = [{
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/announcement_innoex2025/";
+            },},{id: "news-invited-to-the-vietleap-ai-accelerator-opening-ceremony-event",
+          title: 'Invited to the VietLeap AI Accelerator Opening Ceremony event',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/announcement_VietleapAIOpenCer2025/";
             },},{id: "projects-running-quadruped-robot",
           title: 'Running Quadruped Robot',
           description: "High-speed Quadruped with Articulated Spine",
