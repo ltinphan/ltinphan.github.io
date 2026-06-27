@@ -32,7 +32,7 @@ ninja.data = [{
           },
         },{id: "nav-cv",
           title: "cv",
-          description: "The data was updated in January 2025",
+          description: "The data was updated in Sept 2025",
           section: "Navigation",
           handler: () => {
             window.location.href = "/cv/";
@@ -112,6 +112,21 @@ ninja.data = [{
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/announcement_VietleapAIOpenCer2025/";
+            },},{id: "news-selected-in-top-10-nic-scale-x-startups-representing-next-robotics",
+          title: 'Selected in Top 10 NIC Scale X Startups, representing Next Robotics',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/announcement_nic_scalex2026/";
+            },},{id: "news-chính-thức-trúng-tuyển-keieijuku-khóa-24-tại-vjcc-hcmc",
+          title: 'Chính thức trúng tuyển Keieijuku Khóa 24 tại VJCC-HCMC',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/announcement_keieijuku2026/";
+            },},{id: "news-attending-vipc-summit-2026-with-next-robotics",
+          title: 'Attending VIPC Summit 2026 with Next Robotics',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/announcement_vipc2026/";
             },},{id: "projects-running-quadruped-robot",
           title: 'Running Quadruped Robot',
           description: "High-speed Quadruped with Articulated Spine",
