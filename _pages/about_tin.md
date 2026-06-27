@@ -1,4 +1,4 @@
-Robotics Expert with a Ph.D. in Mechanical Engineering (specializing in Robotics) from Sungkyunkwan University, South Korea. My expertise spans motion planning, control systems, and integration for legged robots, autonomous vehicles, and multi-robot coordination in industrial environments.
+I am Phan Lương Tín (academic English name: Luong Tin Phan), a Robotics Expert with a Ph.D. in Mechanical Engineering (specializing in Robotics) from Sungkyunkwan University, South Korea. My expertise spans motion planning, control systems, and integration for legged robots, autonomous vehicles, and multi-robot coordination in industrial environments.
 
 Currently, I lead core robotics products at Next Robotics as Technical Lead, including the development of Vietnam’s first fleet management system for autonomous mobile robots, deployed in large-scale logistics operations. I also run the AutoMa Lab and lead academic programs and applied research at Nguyen Tat Thanh University and the University of Greenwich (Vietnam), facilitating bilingual instruction, research supervision, and curriculum development in Robotics and AI.
 
