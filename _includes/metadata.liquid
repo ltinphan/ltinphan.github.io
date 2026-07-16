@@ -59,16 +59,24 @@
   <meta property="og:url" content="{{ page.url | prepend: site.baseurl | prepend: site.url | remove_first: 'index.html' }}">
   <meta property="og:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
   {% if page.og_image or site.og_image %}
-    <meta property="og:image" content="{% if page.og_image %}{{ page.og_image }}{% else %}{{ site.og_image }}{% endif %}">
+    {% assign og_image_path = page.og_image | default: site.og_image %}
+    {% unless og_image_path contains '://' %}
+      {% assign og_image_path = og_image_path | prepend: site.baseurl | prepend: site.url %}
+    {% endunless %}
+    <meta property="og:image" content="{{ og_image_path }}">
   {% endif %}
   <meta property="og:locale" content="{{ site.lang }}">
 
   <!-- Twitter card -->
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{% if page.title %}{{ page.title }}{% else %}{{ title }}{% endif %}">
   <meta name="twitter:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
   {% if page.og_image or site.og_image %}
-    <meta name="twitter:image" content="{% if page.og_image %}{{ page.og_image }}{% else %}{{ site.og_image }}{% endif %}">
+    {% assign twitter_image_path = page.og_image | default: site.og_image %}
+    {% unless twitter_image_path contains '://' %}
+      {% assign twitter_image_path = twitter_image_path | prepend: site.baseurl | prepend: site.url %}
+    {% endunless %}
+    <meta name="twitter:image" content="{{ twitter_image_path }}">
   {% endif %}
   {% if site.x_username %}
     <meta name="twitter:site" content="@{{ site.x_username }}">
@@ -228,8 +236,8 @@
             "name": "{{ author_name }}"
         },
         "url": "{{ page.url | prepend: site.baseurl | prepend: site.url }}",
-        "@type": "{% if is_blog_post %}BlogPosting{% else %}WebSite{% endif %}",
-        "description": "{% if page.description %}{{ page.description }}{% else if site.description %}{{ site.description }}{% endif %}",
+        "@type": "{% if is_blog_post %}BlogPosting{% else %}WebPage{% endif %}",
+        "description": "{% if page.description %}{{ page.description }}{% elsif site.description %}{{ site.description }}{% endif %}",
         "headline": "{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}",
         {% if sameaslinks != blank %}
         "sameAs": {{ sameaslinks }},
