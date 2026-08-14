@@ -127,6 +127,16 @@ ninja.data = [{
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/announcement_vipc2026/";
+            },},{id: "news-on-air-on-vietnam-today-vtv-capital-needed-to-power-vietnam-39-s-strategic-industries",
+          title: 'On-air on Vietnam Today (VTV) — Capital needed to power Vietnam&amp;#39;s strategic industries...',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/announcement_vtv_capital2026/";
+            },},{id: "news-on-air-on-vietnam-today-vtv-vietnam-advances-core-technology-ambitions",
+          title: 'On-air on Vietnam Today (VTV) — Vietnam advances core technology ambitions',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/announcement_vietnamtoday2026/";
             },},{id: "projects-running-quadruped-robot",
           title: 'Running Quadruped Robot',
           description: "High-speed Quadruped with Articulated Spine",
