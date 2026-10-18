@@ -1,0 +1,924 @@
+<!doctype html>
+<html lang="vi">
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>Chương 2 · RRT, PRM và kiểm tra va chạm</title>
+  <style>
+    .teaching-site-nav {
+      box-sizing: border-box;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 22px;
+      padding: 12px 20px;
+      background: #eef3f7;
+      color: #163c56;
+      font:
+        15px/1.5 system-ui,
+        sans-serif;
+      border-bottom: 1px solid #b8c8d4;
+    }
+    .teaching-site-nav a {
+      color: #174f78;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .teaching-site-nav a:focus-visible {
+      outline: 3px solid #95001a;
+      outline-offset: 4px;
+    }
+    @media (max-width: 1000px) {
+      body {
+        max-width: 100%;
+      }
+      main {
+        display: block !important;
+        padding: 16px !important;
+      }
+      header {
+        display: block !important;
+        padding: 16px !important;
+      }
+      header span {
+        display: block;
+        margin-top: 8px;
+      }
+      aside {
+        margin-top: 24px;
+      }
+      nav {
+        flex-wrap: wrap;
+      }
+      fieldset {
+        min-width: 0;
+      }
+      canvas {
+        max-width: 100%;
+        height: auto;
+      }
+      table {
+        font-size: 14px;
+      }
+      th,
+      td {
+        padding: 6px !important;
+      }
+      h1 {
+        font-size: 27px !important;
+      }
+      .row {
+        grid-template-columns: 1fr !important;
+      }
+    }
+    @media (max-width: 600px) {
+      body {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+      body > h1,
+      body > p,
+      body > fieldset,
+      body > section {
+        margin-left: 14px;
+        margin-right: 14px;
+      }
+      .teaching-site-nav {
+        padding: 10px 14px;
+        font-size: 14px;
+      }
+      button {
+        max-width: 100%;
+      }
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      color: #222;
+      background: #f4f7fa;
+      font:
+        18px Arial,
+        sans-serif;
+    }
+    header {
+      padding: 22px 30px;
+      border-bottom: 5px solid #95001a;
+      background: white;
+    }
+    h1 {
+      font:
+        700 29px "Times New Roman",
+        serif;
+      margin: 0 0 8px;
+    }
+    header p {
+      margin: 0;
+      line-height: 1.5;
+      color: #50545a;
+    }
+    main {
+      padding: 24px 30px;
+      display: grid;
+      grid-template-columns: minmax(620px, 1fr) 330px;
+      gap: 26px;
+    }
+    canvas {
+      width: 100%;
+      height: auto;
+      background: white;
+      border: 1px solid #bacbd8;
+    }
+    aside {
+      padding: 0 0 20px;
+    }
+    label {
+      display: block;
+      margin: 13px 0 6px;
+      font-size: 16px;
+    }
+    input,
+    select {
+      font: 17px Arial;
+      padding: 8px;
+      width: 100%;
+      border: 1px solid #b4c4cf;
+      background: white;
+      color: #222;
+    }
+    button {
+      font: 16px Arial;
+      border: 1px solid #045ea7;
+      color: #045ea7;
+      background: white;
+      padding: 11px 13px;
+      margin: 7px 7px 0 0;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #e7eef4;
+    }
+    button.primary {
+      background: #045ea7;
+      color: white;
+    }
+    h2 {
+      font:
+        700 24px "Times New Roman",
+        serif;
+      color: #95001a;
+    }
+    #status {
+      font-size: 18px;
+      line-height: 1.6;
+      color: #045ea7;
+    }
+    .small {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #50545a;
+    }
+    .toolbar {
+      margin: 10px 0 16px;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      font-size: 16px;
+      background: white;
+    }
+    th,
+    td {
+      padding: 10px;
+      border: 1px solid #d5dfe6;
+      text-align: left;
+    }
+    th {
+      background: #e7eef4;
+      color: #95001a;
+    }
+    footer {
+      padding: 0 30px 30px;
+      line-height: 1.6;
+    }
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    input[type="range"] {
+      padding: 0;
+    }
+    #details {
+      line-height: 1.7;
+    }
+    #bench {
+      margin-top: 16px;
+    }
+    a {
+      color: #045ea7;
+    }
+    #rotation {
+      display: none;
+    }
+  </style>
+  <div class="teaching-site-nav" role="navigation" aria-label="Điều hướng học phần">
+    <a href="/teaching/">Teaching</a><a href="/teaching/lap-lo-trinh-di-chuyen/">Lập lộ trình di chuyển</a
+    ><a href="/teaching/lap-lo-trinh-di-chuyen/chuong-2/">Hướng dẫn Chương 2</a>
+  </div>
+  <header>
+    <h1>RRT, PRM và kiểm tra va chạm</h1>
+    <p>Chương 2 · Lập lộ trình di chuyển · Demo hình học ngoại tuyến</p>
+  </header>
+  <main>
+    <section>
+      <canvas id="map" width="1200" height="720" aria-label="Bản đồ, cây RRT và roadmap PRM"></canvas>
+      <div class="toolbar">
+        <button id="run" class="primary">Chạy lại</button><button id="play">Xem quá trình</button><button id="step">Tiến một bước</button
+        ><button id="reset">Cấu hình gốc</button>
+      </div>
+      <label>Tiến trình hiển thị <input type="range" id="progress" min="0" max="100" value="100" aria-label="Tiến trình hiển thị" /></label>
+      <p id="status" role="status"></p>
+      <p id="details"></p>
+      <div class="toolbar">
+        <button id="counter">Phản ví dụ: hai đầu tự do</button><button id="footprint">Thân chữ nhật và đĩa bao</button
+        ><button id="normal">Trở lại thuật toán</button>
+      </div>
+      <div id="rotation">
+        <label>Góc thân chữ nhật: <span id="angleText">0°</span><input type="range" id="angle" min="0" max="90" step="1" value="0" /></label>
+        <p class="small">
+          Riêng minh họa này dùng thân 2 m × 1 m, gốc tại tâm và không cộng biên. Vách để lại khe 1,80 m. Nó khác mô hình đĩa của demo thuật toán.
+        </p>
+      </div>
+      <div class="toolbar">
+        <button id="batch">Chạy seed 1–20</button><button id="download">Tải kết quả hiện tại</button><button id="csv">Tải bảng 20 seed</button>
+      </div>
+      <div id="bench"></div>
+      <p class="small">
+        Màu xanh nhạt: vùng nở theo bán kính cộng biên. Nét xám: các cạnh đã chấp nhận. Nét vàng: đường kết quả. S và G là hai tâm đầu–đích.
+      </p>
+    </section>
+    <aside>
+      <h2>Dự đoán rồi kiểm tra</h2>
+      <label
+        >Thuật toán<select id="algo">
+          <option>RRT</option>
+          <option>PRM</option>
+        </select></label
+      ><label
+        >Bản đồ<select id="scene">
+          <option value="central">Vật cản trung tâm</option>
+          <option value="narrow">Khe hẹp 1,80 m</option>
+          <option value="closed">Vách kín</option>
+        </select></label
+      >
+      <div class="row">
+        <div>
+          <label>Seed<input id="seed" type="number" value="7" min="0" max="4294967295" /></label>
+        </div>
+        <div>
+          <label>Bước RRT η (m)<input id="stepSize" type="number" value="0.8" min="0.1" max="3" step="0.05" /></label>
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <label>Lượt thử RRT<input id="budget" type="number" value="800" min="10" max="4000" step="10" /></label>
+        </div>
+        <div>
+          <label>Goal bias<input id="bias" type="number" value="0.08" min="0" max="1" step="0.01" /></label>
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <label>Mẫu tự do PRM<input id="samples" type="number" value="200" min="10" max="500" step="10" /></label>
+        </div>
+        <div>
+          <label>Láng giềng k<input id="k" type="number" value="10" min="1" max="25" /></label>
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <label>Bán kính đĩa (m)<input id="radius" type="number" value="0.45" min="0" max="2" step="0.05" /></label>
+        </div>
+        <div>
+          <label>Biên thêm (m)<input id="margin" type="number" value="0.15" min="0" max="1" step="0.05" /></label>
+        </div>
+      </div>
+      <p class="small">PRM chỉ thử nối các láng giềng trong phạm vi 3 m. Chạy nhiều seed để quan sát biến thiên; không chọn riêng lần đẹp nhất.</p>
+      <h2>Ba thí nghiệm gợi ý</h2>
+      <p class="small">
+        1. RRT: chọn khe hẹp, 180 lượt, rồi thử bước 0,25; 0,80; 2 m.<br />2. PRM: giữ k=10, so 120 và 300 mẫu qua seed 1–20.<br />3. Chọn vách kín:
+        phân biệt kết quả thuật toán với lập luận hình học về hai miền bị ngăn cách.
+      </p>
+      <p class="small">
+        Giới hạn: bản đồ tĩnh đã biết; robot đĩa; các cạnh thẳng. Chưa xét hướng xe, tốc độ, động lực học, điều khiển bám đường hoặc sai số cảm biến.
+      </p>
+    </aside>
+  </main>
+  <footer class="small">
+    Mô hình giảng dạy và dữ liệu thực nghiệm của bài giảng. Thời gian hiển thị được đo trong trình duyệt đang chạy, không phải hiệu năng của robot hay
+    ROS 2. Nguồn khái niệm: <a href="https://lavalle.pl/planning/ch5.pdf">LaValle, Planning Algorithms, Chương 5</a>. Các tệp trong gói không cần kết
+    nối mạng để hoạt động.
+  </footer>
+  <script>
+    const MODEL = { width: 20, height: 12, start: { x: 2, y: 6 }, goal: { x: 18, y: 6 }, radius: 0.45, margin: 0.15 };
+    const SCENES = {
+      central: [{ x0: 8, x1: 12, y0: 4, y1: 8 }],
+      narrow: [
+        { x0: 9, x1: 11, y0: 0, y1: 5.1 },
+        { x0: 9, x1: 11, y0: 6.9, y1: 12 },
+      ],
+      closed: [{ x0: 9, x1: 11, y0: 0, y1: 12 }],
+    };
+    const dist = (a, b) => Math.hypot(a.x - b.x, a.y - b.y);
+    function rng(seed) {
+      let a = seed >>> 0;
+      return () => {
+        a += 0x6d2b79f5;
+        let t = a;
+        t = Math.imul(t ^ (t >>> 15), t | 1);
+        t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+      };
+    }
+    const cross = (a, b, c) => (b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x);
+    function on(p, a, b) {
+      return (
+        Math.abs(cross(a, b, p)) < 1e-10 &&
+        p.x >= Math.min(a.x, b.x) - 1e-10 &&
+        p.x <= Math.max(a.x, b.x) + 1e-10 &&
+        p.y >= Math.min(a.y, b.y) - 1e-10 &&
+        p.y <= Math.max(a.y, b.y) + 1e-10
+      );
+    }
+    function intersects(a, b, c, d) {
+      const v = [cross(a, b, c), cross(a, b, d), cross(c, d, a), cross(c, d, b)];
+      return (v[0] * v[1] < 0 && v[2] * v[3] < 0) || on(c, a, b) || on(d, a, b) || on(a, c, d) || on(b, c, d);
+    }
+    function pointSegment(p, a, b) {
+      let dx = b.x - a.x,
+        dy = b.y - a.y,
+        l = dx * dx + dy * dy;
+      if (!l) return dist(p, a);
+      let t = Math.max(0, Math.min(1, ((p.x - a.x) * dx + (p.y - a.y) * dy) / l));
+      return dist(p, { x: a.x + t * dx, y: a.y + t * dy });
+    }
+    function segmentDistance(a, b, c, d) {
+      if (intersects(a, b, c, d)) return 0;
+      return Math.min(pointSegment(a, c, d), pointSegment(b, c, d), pointSegment(c, a, b), pointSegment(d, a, b));
+    }
+    function pointRect(p, o) {
+      return Math.hypot(Math.max(o.x0 - p.x, 0, p.x - o.x1), Math.max(o.y0 - p.y, 0, p.y - o.y1));
+    }
+    function segmentRect(a, b, o) {
+      if (pointRect(a, o) === 0 || pointRect(b, o) === 0) return 0;
+      const v = [
+        { x: o.x0, y: o.y0 },
+        { x: o.x1, y: o.y0 },
+        { x: o.x1, y: o.y1 },
+        { x: o.x0, y: o.y1 },
+      ];
+      return Math.min(...v.map((p, i) => segmentDistance(a, b, p, v[(i + 1) % 4])));
+    }
+    function stateFree(p, scene = "central", r = 0.6) {
+      return p.x > r && p.x < 20 - r && p.y > r && p.y < 12 - r && SCENES[scene].every((o) => pointRect(p, o) > r + 1e-10);
+    }
+    function edgeFree(a, b, scene = "central", r = 0.6) {
+      return stateFree(a, scene, r) && stateFree(b, scene, r) && SCENES[scene].every((o) => segmentRect(a, b, o) > r + 1e-10);
+    }
+    function pathLength(path) {
+      return path.slice(1).reduce((s, p, i) => s + dist(path[i], p), 0);
+    }
+    function rrt({ seed = 7, scene = "central", step = 0.8, budget = 800, bias = 0.08, radius = 0.45, margin = 0.15 } = {}) {
+      const r = radius + margin,
+        random = rng(seed),
+        nodes = [{ ...MODEL.start, parent: -1 }],
+        trace = [],
+        goal = MODEL.goal;
+      let result = [];
+      if (!stateFree(nodes[0], scene, r) || !stateFree(goal, scene, r))
+        return { algorithm: "RRT", seed, scene, nodes, edges: [], path: [], success: false, attempts: 0, reason: "invalid_endpoint", trace };
+      for (let i = 0; i < budget; i++) {
+        const sample = random() < bias ? { ...goal } : { x: 20 * random(), y: 12 * random() };
+        let nearest = 0,
+          dd = Infinity;
+        for (let j = 0; j < nodes.length; j++) {
+          let d = dist(nodes[j], sample);
+          if (d < dd) {
+            dd = d;
+            nearest = j;
+          }
+        }
+        if (dd < 1e-10) continue;
+        const a = nodes[nearest],
+          f = Math.min(1, step / dd),
+          b = { x: a.x + f * (sample.x - a.x), y: a.y + f * (sample.y - a.y), parent: nearest };
+        const valid = edgeFree(a, b, scene, r);
+        trace.push({ i: i + 1, sample, nearest, candidate: { x: b.x, y: b.y }, valid, before: nodes.length });
+        if (!valid) continue;
+        nodes.push(b);
+        if (dist(b, goal) <= step && edgeFree(b, goal, scene, r)) {
+          nodes.push({ ...goal, parent: nodes.length - 1 });
+          let id = nodes.length - 1;
+          while (id >= 0) {
+            result.push({ x: nodes[id].x, y: nodes[id].y });
+            id = nodes[id].parent;
+          }
+          result.reverse();
+          break;
+        }
+      }
+      const edges = nodes.slice(1).map((p, i) => [i + 1, p.parent]);
+      return {
+        algorithm: "RRT",
+        seed,
+        scene,
+        nodes,
+        edges,
+        path: result,
+        success: result.length > 0,
+        attempts: trace.length,
+        length: result.length ? pathLength(result) : null,
+        trace,
+      };
+    }
+    function shortest(nodes, edges, start, goal) {
+      const adj = nodes.map(() => []);
+      for (const [a, b] of edges) {
+        const w = dist(nodes[a], nodes[b]);
+        adj[a].push([b, w]);
+        adj[b].push([a, w]);
+      }
+      let ds = nodes.map(() => Infinity),
+        prev = nodes.map(() => -1),
+        closed = new Set();
+      ds[start] = 0;
+      for (let k = 0; k < nodes.length; k++) {
+        let u = -1;
+        for (let i = 0; i < nodes.length; i++) if (!closed.has(i) && (u === -1 || ds[i] < ds[u])) u = i;
+        if (u < 0 || !Number.isFinite(ds[u])) break;
+        if (u === goal) {
+          const path = [];
+          for (let i = goal; i !== -1; i = prev[i]) path.push({ ...nodes[i] });
+          return path.reverse();
+        }
+        closed.add(u);
+        for (const [v, w] of adj[u])
+          if (ds[u] + w < ds[v]) {
+            ds[v] = ds[u] + w;
+            prev[v] = u;
+          }
+      }
+      return [];
+    }
+    function prm({ seed = 7, scene = "central", samples = 200, k = 10, connection = 3, radius = 0.45, margin = 0.15 } = {}) {
+      const r = radius + margin,
+        random = rng(seed),
+        nodes = [],
+        edges = [],
+        seen = new Set();
+      let draws = 0;
+      while (nodes.length < samples && draws < samples * 100) {
+        draws++;
+        const p = { x: 20 * random(), y: 12 * random() };
+        if (stateFree(p, scene, r)) nodes.push(p);
+      }
+      const roadmapCount = nodes.length;
+      function connect(i, eligible) {
+        const near = eligible
+          .filter((j) => j !== i)
+          .map((j) => ({ j, d: dist(nodes[i], nodes[j]) }))
+          .sort((a, b) => a.d - b.d)
+          .filter((x) => x.d <= connection)
+          .slice(0, k);
+        for (const { j } of near) {
+          const pair = [Math.min(i, j), Math.max(i, j)],
+            key = pair.join(":");
+          if (seen.has(key)) continue;
+          seen.add(key);
+          if (edgeFree(nodes[i], nodes[j], scene, r)) edges.push(pair);
+        }
+      }
+      for (let i = 0; i < roadmapCount; i++)
+        connect(
+          i,
+          Array.from({ length: roadmapCount }, (_, j) => j)
+        );
+      const roadmapEdges = edges.length;
+      nodes.push({ ...MODEL.start }, { ...MODEL.goal });
+      const start = roadmapCount,
+        goal = start + 1;
+      if (stateFree(nodes[start], scene, r) && stateFree(nodes[goal], scene, r)) {
+        connect(
+          start,
+          Array.from({ length: nodes.length }, (_, j) => j)
+        );
+        connect(
+          goal,
+          Array.from({ length: nodes.length }, (_, j) => j)
+        );
+      }
+      const path = shortest(nodes, edges, start, goal);
+      return {
+        algorithm: "PRM",
+        seed,
+        scene,
+        nodes,
+        edges,
+        path,
+        success: path.length > 0,
+        length: path.length ? pathLength(path) : null,
+        roadmapCount,
+        roadmapEdges,
+        draws,
+      };
+    }
+    function validateResult(result, { radius = 0.45, margin = 0.15 } = {}) {
+      return (
+        !result.success ||
+        (result.path.every((p) => stateFree(p, result.scene, radius + margin)) &&
+          result.path.slice(1).every((p, i) => edgeFree(result.path[i], p, result.scene, radius + margin)))
+      );
+    }
+
+    const $ = (id) => document.getElementById(id),
+      canvas = $("map"),
+      ctx = canvas.getContext("2d");
+    let result,
+      params,
+      ms = 0,
+      mode = "normal",
+      playing = false,
+      trials = [];
+    const fmt = (x, d = 2) => (Number.isFinite(x) ? x.toLocaleString("vi-VN", { maximumFractionDigits: d, minimumFractionDigits: d }) : "—");
+    function config() {
+      let p = {
+        seed: +$("seed").value,
+        scene: $("scene").value,
+        step: +$("stepSize").value,
+        budget: +$("budget").value,
+        bias: +$("bias").value,
+        samples: +$("samples").value,
+        k: +$("k").value,
+        connection: 3,
+        radius: +$("radius").value,
+        margin: +$("margin").value,
+      };
+      if (!Object.values(p).every((v) => typeof v === "string" || Number.isFinite(v))) throw Error("Có tham số chưa phải số hợp lệ.");
+      if (p.step <= 0 || p.budget < 1 || p.samples < 1 || p.k < 1 || p.radius < 0 || p.margin < 0 || p.bias < 0 || p.bias > 1)
+        throw Error("Kiểm tra giới hạn các tham số trước khi chạy.");
+      p.budget = Math.min(4000, Math.floor(p.budget));
+      p.samples = Math.min(500, Math.floor(p.samples));
+      p.k = Math.min(25, Math.floor(p.k));
+      return p;
+    }
+    function compute(p) {
+      const t = performance.now(),
+        r = $("algo").value === "RRT" ? rrt(p) : prm(p);
+      return { r, ms: performance.now() - t };
+    }
+    function run() {
+      try {
+        params = config();
+        const v = compute(params);
+        result = v.r;
+        ms = v.ms;
+        mode = "normal";
+        $("rotation").style.display = "none";
+        $("progress").value = 100;
+        playing = false;
+        draw();
+      } catch (e) {
+        $("status").textContent = e.message;
+      }
+    }
+    const W = 1200,
+      H = 720,
+      sx = (x) => 40 + x * 56,
+      sy = (y) => H - 24 - y * 56;
+    function poly(points, color, width = 2) {
+      if (points.length < 2) return;
+      ctx.strokeStyle = color;
+      ctx.lineWidth = width;
+      ctx.beginPath();
+      points.forEach((p, i) => (i ? ctx.lineTo(sx(p.x), sy(p.y)) : ctx.moveTo(sx(p.x), sy(p.y))));
+      ctx.stroke();
+    }
+    function circle(p, r, color, fill) {
+      ctx.beginPath();
+      ctx.arc(sx(p.x), sy(p.y), r * 56, 0, Math.PI * 2);
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 2;
+      if (fill) {
+        ctx.fillStyle = fill;
+        ctx.fill();
+      }
+      ctx.stroke();
+    }
+    function base(scene, r = 0) {
+      ctx.clearRect(0, 0, W, H);
+      ctx.fillStyle = "white";
+      ctx.fillRect(0, 0, W, H);
+      ctx.font = "17px Arial";
+      ctx.strokeStyle = "#edf1f4";
+      ctx.lineWidth = 1;
+      for (let x = 0; x <= 20; x++) {
+        ctx.beginPath();
+        ctx.moveTo(sx(x), sy(0));
+        ctx.lineTo(sx(x), sy(12));
+        ctx.stroke();
+        if (x % 2 === 0) {
+          ctx.fillStyle = "#677c8c";
+          ctx.fillText(x, sx(x) - 5, sy(0) + 19);
+        }
+      }
+      for (let y = 0; y <= 12; y++) {
+        ctx.beginPath();
+        ctx.moveTo(sx(0), sy(y));
+        ctx.lineTo(sx(20), sy(y));
+        ctx.stroke();
+        if (y % 2 === 0) {
+          ctx.fillStyle = "#677c8c";
+          ctx.fillText(y, 8, sy(y) + 5);
+        }
+      }
+      ctx.save();
+      ctx.beginPath();
+      ctx.rect(sx(0), sy(12), 20 * 56, 12 * 56);
+      ctx.clip();
+      for (const o of SCENES[scene]) {
+        if (r) {
+          ctx.fillStyle = "rgba(4,94,167,.10)";
+          ctx.strokeStyle = "#84acc8";
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.roundRect(sx(o.x0 - r), sy(o.y1 + r), (o.x1 - o.x0 + 2 * r) * 56, (o.y1 - o.y0 + 2 * r) * 56, r * 56);
+          ctx.fill();
+          ctx.stroke();
+        }
+        ctx.fillStyle = "#aab0b4";
+        ctx.fillRect(sx(o.x0), sy(o.y1), (o.x1 - o.x0) * 56, (o.y1 - o.y0) * 56);
+        ctx.strokeStyle = "#677c8c";
+        ctx.strokeRect(sx(o.x0), sy(o.y1), (o.x1 - o.x0) * 56, (o.y1 - o.y0) * 56);
+      }
+      ctx.restore();
+      if (r) {
+        ctx.strokeStyle = "#84acc8";
+        ctx.strokeRect(sx(r), sy(12 - r), (20 - 2 * r) * 56, (12 - 2 * r) * 56);
+      }
+      ctx.strokeStyle = "#677c8c";
+      ctx.strokeRect(sx(0), sy(12), 20 * 56, 12 * 56);
+      ctx.fillStyle = "#677c8c";
+      ctx.fillText("m", 1168, 709);
+    }
+    function marks() {
+      for (const [p, l] of [
+        [MODEL.start, "S"],
+        [MODEL.goal, "G"],
+      ]) {
+        circle(p, 0.16, "#045ea7", "white");
+        ctx.fillStyle = "white";
+        ctx.fillRect(sx(p.x) - 14, sy(p.y) - 46, 30, 27);
+        ctx.fillStyle = "#045ea7";
+        ctx.font = "italic 25px Georgia";
+        ctx.fillText(l, sx(p.x) - 8, sy(p.y) - 24);
+      }
+    }
+    function rectangleClear(corners, obs) {
+      for (const o of obs) {
+        const box = [
+            { x: o.x0, y: o.y0 },
+            { x: o.x1, y: o.y0 },
+            { x: o.x1, y: o.y1 },
+            { x: o.x0, y: o.y1 },
+          ],
+          axes = [
+            { x: 1, y: 0 },
+            { x: 0, y: 1 },
+          ];
+        for (let i = 0; i < 2; i++) {
+          const a = corners[i],
+            b = corners[i + 1];
+          axes.push({ x: -(b.y - a.y), y: b.x - a.x });
+        }
+        let separated = false;
+        for (const a of axes) {
+          const pp = corners.map((p) => p.x * a.x + p.y * a.y),
+            qq = box.map((p) => p.x * a.x + p.y * a.y);
+          if (Math.max(...pp) < Math.min(...qq) || Math.max(...qq) < Math.min(...pp)) {
+            separated = true;
+            break;
+          }
+        }
+        if (!separated) return false;
+      }
+      return true;
+    }
+    function draw() {
+      if (mode === "counter") {
+        base("central", 0.6);
+        const a = { x: 6, y: 6 },
+          b = { x: 14, y: 6 };
+        poly([a, b], "#95001a", 5);
+        circle(a, 0.6, "#045ea7");
+        circle(b, 0.6, "#045ea7");
+        circle({ x: 10, y: 6 }, 0.6, "#95001a", "rgba(149,0,26,.1)");
+        $("status").textContent = "Hai đầu tự do: đúng. Toàn đoạn hợp lệ: sai.";
+        $("details").textContent = "Đoạn từ (6,6) đến (14,6) cắt vật cản ở giữa. Bộ kiểm hai đầu bỏ sót chuyển động qua vùng này.";
+        return;
+      }
+      if (mode === "footprint") {
+        base("narrow");
+        const angle = (+$("angle").value * Math.PI) / 180,
+          p = { x: 10, y: 6 };
+        let corners = [
+          [-1, -0.5],
+          [1, -0.5],
+          [1, 0.5],
+          [-1, 0.5],
+        ].map(([x, y]) => ({ x: p.x + x * Math.cos(angle) - y * Math.sin(angle), y: p.y + x * Math.sin(angle) + y * Math.cos(angle) }));
+        const ok = rectangleClear(corners, SCENES.narrow);
+        poly([...corners, corners[0]], ok ? "#045ea7" : "#95001a", 5);
+        circle(p, Math.sqrt(5) / 2, "#a17c00");
+        $("angleText").textContent = $("angle").value + "°";
+        $("status").textContent = "Thân chữ nhật: " + (ok ? "không va chạm tại tư thế này." : "va chạm tại tư thế này.");
+        $("details").textContent =
+          "Khe 1,80 m; thân 2×1 m; đĩa bao có đường kính khoảng 2,24 m. Đĩa bao bị chặn ở khe, trong khi thân chữ nhật còn phụ thuộc hướng. Minh họa này không cộng biên.";
+        return;
+      }
+      if (!result) return;
+      const r = params.radius + params.margin;
+      const pct = +$("progress").value / 100;
+      base(params.scene, r);
+      let limit = Math.ceil(result.edges.length * pct);
+      for (const [a, b] of result.edges.slice(0, limit)) poly([result.nodes[a], result.nodes[b]], "#c4ced7", 1.2);
+      const visible = result.algorithm === "RRT" ? Math.min(result.nodes.length, limit + 1) : result.nodes.length;
+      for (const p of result.nodes.slice(0, visible)) {
+        ctx.fillStyle = "#045ea7";
+        ctx.beginPath();
+        ctx.arc(sx(p.x), sy(p.y), 2.7, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      if (pct >= 1 && result.success) poly(result.path, "#a17c00", 5);
+      marks();
+      $("status").textContent =
+        result.algorithm +
+        " · Seed " +
+        params.seed +
+        " · " +
+        (result.success ? "Tìm thấy đường" : "Chưa có đường trong cấu hình và ngân sách này") +
+        (result.success ? " · L = " + fmt(result.length) + " m" : "");
+      $("details").textContent =
+        result.nodes.length +
+        " đỉnh, " +
+        result.edges.length +
+        " cạnh" +
+        (result.attempts !== undefined ? ", " + result.attempts + " lượt thử" : "") +
+        ". Bán kính hiệu dụng " +
+        fmt(r) +
+        " m. Thời gian tính thuật toán trong trình duyệt: " +
+        fmt(ms, 3) +
+        " ms.";
+    }
+    $("run").onclick = run;
+    $("normal").onclick = run;
+    $("progress").oninput = () => {
+      playing = false;
+      draw();
+    };
+    $("step").onclick = () => {
+      playing = false;
+      $("progress").value = Math.min(100, +$("progress").value + 2);
+      draw();
+    };
+    $("play").onclick = () => {
+      playing = !playing;
+      if (!playing) return;
+      if (+$("progress").value >= 100) $("progress").value = 0;
+      let last = 0;
+      function tick(t) {
+        if (!playing) return;
+        if (t - last > 40) {
+          $("progress").value = Math.min(100, +$("progress").value + 1);
+          draw();
+          last = t;
+        }
+        if (+$("progress").value < 100) requestAnimationFrame(tick);
+        else playing = false;
+      }
+      requestAnimationFrame(tick);
+    };
+    $("counter").onclick = () => {
+      playing = false;
+      mode = "counter";
+      $("rotation").style.display = "none";
+      draw();
+    };
+    $("footprint").onclick = () => {
+      playing = false;
+      mode = "footprint";
+      $("rotation").style.display = "block";
+      draw();
+    };
+    $("angle").oninput = draw;
+    $("reset").onclick = () => {
+      for (const [id, v] of Object.entries({
+        algo: "RRT",
+        scene: "central",
+        seed: 7,
+        stepSize: 0.8,
+        budget: 800,
+        bias: 0.08,
+        samples: 200,
+        k: 10,
+        radius: 0.45,
+        margin: 0.15,
+      }))
+        $(id).value = v;
+      trials = [];
+      $("bench").textContent = "";
+      run();
+    };
+    function save(name, text, type) {
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(new Blob([text], { type }));
+      a.download = name;
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    }
+    $("download").onclick = () =>
+      save(
+        "ket-qua-chuong-2.json",
+        JSON.stringify(
+          {
+            algorithm: $("algo").value,
+            params,
+            success: result.success,
+            length: result.length,
+            nodes: result.nodes.length,
+            edges: result.edges.length,
+            attempts: result.attempts,
+            elapsedMs: ms,
+            path: result.path,
+            scope: "2D static disk model, straight segments; no robot hardware validation",
+          },
+          null,
+          2
+        ),
+        "application/json"
+      );
+    $("batch").onclick = async () => {
+      try {
+        let p = config();
+        trials = [];
+        $("batch").disabled = true;
+        for (let seed = 1; seed <= 20; seed++) {
+          let v = compute({ ...p, seed });
+          trials.push({ seed, success: v.r.success, length: v.r.length, ms: v.ms, nodes: v.r.nodes.length, edges: v.r.edges.length });
+          $("bench").textContent = "Đã chạy " + seed + "/20 seed";
+          await new Promise(requestAnimationFrame);
+        }
+        let ok = trials.filter((x) => x.success),
+          ls = ok.map((x) => x.length).sort((a, b) => a - b),
+          med = ls.length ? (ls[Math.floor((ls.length - 1) / 2)] + ls[Math.ceil((ls.length - 1) / 2)]) / 2 : null;
+        $("bench").innerHTML =
+          "<p><b>" +
+          ok.length +
+          "/20 lần đạt (" +
+          (100 * ok.length) / 20 +
+          "%)</b> · Trung vị độ dài trên các lần đạt: " +
+          fmt(med) +
+          " m.</p><table><tr><th>Seed</th><th>Kết quả</th><th>L (m)</th><th>ms</th></tr>" +
+          trials
+            .map(
+              (x) =>
+                "<tr><td>" +
+                x.seed +
+                "</td><td>" +
+                (x.success ? "Đạt" : "Chưa có đường") +
+                "</td><td>" +
+                fmt(x.length) +
+                "</td><td>" +
+                fmt(x.ms, 3) +
+                "</td></tr>"
+            )
+            .join("") +
+          "</table>";
+      } catch (e) {
+        $("status").textContent = e.message;
+      } finally {
+        $("batch").disabled = false;
+      }
+    };
+    $("csv").onclick = () => {
+      if (!trials.length) {
+        $("status").textContent = "Hãy chạy seed 1–20 trước khi tải bảng.";
+        return;
+      }
+      save(
+        "chuong-2-20-seed.csv",
+        "seed,success,length_m,elapsed_ms,nodes,edges\n" +
+          trials.map((t) => [t.seed, t.success, t.length ?? "", t.ms, t.nodes, t.edges].join(",")).join("\n"),
+        "text/csv"
+      );
+    };
+    run();
+  </script>
+</html>

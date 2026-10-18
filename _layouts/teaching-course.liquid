@@ -1,0 +1,38 @@
+---
+layout: page
+---
+{% assign course = site.data.teaching.courses | where: 'slug', page.course_slug | first %}
+<link rel="stylesheet" href="{{ '/assets/css/teaching.css' | relative_url }}">
+<div class="teaching" lang="vi">
+  <nav class="teaching-breadcrumb" aria-label="Đường dẫn học phần">
+    <a href="{{ '/teaching/' | relative_url }}">Teaching</a><span aria-hidden="true">/</span><span>{{ course.title }}</span>
+  </nav>
+  <p>{{ course.summary }}</p>
+  <h2>Bài thực hành theo chương</h2>
+  {% if course.labs.size > 0 %}
+    <p>Đọc hướng dẫn trước khi chạy. Gói tải về có thể dùng để thực hành lại và lưu kết quả của riêng mình.</p>
+    <ol class="teaching-labs">
+      {% for lab in course.labs %}
+        <li>
+          <p class="teaching-meta">Chương {{ lab.number }} · {{ lab.mode }}</p>
+          <h3>
+            <a href="{{ lab.url | relative_url }}">{{ lab.title }}</a>
+          </h3>
+          <p>{{ lab.summary }}</p>
+          <div class="teaching-actions">
+            <a href="{{ lab.url | relative_url }}">Hướng dẫn thực hành</a>
+            {% if lab.demo -%}
+              <a href="{{ lab.demo | relative_url }}">Chạy demo</a>
+            {%- endif %}
+            <a href="{{ lab.download | relative_url }}" download
+              >Tải gói thực hành <span class="teaching-size">(ZIP, {{ lab.size }})</span></a
+            >
+          </div>
+        </li>
+      {% endfor %}
+    </ol>
+  {% else %}
+    <p>Chưa có bài thực hành được đăng cho học phần này. Tài liệu sẽ được bổ sung theo tiến độ giảng dạy.</p>
+  {% endif %}
+  {{ content }}
+</div>

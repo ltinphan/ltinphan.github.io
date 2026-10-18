@@ -1,0 +1,102 @@
+# Add future chapters to the matching labs list; course and chapter pages use the shared layouts.
+semester: HKI 2026–2027
+courses:
+  - slug: lap-lo-trinh-di-chuyen
+    title: Lập lộ trình di chuyển
+    level: Đại học
+    summary: Biểu diễn bài toán chuyển động, tìm kiếm đường và đánh giá tính hợp lệ của lộ trình. Các thí nghiệm cho phép thay
+      tham số và đối chiếu kết quả ngay trên trình duyệt.
+    labs:
+      - number: 1
+        chapter: Giới thiệu về lộ trình di chuyển
+        title: Ba đường đi, ba kết luận
+        summary: So sánh đường thẳng, đường gãy khúc và đường cong khi cùng xét vật cản, bán kính quay và biên an toàn.
+        url: /teaching/lap-lo-trinh-di-chuyen/chuong-1/
+        demo: /teaching/lap-lo-trinh-di-chuyen/chuong-1/demo/
+        download: /assets/teaching/hki-2026-2027/lap-lo-trinh-di-chuyen/chuong-1.zip
+        mode: Trình duyệt
+        size: 0.3 MB
+      - number: 2
+        chapter: Cơ bản về thiết lập lộ trình di chuyển
+        title: RRT, PRM và kiểm tra va chạm
+        summary: Quan sát cách cây RRT và roadmap PRM tạo kết nối. Thử khe hẹp, vách kín và phản ví dụ hai đầu cạnh tự do.
+        url: /teaching/lap-lo-trinh-di-chuyen/chuong-2/
+        demo: /teaching/lap-lo-trinh-di-chuyen/chuong-2/demo/
+        download: /assets/teaching/hki-2026-2027/lap-lo-trinh-di-chuyen/chuong-2.zip
+        mode: Trình duyệt
+        size: 0.5 MB
+      - number: 3
+        chapter: Thiết lập lộ trình di chuyển dựa trên tìm kiếm
+        title: Dijkstra, A*, rủi ro và RRT*
+        summary: "Bốn phần tương tác: tìm kiếm trên lưới, chi phí dưới bất định, cải thiện cây RRT* và ưu tiên cạnh trong một
+          batch BIT* minh họa."
+        url: /teaching/lap-lo-trinh-di-chuyen/chuong-3/
+        demo: /teaching/lap-lo-trinh-di-chuyen/chuong-3/demo/
+        download: /assets/teaching/hki-2026-2027/lap-lo-trinh-di-chuyen/chuong-3.zip
+        mode: Trình duyệt
+        size: 1.0 MB
+  - slug: he-dieu-hanh-robot
+    title: Hệ điều hành robot
+    level: Đại học
+    summary: Thực hành ROS 2 với node, topic, message, ghi log và tên tài nguyên. Các ví dụ dùng turtlesim để quan sát hoạt
+      động và chẩn đoán lỗi giao tiếp.
+    labs:
+      - number: 1
+        chapter: Nhập môn hệ điều hành robot
+        title: Node, topic và giao tiếp trong ROS 2
+        summary: Quan sát graph, message và các tình huống sai topic, sai kiểu hoặc khác miền bằng turtlesim.
+        url: /teaching/he-dieu-hanh-robot/chuong-1/
+        download: /assets/teaching/hki-2026-2027/he-dieu-hanh-robot/chuong-1.zip
+        mode: ROS 2 Jazzy
+        size: 479 KB
+        videos:
+          - url: /assets/teaching/hki-2026-2027/he-dieu-hanh-robot/chuong-1/01_circle.mp4
+            title: Chạy turtlesim và quan sát đường tròn
+          - url: /assets/teaching/hki-2026-2027/he-dieu-hanh-robot/chuong-1/02_wrong_topic_then_fix.mp4
+            title: Sai tên topic và cách sửa
+          - url: /assets/teaching/hki-2026-2027/he-dieu-hanh-robot/chuong-1/03_publisher_stops.mp4
+            title: Khi publisher ngừng hoạt động
+      - number: 2
+        chapter: Log và tên tài nguyên
+        title: Log và tên tài nguyên trong ROS 2
+        summary: Thử mức log, namespace, tên relative/private và remapping với hai turtlesim.
+        url: /teaching/he-dieu-hanh-robot/chuong-2/
+        download: /assets/teaching/hki-2026-2027/he-dieu-hanh-robot/chuong-2.zip
+        mode: ROS 2 Jazzy
+        size: 129 KB
+        videos:
+          - url: /assets/teaching/hki-2026-2027/he-dieu-hanh-robot/chuong-2/01_relative_r1.mp4
+            title: Tên relative trong namespace r1
+          - url: /assets/teaching/hki-2026-2027/he-dieu-hanh-robot/chuong-2/02_global_wrong_then_remap_r2.mp4
+            title: Tên gốc và remap sang r2
+  - slug: he-dieu-hanh-o-to-thong-minh
+    title: Hệ điều hành ô tô thông minh
+    level: Đại học
+    summary: Trang tài liệu học phần Hệ điều hành ô tô thông minh. Đề cương, bài giảng và bài thực hành sẽ được bổ sung tại
+      đây.
+    labs: []
+  - slug: cong-nghe-dinh-vi-va-lo-trinh-di-chuyen
+    title: Công nghệ định vị và lộ trình di chuyển
+    level: Thạc sĩ
+    summary: Khảo sát các mô hình chuyển động và công nghệ định vị, thiết kế thí nghiệm và phân tích kết quả. Các mô hình minh
+      họa giúp làm rõ giả định, sai số và giới hạn của từng phương pháp.
+    labs:
+      - number: 1
+        chapter: Giới thiệu về xe ô tô tự lái
+        title: Mô hình xe đạp và quãng đường dừng
+        summary: Hai thí nghiệm để đối chiếu nghiệm giải tích, sai số tích phân và ảnh hưởng của độ trễ trong mô hình chuyển động.
+        url: /teaching/cong-nghe-dinh-vi-va-lo-trinh-di-chuyen/chuong-1/
+        demo: /teaching/cong-nghe-dinh-vi-va-lo-trinh-di-chuyen/chuong-1/demo/
+        download: /assets/teaching/hki-2026-2027/cong-nghe-dinh-vi-va-lo-trinh-di-chuyen/chuong-1.zip
+        mode: Trình duyệt
+        size: 0.1 MB
+      - number: 2
+        chapter: Nguyên lý và công nghệ định vị
+        title: ICP, Doppler và cập nhật Gaussian
+        summary: Ba thí nghiệm định vị với dữ liệu tổng hợp, tập trung vào hội tụ, điều kiện quan sát và ảnh hưởng của độ bất
+          định.
+        url: /teaching/cong-nghe-dinh-vi-va-lo-trinh-di-chuyen/chuong-2/
+        demo: /teaching/cong-nghe-dinh-vi-va-lo-trinh-di-chuyen/chuong-2/demo/
+        download: /assets/teaching/hki-2026-2027/cong-nghe-dinh-vi-va-lo-trinh-di-chuyen/chuong-2.zip
+        mode: Trình duyệt
+        size: 0.2 MB

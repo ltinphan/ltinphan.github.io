@@ -1,0 +1,46 @@
+---
+layout: page
+---
+{% assign course = site.data.teaching.courses | where: 'slug', page.course_slug | first %}
+{% assign lab = course.labs | where: 'number', page.chapter_number | first %}
+<link rel="stylesheet" href="{{ '/assets/css/teaching.css' | relative_url }}">
+<div class="teaching teaching-lesson" lang="vi">
+  <nav class="teaching-breadcrumb" aria-label="Đường dẫn bài thực hành">
+    <a href="{{ '/teaching/' | relative_url }}">Teaching</a><span aria-hidden="true">/</span>
+    <a href="{{ '/teaching/' | append: course.slug | append: '/' | relative_url }}">{{ course.title }}</a><span aria-hidden="true">/</span>
+    <span>Chương {{ lab.number }}</span>
+  </nav>
+  <p>{{ lab.summary }}</p>
+  <div class="teaching-actions teaching-actions-primary">
+    {% if lab.demo -%}
+      <a href="{{ lab.demo | relative_url }}">Mở demo tương tác</a>
+    {%- endif %}
+    <a href="{{ lab.download | relative_url }}" download
+      >Tải gói thực hành <span class="teaching-size">(ZIP, {{ lab.size }})</span></a
+    >
+  </div>
+  {% if lab.demo %}
+    <p class="teaching-meta">Demo chạy trực tiếp trong trình duyệt. Để dùng ngoại tuyến, giải nén gói tải về rồi mở demo.html.</p>
+  {% else %}
+    <p class="teaching-meta">
+      Thực hành trên Ubuntu 24.04 và ROS 2 Jazzy. Đây là bài chạy trong môi trường ROS 2, không chạy trực tiếp trên trình duyệt.
+    </p>
+  {% endif %}
+  {{ content }}
+  {% if lab.videos.size > 0 %}
+    <h2>Video minh họa</h2>
+    <p>Các đoạn ghi hình dùng để đối chiếu khi thực hành. Sinh viên vẫn cần tự chạy và lưu kết quả của mình.</p>
+    {% for video in lab.videos %}
+      <figure class="teaching-video">
+        <video controls preload="none" playsinline aria-label="{{ video.title | escape }}">
+          <source src="{{ video.url | relative_url }}" type="video/mp4">
+          Trình duyệt không phát được video. <a href="{{ video.url | relative_url }}">Tải video MP4</a>.
+        </video>
+        <figcaption>{{ video.title }}</figcaption>
+      </figure>
+    {% endfor %}
+  {% endif %}
+  <p class="teaching-back">
+    <a href="{{ '/teaching/' | append: course.slug | append: '/' | relative_url }}">Trở lại học phần {{ course.title }}</a>
+  </p>
+</div>

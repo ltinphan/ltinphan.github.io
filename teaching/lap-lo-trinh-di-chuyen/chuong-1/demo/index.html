@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="vi">
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>Chương 1 • Ba đường đi, ba kết luận</title
+  ><style>
+    .teaching-site-nav {
+      box-sizing: border-box;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 22px;
+      padding: 12px 20px;
+      background: #eef3f7;
+      color: #163c56;
+      font:
+        15px/1.5 system-ui,
+        sans-serif;
+      border-bottom: 1px solid #b8c8d4;
+    }
+    .teaching-site-nav a {
+      color: #174f78;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .teaching-site-nav a:focus-visible {
+      outline: 3px solid #95001a;
+      outline-offset: 4px;
+    }
+    @media (max-width: 1000px) {
+      body {
+        max-width: 100%;
+      }
+      main {
+        display: block !important;
+        padding: 16px !important;
+      }
+      header {
+        display: block !important;
+        padding: 16px !important;
+      }
+      header span {
+        display: block;
+        margin-top: 8px;
+      }
+      aside {
+        margin-top: 24px;
+      }
+      nav {
+        flex-wrap: wrap;
+      }
+      fieldset {
+        min-width: 0;
+      }
+      canvas {
+        max-width: 100%;
+        height: auto;
+      }
+      table {
+        font-size: 14px;
+      }
+      th,
+      td {
+        padding: 6px !important;
+      }
+      h1 {
+        font-size: 27px !important;
+      }
+      .row {
+        grid-template-columns: 1fr !important;
+      }
+    }
+    @media (max-width: 600px) {
+      body {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+      body > h1,
+      body > p,
+      body > fieldset,
+      body > section {
+        margin-left: 14px;
+        margin-right: 14px;
+      }
+      .teaching-site-nav {
+        padding: 10px 14px;
+        font-size: 14px;
+      }
+      button {
+        max-width: 100%;
+      }
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      background: #071d2b;
+      color: #eef5f6;
+      font:
+        18px Arial,
+        sans-serif;
+    }
+    header {
+      padding: 22px 36px;
+      border-bottom: 1px solid #31505d;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+    header span {
+      color: #58d8c7;
+      font-size: 15px;
+    }
+    main {
+      display: grid;
+      grid-template-columns: minmax(650px, 1fr) 360px;
+      gap: 26px;
+      padding: 24px 36px;
+    }
+    canvas {
+      width: 100%;
+      height: auto;
+      background: #eff4f4;
+      border-radius: 4px;
+    }
+    label {
+      display: block;
+      margin: 16px 0 8px;
+    }
+    input {
+      width: 100%;
+      accent-color: #3bd1be;
+    }
+    button {
+      background: #173c4c;
+      border: 1px solid #52717b;
+      padding: 11px 14px;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      margin: 5px 5px 5px 0;
+    }
+    button:hover {
+      background: #286071;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 18px;
+      font-size: 16px;
+    }
+    th,
+    td {
+      padding: 11px 7px;
+      border-bottom: 1px solid #31505d;
+      text-align: left;
+    }
+    th {
+      color: #9bb8c3;
+    }
+    .small {
+      font-size: 14px;
+      color: #b6c9ce;
+      line-height: 1.5;
+    }
+    #status {
+      font-size: 18px;
+      line-height: 1.5;
+      color: #58d8c7;
+    }
+    b {
+      color: #ffcf7b;
+    }
+    .toolbar {
+      margin-top: 12px;
+    }
+    h2 {
+      font-size: 21px;
+    }
+    select {
+      font: 17px Arial;
+      padding: 8px;
+      background: #173c4c;
+      color: #fff;
+    }
+    footer {
+      padding: 0 36px 20px;
+    }
+    output {
+      float: right;
+      color: #ffcf7b;
+    }
+  </style>
+  <div class="teaching-site-nav" role="navigation" aria-label="Điều hướng học phần">
+    <a href="/teaching/">Teaching</a><a href="/teaching/lap-lo-trinh-di-chuyen/">Lập lộ trình di chuyển</a
+    ><a href="/teaching/lap-lo-trinh-di-chuyen/chuong-1/">Hướng dẫn Chương 1</a>
+  </div>
+  <header>
+    <h1>Ba đường đi, ba kết luận</h1>
+    <span>CHƯƠNG 1 · DEMO NGOẠI TUYẾN · ĐƠN VỊ MÉT</span>
+  </header>
+  <main>
+    <section>
+      <canvas id="map" width="1100" height="660"></canvas>
+      <div class="toolbar">
+        <button id="play">▶ Chạy / Dừng</button><button id="reset">Về cấu hình gốc</button><button id="hardturn">R yêu cầu = 8 m</button
+        ><button id="hardmargin">Biên = 0,50 m</button>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Đường</th>
+            <th>Độ dài (m)</th>
+            <th>Hở nhỏ nhất (m)</th>
+            <th>R nhỏ nhất (m)</th>
+            <th>Kết luận</th>
+          </tr>
+        </thead>
+        <tbody id="results"></tbody>
+      </table>
+    </section>
+    <aside>
+      <h2>Dự đoán trước khi kéo</h2>
+      <p>Đường nào qua được vật cản, quay được và giữ đủ biên?</p>
+      <label>Bán kính quay yêu cầu <output id="rv"></output></label
+      ><input id="radius" aria-label="Bán kính quay yêu cầu" type="range" min="1" max="10" step="0.25" value="3" /><label
+        >Biên an toàn yêu cầu <output id="mv"></output></label
+      ><input id="margin" aria-label="Biên an toàn yêu cầu" type="range" min="0" max="1.2" step="0.05" value="0.2" /><label>Đường để chạy</label
+      ><select id="path" aria-label="Đường để chạy">
+        <option value="C">C • Cong rộng</option>
+        <option value="A">A • Thẳng</option>
+        <option value="B">B • Gãy khúc</option>
+      </select>
+      <p id="status"></p>
+      <p class="small">Thân xe 2 × 1 m được bao bởi đĩa bán kính √5/2 ≈ 1,118 m. Vật cản: [8,12] × [4,8]. S=(2,6), G=(18,6). Cảnh 20 × 12 m.</p>
+      <p class="small">
+        A: đoạn thẳng. B: ba đoạn, góc gãy. C: Bézier bậc ba với điểm điều khiển (2,6), (7,0), (13,0), (18,6). C chỉ nối vị trí; chưa áp điều kiện
+        hướng đầu/cuối.
+      </p>
+      <button id="data">Tải số liệu JSON</button><button id="record">Xuất video 12 giây</button>
+      <p class="small" id="recstatus"></p>
+    </aside>
+  </main>
+  <footer class="small">
+    Mô hình giảng dạy do tác giả bài giảng xây dựng · 801 mẫu/đường · Bán kính C tính từ đạo hàm, B có bán kính giới hạn 0 tại góc gãy · Kiểm tra hình
+    học lấy mẫu, không kiểm chứng an toàn xe thật · Chưa xét tốc độ, gia tốc, người đi bộ hay sai số định vị.
+  </footer>
+  <script>
+    const MODEL = {
+      width: 20,
+      height: 12,
+      obstacle: { x0: 8, x1: 12, y0: 4, y1: 8 },
+      length: 2,
+      widthVehicle: 1,
+      radius: Math.sqrt(5) / 2,
+      samples: 801,
+    };
+    const lerp = (a, b, t) => ({ x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t });
+    const controls = [
+      { x: 2, y: 6 },
+      { x: 7, y: 0 },
+      { x: 13, y: 0 },
+      { x: 18, y: 6 },
+    ];
+    function bezier(t) {
+      const [a, b, c, d] = controls,
+        u = 1 - t;
+      return {
+        x: u * u * u * a.x + 3 * u * u * t * b.x + 3 * u * t * t * c.x + t * t * t * d.x,
+        y: u * u * u * a.y + 3 * u * u * t * b.y + 3 * u * t * t * c.y + t * t * t * d.y,
+      };
+    }
+    function curveRadius(t) {
+      const [a, b, c, d] = controls,
+        u = 1 - t;
+      const dx = 3 * (u * u * (b.x - a.x) + 2 * u * t * (c.x - b.x) + t * t * (d.x - c.x)),
+        dy = 3 * (u * u * (b.y - a.y) + 2 * u * t * (c.y - b.y) + t * t * (d.y - c.y));
+      const ddx = 6 * (u * (c.x - 2 * b.x + a.x) + t * (d.x - 2 * c.x + b.x)),
+        ddy = 6 * (u * (c.y - 2 * b.y + a.y) + t * (d.y - 2 * c.y + b.y));
+      return Math.pow(dx * dx + dy * dy, 1.5) / Math.abs(dx * ddy - dy * ddx);
+    }
+    const bPoints = [
+      { x: 2, y: 6 },
+      { x: 5, y: 1.8 },
+      { x: 15, y: 1.8 },
+      { x: 18, y: 6 },
+    ];
+    function point(id, t) {
+      if (id === "A") return { x: 2 + 16 * t, y: 6 };
+      if (id === "C") return bezier(t);
+      const lens = bPoints.slice(1).map((p, i) => Math.hypot(p.x - bPoints[i].x, p.y - bPoints[i].y));
+      let s = t * lens.reduce((a, b) => a + b, 0);
+      for (let i = 0; i < 3; i++) {
+        if (s <= lens[i] || i === 2) return lerp(bPoints[i], bPoints[i + 1], s / lens[i]);
+        s -= lens[i];
+      }
+    }
+    function clearance(p) {
+      const o = MODEL.obstacle,
+        dx = Math.max(o.x0 - p.x, 0, p.x - o.x1),
+        dy = Math.max(o.y0 - p.y, 0, p.y - o.y1);
+      const outside = Math.hypot(dx, dy);
+      const signed = outside > 0 ? outside : -Math.min(p.x - o.x0, o.x1 - p.x, p.y - o.y0, o.y1 - p.y);
+      return Math.min(signed, p.x, 20 - p.x, p.y, 12 - p.y) - MODEL.radius;
+    }
+    function metrics(id, rmin = 3, margin = 0.2) {
+      let len = 0,
+        clear = Infinity,
+        minR = id === "A" ? Infinity : id === "B" ? 0 : Infinity,
+        prev;
+      const points = [];
+      for (let i = 0; i < MODEL.samples; i++) {
+        let t = i / (MODEL.samples - 1),
+          p = point(id, t);
+        points.push(p);
+        if (prev) len += Math.hypot(p.x - prev.x, p.y - prev.y);
+        clear = Math.min(clear, clearance(p));
+        if (id === "C") minR = Math.min(minR, curveRadius(t));
+        prev = p;
+      }
+      const collision = clear < 0,
+        turnFail = minR < rmin,
+        marginFail = clear < margin;
+      return {
+        id,
+        length: len,
+        clearance: clear,
+        minRadius: minR,
+        collision,
+        turnFail,
+        marginFail,
+        pass: !collision && !turnFail && !marginFail,
+        points,
+      };
+    }
+    function all(r = 3, m = 0.2) {
+      return ["A", "B", "C"].map((id) => metrics(id, r, m));
+    }
+
+    const $ = (s) => document.querySelector(s),
+      canvas = $("#map"),
+      ctx = canvas.getContext("2d"),
+      colors = { A: "#d14a45", B: "#c48917", C: "#008e85" };
+    let phase = 0,
+      playing = false,
+      last = 0,
+      recording = false;
+    function params() {
+      return [Number($("#radius").value), Number($("#margin").value)];
+    }
+    function fmt(v) {
+      return Number.isFinite(v) ? v.toFixed(2) : "∞";
+    }
+    function project(p) {
+      return { x: 50 + p.x * 50, y: 630 - p.y * 50 };
+    }
+    function draw() {
+      let [r, m] = params(),
+        rows = all(r, m);
+      $("#rv").textContent = r.toFixed(2) + " m";
+      $("#mv").textContent = m.toFixed(2) + " m";
+      $("#results").innerHTML = rows
+        .map(
+          (a) =>
+            `<tr><td style="color:${colors[a.id]}">${a.id} · ${{ A: "Thẳng", B: "Gãy khúc", C: "Cong rộng" }[a.id]}</td><td>${fmt(
+              a.length
+            )}</td><td>${fmt(a.clearance)}</td><td>${fmt(a.minRadius)}</td><td>${
+              a.pass ? "Đạt mô hình" : a.collision ? "Va chạm" : a.turnFail ? "Quay quá gắt" : "Thiếu biên"
+            }</td></tr>`
+        )
+        .join("");
+      $("#status").textContent = rows.filter((x) => x.pass).length
+        ? "Còn " +
+          rows
+            .filter((x) => x.pass)
+            .map((x) => x.id)
+            .join(", ") +
+          " đạt các kiểm tra đang xét."
+        : "Không có đường ứng viên nào đạt. Cần tìm thêm hoặc đổi bài toán.";
+      ctx.fillStyle = "#eff4f4";
+      ctx.fillRect(0, 0, 1100, 660);
+      ctx.font = "16px Arial";
+      ctx.textAlign = "center";
+      for (let x = 0; x <= 20; x++) {
+        ctx.strokeStyle = "#dbe4e5";
+        ctx.beginPath();
+        ctx.moveTo(50 + x * 50, 30);
+        ctx.lineTo(50 + x * 50, 630);
+        ctx.stroke();
+        if (x % 2 === 0) {
+          ctx.fillStyle = "#526675";
+          ctx.fillText(x, 50 + x * 50, 654);
+        }
+      }
+      for (let y = 0; y <= 12; y++) {
+        ctx.strokeStyle = "#dbe4e5";
+        ctx.beginPath();
+        ctx.moveTo(50, 30 + y * 50);
+        ctx.lineTo(1050, 30 + y * 50);
+        ctx.stroke();
+        if (y % 2 === 0) {
+          ctx.fillStyle = "#526675";
+          ctx.fillText(12 - y, 23, 36 + y * 50);
+        }
+      }
+      ctx.strokeStyle = "#173c4c";
+      ctx.lineWidth = 2;
+      ctx.strokeRect(50, 30, 1000, 600);
+      ctx.fillStyle = "#c7d5db";
+      ctx.fillRect(450, 230, 200, 200);
+      ctx.fillStyle = "#173c4c";
+      ctx.font = "bold 20px Arial";
+      ctx.fillText("VẬT CẢN", 550, 338);
+      ctx.save();
+      ctx.strokeStyle = "#d18439";
+      ctx.setLineDash([8, 6]);
+      ctx.lineWidth = 2;
+      const inf = (MODEL.radius + m) * 50;
+      ctx.strokeRect(450 - inf, 230 - inf, 200 + 2 * inf, 200 + 2 * inf);
+      ctx.restore();
+      for (let row of rows) {
+        ctx.beginPath();
+        row.points.forEach((p, i) => {
+          let z = project(p);
+          i ? ctx.lineTo(z.x, z.y) : ctx.moveTo(z.x, z.y);
+        });
+        ctx.strokeStyle = colors[row.id];
+        ctx.lineWidth = row.id === $("#path").value ? 5 : 3;
+        ctx.stroke();
+      }
+      for (const [label, p] of [
+        ["S", { x: 2, y: 6 }],
+        ["G", { x: 18, y: 6 }],
+      ]) {
+        let z = project(p);
+        ctx.fillStyle = "#173c4c";
+        ctx.beginPath();
+        ctx.arc(z.x, z.y, 8, 0, 7);
+        ctx.fill();
+        ctx.fillText(label, z.x, z.y + 35);
+      }
+      let p = point($("#path").value, phase),
+        q = point($("#path").value, Math.min(1, phase + 0.001)),
+        a = Math.atan2(q.y - p.y, q.x - p.x),
+        z = project(p);
+      ctx.save();
+      ctx.translate(z.x, z.y);
+      ctx.rotate(-a);
+      ctx.fillStyle = "#173c4c";
+      ctx.fillRect(-50, -25, 100, 50);
+      ctx.fillStyle = "#58d8c7";
+      ctx.fillRect(13, -20, 22, 40);
+      ctx.restore();
+      ctx.strokeStyle = "#008e8590";
+      ctx.beginPath();
+      ctx.arc(z.x, z.y, MODEL.radius * 50, 0, 7);
+      ctx.stroke();
+      ctx.font = "bold 17px Arial";
+      ctx.textAlign = "left";
+      ctx.fillStyle = colors.A;
+      ctx.fillText("A", 550, 314);
+      ctx.fillStyle = colors.B;
+      ctx.fillText("B", 730, 563);
+      ctx.fillStyle = colors.C;
+      ctx.fillText("C", 730, 522);
+    }
+    function frame(t) {
+      if (playing) {
+        phase = (phase + Math.min((t - last) / 12000, 0.02)) % 1;
+        draw();
+      }
+      last = t;
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+    for (let el of ["#radius", "#margin", "#path"]) $(el).addEventListener("input", draw);
+    $("#play").onclick = () => (playing = !playing);
+    $("#reset").onclick = () => {
+      $("#radius").value = 3;
+      $("#margin").value = 0.2;
+      phase = 0;
+      playing = false;
+      draw();
+    };
+    $("#hardturn").onclick = () => {
+      $("#radius").value = 8;
+      draw();
+    };
+    $("#hardmargin").onclick = () => {
+      $("#margin").value = 0.5;
+      draw();
+    };
+    function download(blob, name) {
+      let a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = name;
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    }
+    $("#data").onclick = () =>
+      download(
+        new Blob([JSON.stringify({ model: MODEL, parameters: params(), results: all(...params()).map(({ points, ...a }) => a) }, null, 2)], {
+          type: "application/json",
+        }),
+        "ket-qua-demo.json"
+      );
+    $("#record").onclick = () => {
+      if (recording) return;
+      const stream = canvas.captureStream(30);
+      const mime = ["video/webm;codecs=vp9", "video/webm"].find((x) => MediaRecorder.isTypeSupported(x));
+      if (!mime) {
+        $("#recstatus").textContent = "Trình duyệt không hỗ trợ ghi WebM. Dùng video dự phòng.";
+        return;
+      }
+      const recorder = new MediaRecorder(stream, { mimeType: mime });
+      let chunks = [];
+      recorder.ondataavailable = (e) => chunks.push(e.data);
+      recorder.onstop = () => {
+        playing = false;
+        recording = false;
+        download(new Blob(chunks, { type: mime }), "demo-chuong-1.webm");
+        $("#recstatus").textContent = "Video đã sẵn sàng.";
+      };
+      phase = 0;
+      playing = true;
+      recording = true;
+      recorder.start();
+      $("#recstatus").textContent = "Đang ghi 12 giây…";
+      setTimeout(() => recorder.stop(), 12000);
+    };
+    draw();
+  </script>
+</html>

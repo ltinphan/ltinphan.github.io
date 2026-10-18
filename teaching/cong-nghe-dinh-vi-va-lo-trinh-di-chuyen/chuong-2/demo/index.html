@@ -1,0 +1,700 @@
+<!doctype html>
+<html lang="vi">
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" /><title>Ba thí nghiệm định vị — Chương 2</title
+  ><style>
+    .teaching-site-nav {
+      box-sizing: border-box;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 22px;
+      padding: 12px 20px;
+      background: #eef3f7;
+      color: #163c56;
+      font:
+        15px/1.5 system-ui,
+        sans-serif;
+      border-bottom: 1px solid #b8c8d4;
+    }
+    .teaching-site-nav a {
+      color: #174f78;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .teaching-site-nav a:focus-visible {
+      outline: 3px solid #95001a;
+      outline-offset: 4px;
+    }
+    @media (max-width: 1000px) {
+      body {
+        max-width: 100%;
+      }
+      main {
+        display: block !important;
+        padding: 16px !important;
+      }
+      header {
+        display: block !important;
+        padding: 16px !important;
+      }
+      header span {
+        display: block;
+        margin-top: 8px;
+      }
+      aside {
+        margin-top: 24px;
+      }
+      nav {
+        flex-wrap: wrap;
+      }
+      fieldset {
+        min-width: 0;
+      }
+      canvas {
+        max-width: 100%;
+        height: auto;
+      }
+      table {
+        font-size: 14px;
+      }
+      th,
+      td {
+        padding: 6px !important;
+      }
+      h1 {
+        font-size: 27px !important;
+      }
+      .row {
+        grid-template-columns: 1fr !important;
+      }
+    }
+    @media (max-width: 600px) {
+      body {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+      body > h1,
+      body > p,
+      body > fieldset,
+      body > section {
+        margin-left: 14px;
+        margin-right: 14px;
+      }
+      .teaching-site-nav {
+        padding: 10px 14px;
+        font-size: 14px;
+      }
+      button {
+        max-width: 100%;
+      }
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      background: #fff;
+      color: #222;
+      font:
+        20px/1.45 Georgia,
+        "Times New Roman",
+        serif;
+    }
+    header {
+      border-bottom: 5px solid #95001a;
+      padding: 18px 3vw 14px;
+    }
+    h1 {
+      font-size: 32px;
+      color: #95001a;
+      margin: 0;
+    }
+    header p {
+      margin: 4px 0;
+    }
+    nav {
+      display: flex;
+      gap: 12px;
+      padding: 16px 3vw;
+    }
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+    button {
+      padding: 9px 18px;
+      background: white;
+      border: 1px solid #045ea7;
+      color: #045ea7;
+      cursor: pointer;
+    }
+    button[aria-selected="true"],
+    button.primary {
+      background: #045ea7;
+      color: white;
+    }
+    main {
+      padding: 0 3vw 24px;
+    }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 22px;
+      align-items: end;
+      margin: 10px 0;
+    }
+    .controls label {
+      display: flex;
+      flex-direction: column;
+      font-size: 18px;
+    }
+    input[type="number"] {
+      width: 110px;
+      padding: 5px;
+    }
+    input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+    }
+    select {
+      padding: 5px;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(620px, 2fr) minmax(260px, 1fr);
+      gap: 24px;
+    }
+    canvas {
+      width: 100%;
+      height: auto;
+      border: 1px solid #c4ced5;
+      background: #fff;
+    }
+    .result {
+      font-size: 21px;
+      border-top: 2px solid #95001a;
+      padding-top: 12px;
+    }
+    .result strong {
+      color: #045ea7;
+    }
+    .hint {
+      color: #50545a;
+      font-size: 18px;
+    }
+    h2 {
+      margin: 0 0 8px;
+      color: #95001a;
+    }
+    h3 {
+      font-size: 21px;
+      margin: 12px 0 4px;
+    }
+    p {
+      margin: 8px 0;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      font-size: 17px;
+    }
+    td,
+    th {
+      border-bottom: 1px solid #ccd3d8;
+      padding: 6px;
+      text-align: left;
+    }
+    section[hidden] {
+      display: none;
+    }
+    footer {
+      border-top: 1px solid #ccd3d8;
+      margin-top: 20px;
+      padding-top: 10px;
+      font-size: 16px;
+      color: #50545a;
+    }
+    @media (max-width: 980px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+      h1 {
+        font-size: 26px;
+      }
+    }
+  </style>
+  <div class="teaching-site-nav" role="navigation" aria-label="Điều hướng học phần">
+    <a href="/teaching/">Teaching</a><a href="/teaching/cong-nghe-dinh-vi-va-lo-trinh-di-chuyen/">Công nghệ định vị và lộ trình di chuyển</a
+    ><a href="/teaching/cong-nghe-dinh-vi-va-lo-trinh-di-chuyen/chuong-2/">Hướng dẫn Chương 2</a>
+  </div>
+  <header>
+    <h1>Chương 2 · Nguyên lý và công nghệ định vị</h1>
+    <p>Ba thí nghiệm với dữ liệu tổng hợp — bậc Thạc sĩ</p>
+  </header>
+  <nav aria-label="Chọn thí nghiệm">
+    <button id="tab-icp" aria-selected="true">ICP 2D</button><button id="tab-radar" aria-selected="false">Doppler</button
+    ><button id="tab-gaussian" aria-selected="false">Gaussian</button>
+  </nav>
+  <main>
+    <section id="icp">
+      <h2>Ghép đám mây điểm</h2>
+      <p>Tập nguồn được tạo bằng phép quay 10° và tịnh tiến (2, 1) m. Hãy đưa nguồn trở lại tập tham chiếu.</p>
+      <div class="controls">
+        <label
+          >Trường hợp<select id="icp-case">
+            <option value="good">Bất đối xứng, khởi tạo gần</option>
+            <option value="bad">Bất đối xứng, khởi tạo xa</option>
+            <option value="repeat">Cấu trúc lặp lại, chồng lấp một phần</option>
+          </select></label
+        ><button id="icp-reset">Đặt lại</button><button id="icp-step" class="primary">Một bước ICP</button><button id="icp-run">Chạy 15 bước</button>
+      </div>
+      <div class="layout">
+        <canvas id="icp-canvas" width="1000" height="620" aria-label="Đám mây tham chiếu, nguồn sau biến đổi và các cặp tương ứng"></canvas>
+        <div>
+          <div class="result" id="icp-result" aria-live="polite"></div>
+          <h3>Cách quan sát</h3>
+          <p>Xanh: tham chiếu. Vàng: nguồn sau biến đổi hiện tại. Xám: cặp gần nhất được xét.</p>
+          <p>RMSE ghép đo mức phù hợp của các điểm. Lỗi tư thế so với biến đổi thật đã biết của ví dụ.</p>
+          <p class="hint">
+            Cảnh lặp lại dùng một phần tập điểm nguồn để minh họa sự mơ hồ trong vùng chồng lấp. Một nghiệm sai vị trí vẫn có thể có RMSE gần bằng
+            không.
+          </p>
+        </div>
+      </div>
+      <table id="icp-history">
+        <thead>
+          <tr>
+            <th>Bước</th>
+            <th>RMSE ghép (m)</th>
+            <th>Lỗi tịnh tiến (m)</th>
+            <th>Lỗi góc (°)</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+    <section id="radar" hidden>
+      <h2>Vận tốc từ Doppler của các mốc</h2>
+      <p>Quy ước tốc độ cự ly âm khi tiến gần: ṙ = −cos(α) vₓ − sin(α) vᵧ. Vận tốc thật của ví dụ là (5, 1) m/s.</p>
+      <div class="controls">
+        <label>Nửa góc quan sát (°)<input id="radar-spread" type="number" min="0" max="90" value="70" step="1" /></label
+        ><label>Mức nhiễu (m/s)<input id="radar-noise" type="number" min="0" max="1" value="0.08" step="0.02" /></label
+        ><label>Số ngoại lai động<input id="radar-dynamic" type="number" min="0" max="6" value="0" step="1" /></label
+        ><button id="radar-update" class="primary">Tính lại</button>
+      </div>
+      <div class="layout">
+        <canvas id="radar-canvas" width="1000" height="620" aria-label="Hướng nhìn các mốc và vector vận tốc ước lượng"></canvas>
+        <div>
+          <div class="result" id="radar-result" aria-live="polite"></div>
+          <p>
+            Vàng: mốc có quan sát. Đỏ: dữ liệu không phù hợp với nghiệm đồng thuận. Xanh: vận tốc thật. Xám: bình phương tối thiểu. Đỏ tím: nghiệm
+            đồng thuận.
+          </p>
+          <h3>Thử theo thứ tự</h3>
+          <p>Đặt nhiễu bằng 0, rồi tăng lên 0,08. Giảm góc từ 70° xuống 5°. Trả góc 70° rồi thêm 3 ngoại lai.</p>
+          <p class="hint">
+            Bộ đồng thuận dùng ngưỡng 0,35 m/s cố định cho bài học. Mô hình chưa xét vận tốc quay, cánh tay đòn hoặc tín hiệu radar thô.
+          </p>
+        </div>
+      </div>
+    </section>
+    <section id="gaussian" hidden>
+      <h2>Một lần cập nhật Gaussian</h2>
+      <p>Prior và phép đo trực tiếp được giả định Gaussian, không bias và độc lập. Phương sai dùng đơn vị m².</p>
+      <div class="controls">
+        <label>Trung bình prior μ (m)<input id="g-mu" type="number" value="10" step="0.5" /></label
+        ><label>Phương sai P (m²)<input id="g-P" type="number" value="4" min="0.01" step="0.5" /></label
+        ><label>Phép đo z (m)<input id="g-z" type="number" value="12" step="0.5" /></label
+        ><label>Phương sai R (m²)<input id="g-R" type="number" value="1" min="0.01" step="0.5" /></label
+        ><label><span>Cổng 95%, 1D</span><input id="g-gate" type="checkbox" /></label
+        ><label><span>Đếm lại cùng phép đo</span><input id="g-double" type="checkbox" /></label
+        ><button id="g-update" class="primary">Cập nhật</button>
+      </div>
+      <div class="layout">
+        <canvas id="g-canvas" width="1000" height="620" aria-label="Phân bố prior, likelihood và posterior"></canvas>
+        <div>
+          <div class="result" id="g-result" aria-live="polite"></div>
+          <h3>Công thức của mô hình</h3>
+          <p>K = P / (P + R)<br />μ⁺ = μ + K(z − μ)<br />P⁺ = (1 − K)P</p>
+          <p>NIS = (z − μ)² / (P + R). Cổng dùng ngưỡng 3,8414588 khi các giả định 1D phù hợp.</p>
+          <p class="hint">
+            Chọn “đếm lại” để thấy hậu quả coi cùng một dữ liệu là hai phép đo độc lập. Đường tím thể hiện sự quá tự tin của giả định sai ấy.
+          </p>
+        </div>
+      </div>
+    </section>
+    <footer>
+      Dữ liệu và ví dụ do người biên soạn xây dựng. Các kết quả chỉ dùng để khảo sát mô hình, chưa phải kiểm chứng xe hoặc cảm biến thực. Mã tính và
+      cấu hình đi kèm trong gói để chạy lại.
+    </footer>
+  </main>
+  <script>
+    const rad = (a) => (a * Math.PI) / 180;
+    const rotate = (p, a) => [Math.cos(a) * p[0] - Math.sin(a) * p[1], Math.sin(a) * p[0] + Math.cos(a) * p[1]];
+    function transform(points, theta, t) {
+      return points.map((p) => {
+        const r = rotate(p, theta);
+        return [r[0] + t[0], r[1] + t[1]];
+      });
+    }
+    const asym = [
+      [-4, -2],
+      [-3.2, -0.8],
+      [-3, 2],
+      [-1, 2.7],
+      [0.2, 1.6],
+      [2, 2],
+      [4, 1.1],
+      [3.5, -1.9],
+      [1, -2.6],
+      [-0.8, -1.5],
+    ];
+    const repeat = Array.from({ length: 9 }, (_, i) => [
+      [-6 + i * 1.5, -1],
+      [-6 + i * 1.5, 1],
+    ]).flat();
+    function icpStart({ theta = 0, tx = 0, ty = 0, mode = "asym" } = {}) {
+      const reference = mode === "repeat" ? repeat : asym;
+      const source = transform(mode === "repeat" ? reference.slice(4, 14) : reference, rad(10), [2, 1]);
+      return { reference, source, theta: rad(theta), t: [tx, ty], history: [] };
+    }
+    function nearest(p, ps) {
+      let j = 0,
+        d = Infinity;
+      ps.forEach((q, i) => {
+        let r = (p[0] - q[0]) ** 2 + (p[1] - q[1]) ** 2;
+        if (r < d) {
+          d = r;
+          j = i;
+        }
+      });
+      return { j, d };
+    }
+    function icpStep(state) {
+      const ps = transform(state.source, state.theta, state.t),
+        pairs = ps.map((p) => nearest(p, state.reference)),
+        qs = pairs.map((a) => state.reference[a.j]);
+      const mean = (arr) => arr.reduce((a, p) => [a[0] + p[0] / arr.length, a[1] + p[1] / arr.length], [0, 0]);
+      const pc = mean(ps),
+        qc = mean(qs);
+      let dot = 0,
+        cross = 0;
+      ps.forEach((p, i) => {
+        const x = p[0] - pc[0],
+          y = p[1] - pc[1],
+          X = qs[i][0] - qc[0],
+          Y = qs[i][1] - qc[1];
+        dot += x * X + y * Y;
+        cross += x * Y - y * X;
+      });
+      const da = Math.atan2(cross, dot),
+        rp = rotate(pc, da),
+        dt = [qc[0] - rp[0], qc[1] - rp[1]],
+        rt = rotate(state.t, da),
+        theta = state.theta + da,
+        t = [rt[0] + dt[0], rt[1] + dt[1]],
+        out = transform(state.source, theta, t);
+      const rmse = Math.sqrt(out.reduce((a, p) => a + nearest(p, state.reference).d, 0) / out.length);
+      const truthT = rotate([-2, -1], rad(-10));
+      const terr = Math.hypot(t[0] - truthT[0], t[1] - truthT[1]),
+        aerr = (Math.abs(Math.atan2(Math.sin(theta - rad(-10)), Math.cos(theta - rad(-10)))) * 180) / Math.PI;
+      return { ...state, theta, t, pairs, rmse, terr, aerr, history: [...state.history, { theta, t, rmse, terr, aerr }] };
+    }
+    function solveLS(angles, rdots, ids = angles.map((_, i) => i)) {
+      let aa = 0,
+        ab = 0,
+        bb = 0,
+        ar = 0,
+        br = 0;
+      for (const i of ids) {
+        const a = -Math.cos(rad(angles[i])),
+          b = -Math.sin(rad(angles[i])),
+          r = rdots[i];
+        aa += a * a;
+        ab += a * b;
+        bb += b * b;
+        ar += a * r;
+        br += b * r;
+      }
+      const det = aa * bb - ab * ab,
+        tr = aa + bb,
+        disc = Math.sqrt((aa - bb) ** 2 + 4 * ab * ab),
+        lmin = (tr - disc) / 2,
+        lmax = (tr + disc) / 2;
+      if (det < 1e-12 || lmin < 1e-12) return { v: null, condition: Infinity };
+      return { v: [(bb * ar - ab * br) / det, (aa * br - ab * ar) / det], condition: lmax / lmin };
+    }
+    function doppler({ spread = 70, noise = 0.08, dynamic = 0 } = {}) {
+      const angles = Array.from({ length: 12 }, (_, i) => -spread + (2 * spread * i) / 11),
+        v = [5, 1],
+        rdots = angles.map(
+          (a, i) =>
+            -Math.cos(rad(a)) * v[0] - Math.sin(rad(a)) * v[1] + noise * (Math.sin(i * 2.17) + 0.4 * Math.cos(i * 0.73)) + (i < dynamic ? 3 : 0)
+        );
+      const all = solveLS(angles, rdots);
+      let best = null;
+      for (let i = 0; i < 12; i++)
+        for (let j = i + 1; j < 12; j++) {
+          let fit = solveLS(angles, rdots, [i, j]);
+          if (!fit.v) continue;
+          const ids = angles
+            .map((a, k) => (Math.abs(-Math.cos(rad(a)) * fit.v[0] - Math.sin(rad(a)) * fit.v[1] - rdots[k]) < 0.35 ? k : null))
+            .filter((k) => k !== null);
+          if (!best || ids.length > best.length) best = ids;
+        }
+      const robust = solveLS(angles, rdots, best || []);
+      return {
+        angles,
+        rdots,
+        truth: v,
+        all,
+        robust,
+        inliers: best || [],
+        allError: all.v ? Math.hypot(all.v[0] - 5, all.v[1] - 1) : Infinity,
+        robustError: robust.v ? Math.hypot(robust.v[0] - 5, robust.v[1] - 1) : Infinity,
+      };
+    }
+    function gaussian({ mu = 10, P = 4, z = 12, R = 1, gate = false, double = false } = {}) {
+      if (P <= 0 || R <= 0) throw Error("Variances must be positive");
+      const nu = z - mu,
+        S = P + R,
+        nis = (nu * nu) / S,
+        K = P / S,
+        accepted = !gate || nis <= 3.841458820694124;
+      let posteriorMu = accepted ? mu + K * nu : mu,
+        posteriorP = accepted ? (1 - K) * P : P;
+      let second = null;
+      if (double) {
+        const k = posteriorP / (posteriorP + R);
+        second = { mu: posteriorMu + k * (z - posteriorMu), P: (1 - k) * posteriorP };
+      }
+      return { mu, P, z, R, K, nu, S, nis, accepted, posteriorMu, posteriorP, second };
+    }
+
+    const el = (id) => document.getElementById(id),
+      num = (id) => Number(el(id).value),
+      fmt = (x, n = 4) => (Number.isFinite(x) ? x.toFixed(n) : "không xác định");
+    const C = { blue: "#045ea7", gold: "#a17c00", red: "#95001a", gray: "#677c8c", purple: "#8a3d8f" };
+    for (const k of ["icp", "radar", "gaussian"])
+      el("tab-" + k).onclick = () => {
+        for (const j of ["icp", "radar", "gaussian"]) {
+          el(j).hidden = j !== k;
+          el("tab-" + j).setAttribute("aria-selected", String(j === k));
+        }
+        if (k === "radar") drawRadar();
+        if (k === "gaussian") drawGaussian();
+      };
+    function base(canvas, xmin = -8, xmax = 8, ymin = -4.5, ymax = 5) {
+      const c = canvas.getContext("2d"),
+        W = canvas.width,
+        H = canvas.height;
+      c.clearRect(0, 0, W, H);
+      const scale = Math.min((W - 95) / (xmax - xmin), (H - 100) / (ymax - ymin)),
+        ox = (W - scale * (xmax - xmin)) / 2,
+        oy = (H - scale * (ymax - ymin)) / 2,
+        X = (x) => ox + (x - xmin) * scale,
+        Y = (y) => H - oy - (y - ymin) * scale;
+      c.font = "22px Georgia";
+      c.fillStyle = C.gray;
+      c.strokeStyle = "#e5e9ec";
+      c.lineWidth = 1;
+      for (let x = Math.ceil(xmin); x <= xmax; x += 2) {
+        c.beginPath();
+        c.moveTo(X(x), Y(ymin));
+        c.lineTo(X(x), Y(ymax));
+        c.stroke();
+        c.fillText(String(x), X(x) - 5, H - 22);
+      }
+      for (let y = Math.ceil(ymin); y <= ymax; y += 2) {
+        c.beginPath();
+        c.moveTo(X(xmin), Y(y));
+        c.lineTo(X(xmax), Y(y));
+        c.stroke();
+        c.fillText(String(y), 20, Y(y) + 5);
+      }
+      return { c, X, Y };
+    }
+    function line2(c, X, Y, a, b, color, width = 2) {
+      c.strokeStyle = color;
+      c.lineWidth = width;
+      c.beginPath();
+      c.moveTo(X(a[0]), Y(a[1]));
+      c.lineTo(X(b[0]), Y(b[1]));
+      c.stroke();
+    }
+    function dots(c, X, Y, ps, color, r = 7) {
+      c.fillStyle = color;
+      for (const p of ps) {
+        c.beginPath();
+        c.arc(X(p[0]), Y(p[1]), r, 0, 2 * Math.PI);
+        c.fill();
+      }
+    }
+    let state;
+    function resetICP() {
+      const k = el("icp-case").value;
+      state = icpStart(
+        k === "good"
+          ? { theta: -2, tx: -0.5, ty: -0.3 }
+          : k === "bad"
+            ? { theta: 80, tx: 3, ty: 2 }
+            : { mode: "repeat", theta: -10, tx: -0.64, ty: -0.64 }
+      );
+      drawICP();
+    }
+    function drawICP() {
+      const { c, X, Y } = base(el("icp-canvas"), -9, 10, -5, 7),
+        ps = transform(state.source, state.theta, state.t);
+      for (const p of ps) {
+        const q = state.reference[nearest(p, state.reference).j];
+        line2(c, X, Y, p, q, "#bfc9cf", 1.5);
+      }
+      dots(c, X, Y, state.reference, C.blue, 7);
+      dots(c, X, Y, ps, C.gold, 5);
+      let last = state.history.at(-1);
+      el("icp-result").innerHTML =
+        "<strong>Bước " +
+        state.history.length +
+        "</strong><br>Góc: " +
+        fmt((state.theta * 180) / Math.PI, 3) +
+        "°<br>Tịnh tiến: (" +
+        state.t.map((x) => fmt(x, 3)).join(", ") +
+        ") m<br>RMSE ghép: " +
+        (last ? fmt(last.rmse) : "chưa cập nhật") +
+        " m<br>Lỗi tịnh tiến: " +
+        (last ? fmt(last.terr) : "chưa cập nhật") +
+        " m<br>Lỗi góc: " +
+        (last ? fmt(last.aerr, 3) : "chưa cập nhật") +
+        "°";
+      el("icp-history").querySelector("tbody").innerHTML = state.history
+        .slice(-15)
+        .map(
+          (h, j) =>
+            "<tr><td>" +
+            (state.history.length - Math.min(state.history.length, 15) + j + 1) +
+            "</td><td>" +
+            fmt(h.rmse) +
+            "</td><td>" +
+            fmt(h.terr) +
+            "</td><td>" +
+            fmt(h.aerr, 3) +
+            "</td></tr>"
+        )
+        .join("");
+    }
+    el("icp-reset").onclick = resetICP;
+    el("icp-case").onchange = resetICP;
+    el("icp-step").onclick = () => {
+      state = icpStep(state);
+      drawICP();
+    };
+    el("icp-run").onclick = () => {
+      for (let i = 0; i < 15; i++) state = icpStep(state);
+      drawICP();
+    };
+    function drawRadar() {
+      let spread = Math.max(0, Math.min(90, num("radar-spread"))),
+        noise = Math.max(0, Math.min(1, num("radar-noise"))),
+        dynamic = Math.max(0, Math.min(6, Math.round(num("radar-dynamic"))));
+      let d = doppler({ spread, noise, dynamic });
+      const { c, X, Y } = base(el("radar-canvas"), -1, 7, -6.5, 6.5);
+      d.angles.forEach((a, i) => {
+        const p = [6 * Math.cos(rad(a)), 6 * Math.sin(rad(a))];
+        line2(c, X, Y, [0, 0], p, "#c5cdd3");
+        dots(c, X, Y, [p], d.inliers.includes(i) ? C.gold : C.red, 7);
+      });
+      line2(c, X, Y, [0, 0], d.truth, C.blue, 7);
+      if (d.all.v) line2(c, X, Y, [0, 0], d.all.v, C.gray, 4);
+      if (d.robust.v) line2(c, X, Y, [0, 0], d.robust.v, C.purple, 3);
+      el("radar-result").innerHTML =
+        "<strong>Vận tốc ước lượng (m/s)</strong><br>Bình phương tối thiểu: " +
+        (d.all.v ? "(" + d.all.v.map((x) => fmt(x, 3)).join(", ") + ")" : "không đủ hạng") +
+        "<br>Đồng thuận: " +
+        (d.robust.v ? "(" + d.robust.v.map((x) => fmt(x, 3)).join(", ") + ")" : "không đủ hạng") +
+        "<br>Lỗi toàn bộ: " +
+        fmt(d.allError) +
+        " m/s<br>Lỗi đồng thuận: " +
+        fmt(d.robustError) +
+        " m/s<br>Số điều kiện AᵀA: " +
+        fmt(d.all.condition, 2) +
+        "<br>Số điểm đồng thuận: " +
+        d.inliers.length +
+        "/12";
+    }
+    el("radar-update").onclick = drawRadar;
+    function drawGaussian() {
+      try {
+        const d = gaussian({
+          mu: num("g-mu"),
+          P: num("g-P"),
+          z: num("g-z"),
+          R: num("g-R"),
+          gate: el("g-gate").checked,
+          double: el("g-double").checked,
+        });
+        const s = Math.max(Math.sqrt(d.P), Math.sqrt(d.R)),
+          xmin = Math.min(d.mu, d.z) - 4 * s,
+          xmax = Math.max(d.mu, d.z) + 4 * s;
+        const ymax =
+          (Math.max(1 / Math.sqrt(d.P), 1 / Math.sqrt(d.R), 1 / Math.sqrt(d.posteriorP), d.second ? 1 / Math.sqrt(d.second.P) : 0) /
+            Math.sqrt(2 * Math.PI)) *
+          1.2;
+        const canvas = el("g-canvas"),
+          c = canvas.getContext("2d"),
+          W = canvas.width,
+          H = canvas.height,
+          X = (x) => 65 + ((x - xmin) / (xmax - xmin)) * (W - 95),
+          Y = (y) => H - 55 - (y / ymax) * (H - 100);
+        c.clearRect(0, 0, W, H);
+        c.font = "22px Georgia";
+        c.fillStyle = C.gray;
+        c.strokeStyle = "#d1d9de";
+        c.beginPath();
+        c.moveTo(65, H - 55);
+        c.lineTo(W - 30, H - 55);
+        c.stroke();
+        for (let i = 0; i <= 6; i++) {
+          let x = xmin + ((xmax - xmin) * i) / 6;
+          c.fillText(fmt(x, 1), X(x) - 12, H - 20);
+        }
+        const curve = (mu, P, color) => {
+          c.strokeStyle = color;
+          c.lineWidth = 4;
+          c.beginPath();
+          for (let i = 0; i <= 600; i++) {
+            let x = xmin + ((xmax - xmin) * i) / 600,
+              y = Math.exp((-0.5 * (x - mu) ** 2) / P) / Math.sqrt(2 * Math.PI * P);
+            i ? c.lineTo(X(x), Y(y)) : c.moveTo(X(x), Y(y));
+          }
+          c.stroke();
+        };
+        curve(d.mu, d.P, C.gray);
+        curve(d.z, d.R, C.gold);
+        curve(d.posteriorMu, d.posteriorP, C.blue);
+        if (d.second) curve(d.second.mu, d.second.P, C.purple);
+        el("g-result").innerHTML =
+          "<strong>" +
+          (d.accepted ? "Chấp nhận phép đo" : "Loại phép đo, giữ prior") +
+          "</strong><br>K = " +
+          fmt(d.K) +
+          "<br>Innovation = " +
+          fmt(d.nu) +
+          " m<br>NIS = " +
+          fmt(d.nis) +
+          "<br>μ sau = " +
+          fmt(d.posteriorMu) +
+          " m<br>P sau = " +
+          fmt(d.posteriorP) +
+          " m²" +
+          (d.second ? "<br><br>Đếm lại cùng số đo:<br>μ = " + fmt(d.second.mu) + " m<br>P = " + fmt(d.second.P) + " m²" : "") +
+          "<br><br>Xám: prior · Vàng: likelihood<br>Xanh: posterior · Tím: đếm lại";
+      } catch (e) {
+        el("g-result").textContent = "P và R phải dương.";
+      }
+    }
+    el("g-update").onclick = drawGaussian;
+    resetICP();
+    drawRadar();
+    drawGaussian();
+  </script>
+</html>
