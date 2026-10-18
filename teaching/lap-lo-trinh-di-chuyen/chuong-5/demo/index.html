@@ -1,42 +1,895 @@
-<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Chương 5 · Giao thông động | Tin Robotics</title><style>
-:root{--blue:#045ea7;--red:#95001a;--gold:#9a7500;--ink:#192f45;--muted:#536779;--line:#d6e2eb}*{box-sizing:border-box}body{margin:0;font:16px/1.55 system-ui,-apple-system,sans-serif;background:#f3f7fa;color:var(--ink)}header{background:#fff;border-bottom:3px solid var(--red);padding:22px max(24px,calc((100vw - 1450px)/2));}header a{color:var(--blue)}h1{font-size:clamp(23px,3vw,34px);margin:7px 0}header p{margin:0;color:var(--muted)}main{max-width:1490px;margin:24px auto;padding:0 20px}.tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}button,.download{font:inherit;font-weight:600;border:1px solid var(--line);padding:10px 16px;border-radius:9px;background:#fff;color:var(--blue);cursor:pointer;text-decoration:none}button:hover,.download:hover{background:#e8f2fa}button[aria-selected=true]{background:var(--blue);color:white}.grid{display:grid;grid-template-columns:minmax(265px,330px) minmax(0,1fr);gap:20px}.panel{background:white;border:1px solid var(--line);border-radius:14px;padding:20px;box-shadow:0 3px 12px #001c4507}h2{font-size:21px;margin:0 0 12px}label{display:block;margin:14px 0 4px;font-weight:600}select,input[type=number]{font:inherit;border:1px solid #b8cad9;background:white;padding:9px;border-radius:7px;width:100%;color:var(--ink)}input[type=range]{width:100%;accent-color:var(--blue)}.hint{font-size:14px;color:var(--muted)}.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.primary{background:var(--blue);color:white}.primary:hover{background:#004c8b}.canvas-wrap{padding:0;overflow:hidden}canvas{display:block;width:100%;height:auto;background:white}.playbar{padding:14px 18px;border-top:1px solid var(--line)}#result{border-left:4px solid var(--blue);padding:10px 14px;background:#f2f7fb;margin:15px 0}#result.bad{border-left-color:var(--red);background:#fff3f5}#result strong{display:block}details{margin:18px 0}summary{cursor:pointer;font-weight:650}code{background:#eef4f8;padding:2px 5px;border-radius:3px}.export{margin-top:16px}#recorded[hidden]{display:none}#recorded{display:inline-block;margin:12px 0}#recordStatus{min-height:22px;color:var(--red)}footer{color:var(--muted);font-size:14px;padding:20px 0 40px}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #c6a340;outline-offset:3px}@media(max-width:850px){.grid{grid-template-columns:1fr}main{padding:0 12px}.panel{padding:16px}.canvas-wrap{padding:0}}
-</style></head><body><header><a href="/teaching/lap-lo-trinh-di-chuyen/chuong-5/">← Hướng dẫn thực hành trên Teaching</a><h1>Chương 5 · Lập lộ trình trong giao thông động</h1><p>Thử một giả định, xem cả khoảng chuyển động, rồi giải thích kết quả.</p></header><main><nav class="tabs" aria-label="Chọn tình huống"><button data-scene="intersection" aria-selected="true">1. Hai ô tô qua giao lộ</button><button data-scene="crossing" aria-selected="false">2. Nhường người đi bộ</button><button data-scene="occlusion" aria-selected="false">3. Vận tốc trước vùng khuất</button></nav><div class="grid"><section class="panel"><h2 id="scenarioTitle">Lịch phối hợp</h2><div id="controls"></div><div id="result" aria-live="polite"></div><p id="explanation" class="hint"></p><details><summary>Mô hình và phép kiểm</summary><p class="hint">Ô tô dài 4,4 m, rộng 1,8 m; đi thẳng, hướng cố định. Gia tốc không đổi theo từng đoạn. Người đi bộ là hình vuông cạnh 0,6 m và đi thẳng đều. Không có cảm biến hoặc xe thật được kết nối.</p><p class="hint">Tiếp xúc cũng tính là va chạm. Bộ kiểm giải thời điểm chạm biên của các hình chữ nhật trên từng đoạn, rồi xét khoảng giữa các nghiệm. Khoảng hở nhỏ nhất là chỉ số trên mẫu 1 ms, được báo riêng.</p><p class="hint">Vùng khuất chỉ kiểm khoảng dừng trước ranh giới, chưa mô phỏng người ẩn. Chuyển gia tốc lý tưởng có bước nhảy; chưa có mô hình lốp, cơ cấu phanh hoặc độ êm đầy đủ.</p></details><div class="row export"><button id="json">Lưu JSON</button><button id="csv">Lưu CSV</button><button id="reset">Cấu hình gốc</button></div></section><section class="panel canvas-wrap"><canvas id="scene" width="1440" height="1080" aria-label="Hình chiếu bằng của mô phỏng ô tô, lịch thời gian và vận tốc"></canvas><div class="playbar"><div class="row"><button id="play" class="primary">Phát mô phỏng</button><a class="download" href="/teaching/lap-lo-trinh-di-chuyen/chuong-5/">Xem video dự phòng</a><span id="timeText"></span></div><label for="time">Thời điểm trong mô hình</label><input id="time" type="range" min="0" max="12.2" step="0.01" value="0"><p class="hint">Kéo thanh để kiểm từng mốc. Phát ở tốc độ 2×; dữ liệu JSON/CSV giữ thời gian mô hình gốc. Video dự phòng trên Teaching giữ dấu giờ của mô hình.</p></div></section></div><footer>Nguồn: mô phỏng giáo dục của bài giảng Lập lộ trình di chuyển, HKI 2026–2027. Mã nguồn và dữ liệu mẫu trong gói tải trên Teaching. Đây chưa phải phần mềm điều khiển xe hoặc triển khai ROS 2.</footer></main>
-<script>
-// Educational straight-road model, SI units. No vehicle or ROS connection.
-const MODEL = {length:4.4,width:1.8,carAcceleration:2,brake:3,dt:0.05,clearanceSample:0.001};
-function cruiseFromRest(t,delay=0,v=4,a=2){const u=Math.max(0,t-delay),r=v/a;return {s:u<=r?.5*a*u*u:.5*a*r*r+v*(u-r),v:Math.min(v,a*u)};}
-function restTime(s,v=4,a=2){const r=v/a,d=.5*a*r*r;return s<=d?Math.sqrt(2*s/a):r+(s-d)/v;}
-function brakeMotion(t,{v=8,delay=.2,b=3}={}){if(t<=delay)return {s:v*t,v,a:0};const u=t-delay,h=v/b;if(u<=h)return {s:v*delay+v*u-.5*b*u*u,v:v-b*u,a:-b};return {s:v*delay+v*v/(2*b),v:0,a:0};}
-function stoppingDistance(v,tau,b){return v*tau+v*v/(2*b);}
-function visibleSpeed(D,tau,b,buffer=2){if(D<buffer)return 0;return Math.max(0,-b*tau+Math.sqrt((b*tau)**2+2*b*(D-buffer)));}
-function closestApproach(r,w,H=10,R=2){const ww=w[0]**2+w[1]**2,dot=r[0]*w[0]+r[1]*w[1];const t=ww?Math.max(0,Math.min(H,-dot/ww)):0;const d=Math.hypot(r[0]+w[0]*t,r[1]+w[1]*t);let ttc=null;const c=r[0]**2+r[1]**2-R*R,disc=dot*dot-ww*c;if(c<=0)ttc=0;else if(ww>0&&disc>=0){const z=(-dot-Math.sqrt(disc))/ww;if(z>=0&&z<=H)ttc=z;}return {tcpa:t,dmin:d,ttc};}
-function roots(a,b,c){const e=1e-10;if(Math.abs(a)<e)return Math.abs(b)<e?[]:[-c/b];let d=b*b-4*a*c;if(d < -e)return [];d=Math.max(0,d);const u=Math.sqrt(d);return [(-b-u)/(2*a),(-b+u)/(2*a)];}
-function unionCuts(xs){return [...new Set(xs.filter(Number.isFinite).map(x=>Math.round(x*1e10)/1e10))].sort((a,b)=>a-b);}
-// Each motion segment has constant acceleration; relative positions are quadratic.
-// Partition at the exact roots of each rectangle boundary. Contact counts as collision.
-function collisionIntervals(A,B,breaks,T){const cuts=unionCuts([0,T,...breaks].filter(t=>t>=0&&t<=T)),hit=[];for(let k=0;k<cuts.length-1;k++){const l=cuts[k],r=cuts[k+1],dt=r-l;if(dt<1e-9)continue;const aa=A(l),bb=B(l),mid=(l+r)/2,am=A(mid),bm=B(mid);const h=[aa.hx+bb.hx,aa.hy+bb.hy],p=[aa.x-bb.x,aa.y-bb.y],v=[aa.vx-bb.vx,aa.vy-bb.vy],acc=[am.ax-bm.ax,am.ay-bm.ay];let zz=[0,dt];for(let j=0;j<2;j++)for(const sign of [-1,1])for(const z of roots(.5*acc[j],v[j],p[j]-sign*h[j]))if(z>1e-9&&z<dt-1e-9)zz.push(z);zz=unionCuts(zz);const inside=z=>[0,1].every(j=>Math.abs(p[j]+v[j]*z+.5*acc[j]*z*z)<=h[j]+1e-8);for(let z=0;z<zz.length-1;z++)if(inside((zz[z]+zz[z+1])/2))hit.push([l+zz[z],l+zz[z+1]]);for(const z of zz)if(inside(z))hit.push([l+z,l+z]);}hit.sort((a,b)=>a[0]-b[0]);const out=[];for(const q of hit){if(out.length&&q[0]<=out.at(-1)[1]+1e-7)out.at(-1)[1]=Math.max(out.at(-1)[1],q[1]);else out.push(q);}return out;}
-function rectGap(a,b){return Math.hypot(Math.max(0,Math.abs(a.x-b.x)-a.hx-b.hx),Math.max(0,Math.abs(a.y-b.y)-a.hy-b.hy));}
-function measure(A,B,breaks,T){const hit=collisionIntervals(A,B,breaks,T);let gap=Infinity,time=0;for(let k=0;k<=Math.ceil(T/.001);k++){const t=Math.min(T,k*.001),d=rectGap(A(t),B(t));if(d<gap){gap=d;time=t;}}return {collision:hit.length>0,contactIntervals:hit,firstContact:hit[0]?.[0]??null,minSampledGap:gap,gapSampleStep:.001,minGapSampleTime:time};}
-function states(A,B,T){return Array.from({length:Math.ceil(T/.05)+1},(_,k)=>{const t=Math.min(T,k*.05);return {t,A:A(t),B:B?.(t)};});}
-function intersection(options={}){const o={mode:'reserve',margin:.3,gap:.5,bShift:0,first:'A',...options};const {length:L,width:W}=MODEL,K=(L+W)/2+o.margin,entry=restTime(18-K),exit=restTime(18+K),slot=exit-entry+o.gap;let da=0,db=o.bShift;if(o.mode==='reserve'){if(o.first==='A')db=Math.max(db,slot);else da=Math.max(0,db+slot);}const car=(axis,delay)=>t=>{const z=cruiseFromRest(t,delay);return {x:axis==='x'?-18+z.s:0,y:axis==='y'?-18+z.s:0,vx:axis==='x'?z.v:0,vy:axis==='y'?z.v:0,ax:axis==='x'&&t>delay&&t<delay+2?2:0,ay:axis==='y'&&t>delay&&t<delay+2?2:0,hx:axis==='x'?L/2:W/2,hy:axis==='x'?W/2:L/2};};const A=car('x',da),B=car('y',db),T=Math.max(da,db)+10,breaks=[da,db,da+2,db+2];return {kind:'intersection',options:o,delays:{A:da,B:db},reservations:{A:[da+entry,da+exit],B:[db+entry,db+exit]},timeGap:Math.max(da+entry,db+entry)-Math.min(da+exit,db+exit),goalTimes:{A:da+10,B:db+10},metrics:measure(A,B,breaks,T),frames:states(A,B,T),T};}
-function crossing(options={}){const o={mode:'predict',v:8,delay:.2,dist:18,pedSpeed:1.5,b:3,margin:.5,...options};const L=MODEL.length,W=MODEL.width,ph=.3,exit=(3+W/2+ph+o.margin)/o.pedSpeed;const stopped=o.delay+o.v/o.b,release=Math.max(stopped,exit+.4),sd=stoppingDistance(o.v,o.delay,o.b);const A=t=>{let z;if(o.mode==='static')z={s:o.v*t,v:o.v,a:0};else if(t<=release)z=brakeMotion(t,{v:o.v,delay:o.delay,b:o.b});else{const z2=cruiseFromRest(t,release,o.v,2);z={s:sd+z2.s,v:z2.v,a:z2.v<o.v?2:0};}return {x:-o.dist+z.s,y:0,vx:z.v,vy:0,ax:z.a,ay:0,hx:L/2,hy:W/2};};const B=t=>({x:0,y:-3+o.pedSpeed*t,vx:0,vy:o.pedSpeed,ax:0,ay:0,hx:ph,hy:ph});const T=o.mode==='static'?7:release+8,breaks=[o.delay,stopped,release,release+o.v/2];return {kind:'crossing',options:o,stoppingDistance:sd,stopFront:-o.dist+sd+L/2,release,occupancy:[(3-W/2-ph)/o.pedSpeed,(3+W/2+ph)/o.pedSpeed],metrics:measure(A,B,breaks,T),frames:states(A,B,T),T};}
-function occlusion(options={}){const o={speedMode:'cap',v:8,D:8,delay:.6,b:3,buffer:2,...options};const cap=visibleSpeed(o.D,o.delay,o.b,o.buffer),v=o.speedMode==='cap'?Math.min(o.v,cap):o.v,d=stoppingDistance(v,o.delay,o.b),T=o.delay+v/o.b+1;const A=t=>{const z=brakeMotion(t,{v,delay:o.delay,b:o.b});return {x:-o.D-MODEL.length/2+z.s,y:0,vx:z.v,vy:0,ax:z.a,ay:0,hx:MODEL.length/2,hy:MODEL.width/2};};return {kind:'occlusion',options:o,cap,usedSpeed:v,stoppingDistance:d,remaining:o.D-d,bufferSatisfied:d<=o.D-o.buffer+1e-9,frames:states(A,null,T),T};}
-function referenceRuns(){return {intersection:[intersection({mode:'independent'}),intersection(),intersection({first:'B'})],crossing:[crossing({mode:'static'}),crossing(),crossing({delay:.8}),crossing({pedSpeed:1})],occlusion:[occlusion({speedMode:'fixed'}),occlusion(),occlusion({delay:1})],cpa:closestApproach([8,-6],[-2,1.5],6,2)};}
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Chương 5 · Giao thông động | Tin Robotics</title>
+    <style>
+      :root {
+        --blue: #045ea7;
+        --red: #95001a;
+        --gold: #9a7500;
+        --ink: #192f45;
+        --muted: #536779;
+        --line: #d6e2eb;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font:
+          16px/1.55 system-ui,
+          -apple-system,
+          sans-serif;
+        background: #f3f7fa;
+        color: var(--ink);
+      }
+      header {
+        background: #fff;
+        border-bottom: 3px solid var(--red);
+        padding: 22px max(24px, calc((100vw - 1450px) / 2));
+      }
+      header a {
+        color: var(--blue);
+      }
+      h1 {
+        font-size: clamp(23px, 3vw, 34px);
+        margin: 7px 0;
+      }
+      header p {
+        margin: 0;
+        color: var(--muted);
+      }
+      main {
+        max-width: 1490px;
+        margin: 24px auto;
+        padding: 0 20px;
+      }
+      .tabs {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+      }
+      button,
+      .download {
+        font: inherit;
+        font-weight: 600;
+        border: 1px solid var(--line);
+        padding: 10px 16px;
+        border-radius: 9px;
+        background: #fff;
+        color: var(--blue);
+        cursor: pointer;
+        text-decoration: none;
+      }
+      button:hover,
+      .download:hover {
+        background: #e8f2fa;
+      }
+      button[aria-selected="true"] {
+        background: var(--blue);
+        color: white;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: minmax(265px, 330px) minmax(0, 1fr);
+        gap: 20px;
+      }
+      .panel {
+        background: white;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 20px;
+        box-shadow: 0 3px 12px #001c4507;
+      }
+      h2 {
+        font-size: 21px;
+        margin: 0 0 12px;
+      }
+      label {
+        display: block;
+        margin: 14px 0 4px;
+        font-weight: 600;
+      }
+      select,
+      input[type="number"] {
+        font: inherit;
+        border: 1px solid #b8cad9;
+        background: white;
+        padding: 9px;
+        border-radius: 7px;
+        width: 100%;
+        color: var(--ink);
+      }
+      input[type="range"] {
+        width: 100%;
+        accent-color: var(--blue);
+      }
+      .hint {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      .row {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      .primary {
+        background: var(--blue);
+        color: white;
+      }
+      .primary:hover {
+        background: #004c8b;
+      }
+      .canvas-wrap {
+        padding: 0;
+        overflow: hidden;
+      }
+      canvas {
+        display: block;
+        width: 100%;
+        height: auto;
+        background: white;
+      }
+      .playbar {
+        padding: 14px 18px;
+        border-top: 1px solid var(--line);
+      }
+      #result {
+        border-left: 4px solid var(--blue);
+        padding: 10px 14px;
+        background: #f2f7fb;
+        margin: 15px 0;
+      }
+      #result.bad {
+        border-left-color: var(--red);
+        background: #fff3f5;
+      }
+      #result strong {
+        display: block;
+      }
+      details {
+        margin: 18px 0;
+      }
+      summary {
+        cursor: pointer;
+        font-weight: 650;
+      }
+      code {
+        background: #eef4f8;
+        padding: 2px 5px;
+        border-radius: 3px;
+      }
+      .export {
+        margin-top: 16px;
+      }
+      #recorded[hidden] {
+        display: none;
+      }
+      #recorded {
+        display: inline-block;
+        margin: 12px 0;
+      }
+      #recordStatus {
+        min-height: 22px;
+        color: var(--red);
+      }
+      footer {
+        color: var(--muted);
+        font-size: 14px;
+        padding: 20px 0 40px;
+      }
+      button:focus-visible,
+      a:focus-visible,
+      input:focus-visible,
+      select:focus-visible {
+        outline: 3px solid #c6a340;
+        outline-offset: 3px;
+      }
+      @media (max-width: 850px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+        main {
+          padding: 0 12px;
+        }
+        .panel {
+          padding: 16px;
+        }
+        .canvas-wrap {
+          padding: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a href="/teaching/lap-lo-trinh-di-chuyen/chuong-5/">← Hướng dẫn thực hành trên Teaching</a>
+      <h1>Chương 5 · Lập lộ trình trong giao thông động</h1>
+      <p>Thử một giả định, xem cả khoảng chuyển động, rồi giải thích kết quả.</p>
+    </header>
+    <main>
+      <nav class="tabs" aria-label="Chọn tình huống">
+        <button data-scene="intersection" aria-selected="true">1. Hai ô tô qua giao lộ</button
+        ><button data-scene="crossing" aria-selected="false">2. Nhường người đi bộ</button
+        ><button data-scene="occlusion" aria-selected="false">3. Vận tốc trước vùng khuất</button>
+      </nav>
+      <div class="grid">
+        <section class="panel">
+          <h2 id="scenarioTitle">Lịch phối hợp</h2>
+          <div id="controls"></div>
+          <div id="result" aria-live="polite"></div>
+          <p id="explanation" class="hint"></p>
+          <details>
+            <summary>Mô hình và phép kiểm</summary>
+            <p class="hint">
+              Ô tô dài 4,4 m, rộng 1,8 m; đi thẳng, hướng cố định. Gia tốc không đổi theo từng đoạn. Người đi bộ là hình vuông cạnh 0,6 m và đi thẳng
+              đều. Không có cảm biến hoặc xe thật được kết nối.
+            </p>
+            <p class="hint">
+              Tiếp xúc cũng tính là va chạm. Bộ kiểm giải thời điểm chạm biên của các hình chữ nhật trên từng đoạn, rồi xét khoảng giữa các nghiệm.
+              Khoảng hở nhỏ nhất là chỉ số trên mẫu 1 ms, được báo riêng.
+            </p>
+            <p class="hint">
+              Vùng khuất chỉ kiểm khoảng dừng trước ranh giới, chưa mô phỏng người ẩn. Chuyển gia tốc lý tưởng có bước nhảy; chưa có mô hình lốp, cơ
+              cấu phanh hoặc độ êm đầy đủ.
+            </p>
+          </details>
+          <div class="row export"><button id="json">Lưu JSON</button><button id="csv">Lưu CSV</button><button id="reset">Cấu hình gốc</button></div>
+        </section>
+        <section class="panel canvas-wrap">
+          <canvas id="scene" width="1440" height="1080" aria-label="Hình chiếu bằng của mô phỏng ô tô, lịch thời gian và vận tốc"></canvas>
+          <div class="playbar">
+            <div class="row">
+              <button id="play" class="primary">Phát mô phỏng</button
+              ><a class="download" href="/teaching/lap-lo-trinh-di-chuyen/chuong-5/">Xem video dự phòng</a><span id="timeText"></span>
+            </div>
+            <label for="time">Thời điểm trong mô hình</label><input id="time" type="range" min="0" max="12.2" step="0.01" value="0" />
+            <p class="hint">
+              Kéo thanh để kiểm từng mốc. Phát ở tốc độ 2×; dữ liệu JSON/CSV giữ thời gian mô hình gốc. Video dự phòng trên Teaching giữ dấu giờ của
+              mô hình.
+            </p>
+          </div>
+        </section>
+      </div>
+      <footer>
+        Nguồn: mô phỏng giáo dục của bài giảng Lập lộ trình di chuyển, HKI 2026–2027. Mã nguồn và dữ liệu mẫu trong gói tải trên Teaching. Đây chưa
+        phải phần mềm điều khiển xe hoặc triển khai ROS 2.
+      </footer>
+    </main>
+    <script>
+      // Educational straight-road model, SI units. No vehicle or ROS connection.
+      const MODEL = { length: 4.4, width: 1.8, carAcceleration: 2, brake: 3, dt: 0.05, clearanceSample: 0.001 };
+      function cruiseFromRest(t, delay = 0, v = 4, a = 2) {
+        const u = Math.max(0, t - delay),
+          r = v / a;
+        return { s: u <= r ? 0.5 * a * u * u : 0.5 * a * r * r + v * (u - r), v: Math.min(v, a * u) };
+      }
+      function restTime(s, v = 4, a = 2) {
+        const r = v / a,
+          d = 0.5 * a * r * r;
+        return s <= d ? Math.sqrt((2 * s) / a) : r + (s - d) / v;
+      }
+      function brakeMotion(t, { v = 8, delay = 0.2, b = 3 } = {}) {
+        if (t <= delay) return { s: v * t, v, a: 0 };
+        const u = t - delay,
+          h = v / b;
+        if (u <= h) return { s: v * delay + v * u - 0.5 * b * u * u, v: v - b * u, a: -b };
+        return { s: v * delay + (v * v) / (2 * b), v: 0, a: 0 };
+      }
+      function stoppingDistance(v, tau, b) {
+        return v * tau + (v * v) / (2 * b);
+      }
+      function visibleSpeed(D, tau, b, buffer = 2) {
+        if (D < buffer) return 0;
+        return Math.max(0, -b * tau + Math.sqrt((b * tau) ** 2 + 2 * b * (D - buffer)));
+      }
+      function closestApproach(r, w, H = 10, R = 2) {
+        const ww = w[0] ** 2 + w[1] ** 2,
+          dot = r[0] * w[0] + r[1] * w[1];
+        const t = ww ? Math.max(0, Math.min(H, -dot / ww)) : 0;
+        const d = Math.hypot(r[0] + w[0] * t, r[1] + w[1] * t);
+        let ttc = null;
+        const c = r[0] ** 2 + r[1] ** 2 - R * R,
+          disc = dot * dot - ww * c;
+        if (c <= 0) ttc = 0;
+        else if (ww > 0 && disc >= 0) {
+          const z = (-dot - Math.sqrt(disc)) / ww;
+          if (z >= 0 && z <= H) ttc = z;
+        }
+        return { tcpa: t, dmin: d, ttc };
+      }
+      function roots(a, b, c) {
+        const e = 1e-10;
+        if (Math.abs(a) < e) return Math.abs(b) < e ? [] : [-c / b];
+        let d = b * b - 4 * a * c;
+        if (d < -e) return [];
+        d = Math.max(0, d);
+        const u = Math.sqrt(d);
+        return [(-b - u) / (2 * a), (-b + u) / (2 * a)];
+      }
+      function unionCuts(xs) {
+        return [...new Set(xs.filter(Number.isFinite).map((x) => Math.round(x * 1e10) / 1e10))].sort((a, b) => a - b);
+      }
+      // Each motion segment has constant acceleration; relative positions are quadratic.
+      // Partition at the exact roots of each rectangle boundary. Contact counts as collision.
+      function collisionIntervals(A, B, breaks, T) {
+        const cuts = unionCuts([0, T, ...breaks].filter((t) => t >= 0 && t <= T)),
+          hit = [];
+        for (let k = 0; k < cuts.length - 1; k++) {
+          const l = cuts[k],
+            r = cuts[k + 1],
+            dt = r - l;
+          if (dt < 1e-9) continue;
+          const aa = A(l),
+            bb = B(l),
+            mid = (l + r) / 2,
+            am = A(mid),
+            bm = B(mid);
+          const h = [aa.hx + bb.hx, aa.hy + bb.hy],
+            p = [aa.x - bb.x, aa.y - bb.y],
+            v = [aa.vx - bb.vx, aa.vy - bb.vy],
+            acc = [am.ax - bm.ax, am.ay - bm.ay];
+          let zz = [0, dt];
+          for (let j = 0; j < 2; j++)
+            for (const sign of [-1, 1]) for (const z of roots(0.5 * acc[j], v[j], p[j] - sign * h[j])) if (z > 1e-9 && z < dt - 1e-9) zz.push(z);
+          zz = unionCuts(zz);
+          const inside = (z) => [0, 1].every((j) => Math.abs(p[j] + v[j] * z + 0.5 * acc[j] * z * z) <= h[j] + 1e-8);
+          for (let z = 0; z < zz.length - 1; z++) if (inside((zz[z] + zz[z + 1]) / 2)) hit.push([l + zz[z], l + zz[z + 1]]);
+          for (const z of zz) if (inside(z)) hit.push([l + z, l + z]);
+        }
+        hit.sort((a, b) => a[0] - b[0]);
+        const out = [];
+        for (const q of hit) {
+          if (out.length && q[0] <= out.at(-1)[1] + 1e-7) out.at(-1)[1] = Math.max(out.at(-1)[1], q[1]);
+          else out.push(q);
+        }
+        return out;
+      }
+      function rectGap(a, b) {
+        return Math.hypot(Math.max(0, Math.abs(a.x - b.x) - a.hx - b.hx), Math.max(0, Math.abs(a.y - b.y) - a.hy - b.hy));
+      }
+      function measure(A, B, breaks, T) {
+        const hit = collisionIntervals(A, B, breaks, T);
+        let gap = Infinity,
+          time = 0;
+        for (let k = 0; k <= Math.ceil(T / 0.001); k++) {
+          const t = Math.min(T, k * 0.001),
+            d = rectGap(A(t), B(t));
+          if (d < gap) {
+            gap = d;
+            time = t;
+          }
+        }
+        return {
+          collision: hit.length > 0,
+          contactIntervals: hit,
+          firstContact: hit[0]?.[0] ?? null,
+          minSampledGap: gap,
+          gapSampleStep: 0.001,
+          minGapSampleTime: time,
+        };
+      }
+      function states(A, B, T) {
+        return Array.from({ length: Math.ceil(T / 0.05) + 1 }, (_, k) => {
+          const t = Math.min(T, k * 0.05);
+          return { t, A: A(t), B: B?.(t) };
+        });
+      }
+      function intersection(options = {}) {
+        const o = { mode: "reserve", margin: 0.3, gap: 0.5, bShift: 0, first: "A", ...options };
+        const { length: L, width: W } = MODEL,
+          K = (L + W) / 2 + o.margin,
+          entry = restTime(18 - K),
+          exit = restTime(18 + K),
+          slot = exit - entry + o.gap;
+        let da = 0,
+          db = o.bShift;
+        if (o.mode === "reserve") {
+          if (o.first === "A") db = Math.max(db, slot);
+          else da = Math.max(0, db + slot);
+        }
+        const car = (axis, delay) => (t) => {
+          const z = cruiseFromRest(t, delay);
+          return {
+            x: axis === "x" ? -18 + z.s : 0,
+            y: axis === "y" ? -18 + z.s : 0,
+            vx: axis === "x" ? z.v : 0,
+            vy: axis === "y" ? z.v : 0,
+            ax: axis === "x" && t > delay && t < delay + 2 ? 2 : 0,
+            ay: axis === "y" && t > delay && t < delay + 2 ? 2 : 0,
+            hx: axis === "x" ? L / 2 : W / 2,
+            hy: axis === "x" ? W / 2 : L / 2,
+          };
+        };
+        const A = car("x", da),
+          B = car("y", db),
+          T = Math.max(da, db) + 10,
+          breaks = [da, db, da + 2, db + 2];
+        return {
+          kind: "intersection",
+          options: o,
+          delays: { A: da, B: db },
+          reservations: { A: [da + entry, da + exit], B: [db + entry, db + exit] },
+          timeGap: Math.max(da + entry, db + entry) - Math.min(da + exit, db + exit),
+          goalTimes: { A: da + 10, B: db + 10 },
+          metrics: measure(A, B, breaks, T),
+          frames: states(A, B, T),
+          T,
+        };
+      }
+      function crossing(options = {}) {
+        const o = { mode: "predict", v: 8, delay: 0.2, dist: 18, pedSpeed: 1.5, b: 3, margin: 0.5, ...options };
+        const L = MODEL.length,
+          W = MODEL.width,
+          ph = 0.3,
+          exit = (3 + W / 2 + ph + o.margin) / o.pedSpeed;
+        const stopped = o.delay + o.v / o.b,
+          release = Math.max(stopped, exit + 0.4),
+          sd = stoppingDistance(o.v, o.delay, o.b);
+        const A = (t) => {
+          let z;
+          if (o.mode === "static") z = { s: o.v * t, v: o.v, a: 0 };
+          else if (t <= release) z = brakeMotion(t, { v: o.v, delay: o.delay, b: o.b });
+          else {
+            const z2 = cruiseFromRest(t, release, o.v, 2);
+            z = { s: sd + z2.s, v: z2.v, a: z2.v < o.v ? 2 : 0 };
+          }
+          return { x: -o.dist + z.s, y: 0, vx: z.v, vy: 0, ax: z.a, ay: 0, hx: L / 2, hy: W / 2 };
+        };
+        const B = (t) => ({ x: 0, y: -3 + o.pedSpeed * t, vx: 0, vy: o.pedSpeed, ax: 0, ay: 0, hx: ph, hy: ph });
+        const T = o.mode === "static" ? 7 : release + 8,
+          breaks = [o.delay, stopped, release, release + o.v / 2];
+        return {
+          kind: "crossing",
+          options: o,
+          stoppingDistance: sd,
+          stopFront: -o.dist + sd + L / 2,
+          release,
+          occupancy: [(3 - W / 2 - ph) / o.pedSpeed, (3 + W / 2 + ph) / o.pedSpeed],
+          metrics: measure(A, B, breaks, T),
+          frames: states(A, B, T),
+          T,
+        };
+      }
+      function occlusion(options = {}) {
+        const o = { speedMode: "cap", v: 8, D: 8, delay: 0.6, b: 3, buffer: 2, ...options };
+        const cap = visibleSpeed(o.D, o.delay, o.b, o.buffer),
+          v = o.speedMode === "cap" ? Math.min(o.v, cap) : o.v,
+          d = stoppingDistance(v, o.delay, o.b),
+          T = o.delay + v / o.b + 1;
+        const A = (t) => {
+          const z = brakeMotion(t, { v, delay: o.delay, b: o.b });
+          return { x: -o.D - MODEL.length / 2 + z.s, y: 0, vx: z.v, vy: 0, ax: z.a, ay: 0, hx: MODEL.length / 2, hy: MODEL.width / 2 };
+        };
+        return {
+          kind: "occlusion",
+          options: o,
+          cap,
+          usedSpeed: v,
+          stoppingDistance: d,
+          remaining: o.D - d,
+          bufferSatisfied: d <= o.D - o.buffer + 1e-9,
+          frames: states(A, null, T),
+          T,
+        };
+      }
+      function referenceRuns() {
+        return {
+          intersection: [intersection({ mode: "independent" }), intersection(), intersection({ first: "B" })],
+          crossing: [crossing({ mode: "static" }), crossing(), crossing({ delay: 0.8 }), crossing({ pedSpeed: 1 })],
+          occlusion: [occlusion({ speedMode: "fixed" }), occlusion(), occlusion({ delay: 1 })],
+          cpa: closestApproach([8, -6], [-2, 1.5], 6, 2),
+        };
+      }
 
-const $=s=>document.querySelector(s),can=$('#scene'),ctx=can.getContext('2d');let scene='intersection',current=null,t=0,playing=false,last=0,recording=false,rec=null,recordParts=[],recordBlob=null,recordUrl=null,recordTrack=null;const C={blue:'#045ea7',gold:'#9a7500',red:'#95001a',gray:'#718698',green:'#23785a',ink:'#192f45'};const f=(x,n=3)=>Number(x).toLocaleString('vi-VN',{maximumFractionDigits:n,minimumFractionDigits:n});
-const field=(id,label,values,value)=>`<label for="${id}">${label}</label><select id="${id}">${values.map(([v,s])=>`<option value="${v}" ${String(v)===String(value)?'selected':''}>${s}</option>`).join('')}</select>`;const num=(id,label,min,max,step,value)=>`<label for="${id}">${label}</label><input id="${id}" type="number" min="${min}" max="${max}" step="${step}" value="${value}">`;
-function setup(){playing=false;t=0;$('#play').textContent='Phát mô phỏng';for(const b of document.querySelectorAll('[data-scene]'))b.setAttribute('aria-selected',String(b.dataset.scene===scene));let h='';if(scene==='intersection'){h=field('mode','Cách phối hợp',[['reserve','Đặt chỗ theo ưu tiên'],['independent','Cùng khởi hành, không điều phối']],'reserve')+field('first','Xe được đi trước',[['A','Xe A (xanh)'],['B','Xe B (vàng)']],'A')+num('gap','Đệm thời gian (s)',0,2,.1,.5)+num('margin','Biên lập lịch (m)',0,1,.1,.3)+num('bShift','B khởi hành muộn sẵn (s)',0,4,.1,0);$('#scenarioTitle').textContent='Lịch phối hợp';}else if(scene==='crossing'){h=field('mode','Cách xử lý vật cản',[['predict','Nhường: phanh – chờ – đi tiếp'],['static','Bỏ qua chuyển động: giữ vận tốc']],'predict')+num('delay','Độ trễ trước khi phanh (s)',0,1.5,.1,.2)+num('v','Vận tốc đầu của xe (m/s)',2,10,.5,8)+num('pedSpeed','Tốc độ người đi bộ (m/s)',.8,2.5,.1,1.5);$('#scenarioTitle').textContent='Người đi bộ cắt ngang';}else{h=field('speedMode','Cách chọn vận tốc',[['cap','Giới hạn theo khoảng nhìn'],['fixed','Giữ vận tốc yêu cầu']],'cap')+num('v','Vận tốc yêu cầu (m/s)',2,10,.5,8)+num('D','Khoảng nhìn từ mép trước (m)',4,16,.5,8)+num('delay','Độ trễ trước khi phanh (s)',0,1.5,.1,.6);$('#scenarioTitle').textContent='Điều kiện dừng trước vùng khuất';}$('#controls').innerHTML=h;for(const a of $('#controls').querySelectorAll('input,select'))a.addEventListener(a.tagName==='INPUT'?'input':'change',calculate);calculate();}
-function calculate(){if(recording)return;playing=false;$('#play').textContent='Phát mô phỏng';const o={};for(const a of $('#controls').querySelectorAll('input,select')){if(a.tagName==='INPUT'&&!a.checkValidity()){a.reportValidity();return;}o[a.id]=a.tagName==='INPUT'?Number(a.value):a.value;}current=scene==='intersection'?intersection(o):scene==='crossing'?crossing(o):occlusion(o);t=0;$('#time').max=current.T;$('#time').value=0;const r=current,bad=scene==='occlusion'?!r.bufferSatisfied:r.metrics.collision;$('#result').className=bad?'bad':'';if(scene==='intersection'){$('#result').innerHTML=`<strong>${bad?'Có tiếp xúc trong mô hình':'Không phát hiện tiếp xúc theo kiểm khoảng'}</strong>Khởi hành A: ${f(r.delays.A,2)} s · B: ${f(r.delays.B,2)} s<br>Khoảng giữa hai đặt chỗ: ${f(r.timeGap,2)} s<br>Hở nhỏ nhất trên mẫu 1 ms: ${f(r.metrics.minSampledGap)} m`;$('#explanation').textContent='Mỗi xe từ đứng yên, tăng tốc 2 m/s² tới 4 m/s. Điều phối dời giờ khởi hành khi xe chưa chạy. Mốc đích là đi qua vạch, chưa thiết kế phanh cuối tuyến.';}else if(scene==='crossing'){$('#result').innerHTML=`<strong>${bad?'Có tiếp xúc trong mô hình':'Không phát hiện tiếp xúc theo kiểm khoảng'}</strong>${bad?'Tiếp xúc đầu: '+f(r.metrics.firstContact,4)+' s':'Hở nhỏ nhất trên mẫu 1 ms: '+f(r.metrics.minSampledGap)+' m'}<br>${o.mode==='static'?'Giữ vận tốc; tham số trễ không áp dụng.':'Quãng dừng: '+f(r.stoppingDistance)+' m; mép trước dừng tại '+f(r.stopFront)+' m.'}`;$('#explanation').textContent='Tâm xe xuất phát ở −18 m; người ở (0,−3) m, đi ngang thẳng đều. Chế độ nhường biết trạng thái người ở t=0, phản ứng sau độ trễ và giữ phanh tới khi đứng yên; đi tiếp sau mốc dự báo có biên 0,5 m và đệm 0,4 s. Đây chưa là bộ dự báo cảm biến.';}else{$('#result').innerHTML=`<strong>${bad?'Không thỏa khoảng dừng đã đặt':'Thỏa khoảng dừng trong mô hình lý tưởng'}</strong>Vận tốc dùng: ${f(r.usedSpeed)} m/s<br>Quãng dừng: ${f(r.stoppingDistance)} m<br>Còn trước ranh giới: ${f(r.remaining)} m; yêu cầu 2 m`;$('#explanation').textContent='Mô hình giữ tốc trong lúc trễ rồi phanh đều 3 m/s². Giới hạn vận tốc được chọn trước lúc lộ vùng, chưa phải lệnh hạ tốc tức thì từ một trạng thái đang chạy nhanh. Không có người ẩn được mô phỏng.';}draw();}
-function rr(x,y,w,h,r=12,fill='#fff',stroke=null){ctx.beginPath();ctx.roundRect(x,y,w,h,r);ctx.fillStyle=fill;ctx.fill();if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=2;ctx.stroke();}}
-function text(s,x,y,size=26,color=C.ink,font='system-ui',align='left'){ctx.fillStyle=color;ctx.font=`${size}px ${font}`;ctx.textAlign=align;ctx.fillText(s,x,y);ctx.textAlign='left';}
-function line(x1,y1,x2,y2,color=C.gray,width=2,dash=[]){ctx.beginPath();ctx.setLineDash(dash);ctx.strokeStyle=color;ctx.lineWidth=width;ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();ctx.setLineDash([]);}
-function carDraw(a,map,color){const [x,y]=map(a.x,a.y),sx=Math.hypot(...map(a.x+1,a.y).map((z,i)=>z-map(a.x,a.y)[i]));const w=2*a.hx*sx,h=2*a.hy*sx;rr(x-w/2,y-h/2,w,h,7,color+'28',color);rr(x-w*.13,y-h*.33,w*.3,h*.66,4,'#ffffffb0',color);const vertical=a.hy>a.hx;text(vertical?'B':'A',x,y+8,23,color,'system-ui','center');}
-function chart(x,y,w,h,curves,ylim,label){const tmax=current.T;rr(x-12,y-38,w+45,h+100,8,'#fbfdff','#dce6ed');text(label,x,y-24,23,C.ink);const xy=(tt,v)=>[x+tt/tmax*w,y+h-(v-ylim[0])/(ylim[1]-ylim[0])*h];for(let j=0;j<3;j++){const v=ylim[0]+j*(ylim[1]-ylim[0])/2,yy=xy(0,v)[1];line(x,yy,x+w,yy,'#e0e9f0',1);text(f(v,1),x-5,yy-4,17,C.gray);}for(let j=0;j<=4;j++){const tt=j*tmax/4;const xx=xy(tt,ylim[0])[0];text(f(tt,1),xx,y+h+26,17,C.gray,'system-ui','center');}for(const [pts,color]of curves){ctx.beginPath();ctx.strokeStyle=color;ctx.lineWidth=3;let started=false;for(const [tt,v]of pts){const [xx,yy]=xy(tt,v);if(!started){ctx.moveTo(xx,yy);started=true;}else ctx.lineTo(xx,yy);}ctx.stroke();}const tx=xy(t,0)[0];line(tx,y,tx,y+h,C.red,2,[5,4]);text('Thời gian (s)',x+w-130,y+h+53,18,C.gray);}
-function draw(){if(!current)return;ctx.clearRect(0,0,can.width,can.height);ctx.fillStyle='white';ctx.fillRect(0,0,can.width,can.height);const r=current;const frame=r.frames.reduce((best,z)=>Math.abs(z.t-t)<Math.abs(best.t-t)?z:best,r.frames[0]);text(scene==='intersection'?'HAI Ô TÔ QUA GIAO LỘ':scene==='crossing'?'Ô TÔ NHƯỜNG NGƯỜI ĐI BỘ':'VẬN TỐC TRƯỚC VÙNG KHUẤT',42,48,31,C.blue);text('Mô phỏng giáo dục · Tính theo mô hình, chưa là thử nghiệm xe thật',42,82,22,C.gray);text('t = '+f(t,2)+' s',1394,48,26,C.red,'system-ui','right');const map=scene==='intersection'?((x,y)=>[730+11.4*x,355-11.4*y]):((x,y)=>[900+22*x,335-22*y]);const scale=scene==='intersection'?11.4:22;const [cx,cy]=map(0,0);rr(35,110,1370,490,12,'#f8fbfd','#dce6ed');ctx.save();ctx.beginPath();ctx.rect(36,111,1368,488);ctx.clip();ctx.fillStyle='#e7eef3';ctx.fillRect(36,cy-2.3*scale,1368,4.6*scale);if(scene==='intersection')ctx.fillRect(cx-2.3*scale,111,4.6*scale,488);line(40,cy,1400,cy,'#b5c5d1',2,[16,14]);if(scene==='intersection'){line(cx,115,cx,595,'#b5c5d1',2,[16,14]);const k=3.1+r.options.margin;rr(cx-k*scale,cy-k*scale,2*k*scale,2*k*scale,0,'#95001a0a','#95001a50');text('Vùng đặt chỗ',cx+110,cy-95,20,C.red);}else if(scene==='crossing'){for(let j=0;j<9;j++){ctx.fillStyle='#fff';ctx.fillRect(cx-43+j*10,cy-2.2*scale,5,4.4*scale);}const b=frame.B;const [px,py]=map(b.x,b.y);ctx.strokeStyle=C.gold;ctx.lineWidth=3;ctx.beginPath();ctx.arc(px,py,8,0,Math.PI*2);ctx.stroke();text('Người đi bộ',px+18,py-16,22,C.gold);text('Bắt đầu: (0, −3) m · đi thẳng đều',50,560,21,C.gray);}else{const bx=map(0,0)[0];ctx.fillStyle='#a17c0020';ctx.fillRect(bx,115,1400-bx,480);line(bx,120,bx,590,C.red,3,[9,6]);rr(bx+25,cy-150,145,55,6,'#cbd6df',C.gray);text('Xe đỗ',bx+95,cy-116,19,C.gray,'system-ui','center');text('Vùng chưa quan sát',bx+20,520,22,C.gold);const b=map(-2,0)[0];line(b,cy+80,b,cy+145,C.gold,2);text('Giữ lại 2 m',b-65,cy+175,20,C.gold);text('Chưa mô phỏng người ẩn; kiểm khoảng dừng trước ranh giới',50,560,21,C.gray);}
-carDraw(frame.A,map,C.blue);if(scene==='intersection')carDraw(frame.B,map,C.gold);for(const v of [-20,-10,0,10,20]){const [x]=map(v,0);if(x>50&&x<1390)text(v+' m',x,585,17,C.gray,'system-ui','center');}ctx.restore();text('Hình chiếu bằng · m',60,145,20,C.gray);const curvesA=r.frames.map(z=>[z.t,z.A.vx]),curvesB=r.frames.map(z=>[z.t,z.B?.vy??0]);chart(65,670,600,205,[[curvesA,C.blue],...(scene==='intersection'?[[curvesB,C.gold]]:[])],[0,scene==='intersection'?4.5:Math.max(9,r.usedSpeed||r.options.v)],'Vận tốc theo tuyến (m/s)');if(scene==='intersection'){const xx=770,yy=695,w=560;const pos=tt=>xx+tt/r.T*w;text('Khoảng đặt chỗ (s)',xx,660,23,C.ink);for(const [i,key,color]of [[0,'A',C.blue],[1,'B',C.gold]]){const a=r.reservations[key];line(xx,yy+i*105,xx+w,yy+i*105,'#d7e2eb',2);rr(pos(a[0]),yy-22+i*105,(a[1]-a[0])/r.T*w,44,5,color+'22',color);text(key,xx-30,yy+8+i*105,24,color);text(f(a[0],2)+'–'+f(a[1],2)+' s',pos(a[0]),yy+58+i*105,21,color);}line(pos(t),yy-42,pos(t),yy+180,C.red,2,[5,5]);}else{const xs=r.frames.map(z=>[z.t,z.A.x+z.A.hx]),ys=r.frames.map(z=>[z.t,z.B?.y??0]);chart(780,670,570,205,[[xs,C.blue],...(scene==='crossing'?[[ys,C.gold]]:[])],[-20,Math.max(18,...xs.map(z=>z[1]))],scene==='crossing'?'Mép trước xe / vị trí ngang người (m)':'Vị trí mép trước so với ranh giới (m)');}const bad=scene==='occlusion'?!r.bufferSatisfied:r.metrics.collision;rr(38,965,1364,78,10,bad?'#fff1f4':'#eef7f3');text(scene==='occlusion'?(r.bufferSatisfied?'Thỏa điều kiện dừng của mô hình':'Không thỏa điều kiện dừng đã đặt'):(bad?'Có tiếp xúc: '+r.metrics.contactIntervals.map(z=>f(z[0],3)+'–'+f(z[1],3)+' s').join(', '):'Không phát hiện tiếp xúc theo bộ kiểm khoảng'),60,998,24,bad?C.red:C.green);text(scene==='occlusion'?'Quãng dừng '+f(r.stoppingDistance)+' m · còn '+f(r.remaining)+' m': 'Khoảng hở trên mẫu 1 ms: '+f(r.metrics.minSampledGap)+' m · tiếp xúc được kiểm riêng theo khoảng',60,1028,21,C.gray);$('#timeText').textContent=f(t,2)+' / '+f(r.T,2)+' s';$('#time').value=t;if(recording&&recordTrack?.requestFrame)recordTrack.requestFrame();}
-function tick(now){if(playing){if(last)t=Math.min(current.T,t+(recording?1/30:Math.min(now-last,100)/1000*2));last=now;draw();if(t>=current.T){playing=false;$('#play').textContent='Phát lại mô phỏng';if(recording&&rec?.state==='recording')setTimeout(()=>{if(rec.state==='recording')rec.stop();},700);}}else last=0;requestAnimationFrame(tick);}requestAnimationFrame(tick);
-$('#play').addEventListener('click',()=>{if(recording)return;if(t>=current.T)t=0;playing=!playing;last=0;$('#play').textContent=playing?'Tạm dừng':'Phát mô phỏng';});$('#time').addEventListener('input',()=>{if(recording)return;playing=false;t=Number($('#time').value);$('#play').textContent='Phát mô phỏng';draw();});for(const b of document.querySelectorAll('[data-scene]'))b.addEventListener('click',()=>{if(recording)return;scene=b.dataset.scene;setup();});$('#reset').addEventListener('click',()=>{if(!recording)setup();});
-function saveBlob(blob,name){const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),10000);}$('#json').addEventListener('click',()=>saveBlob(new Blob([JSON.stringify(current,null,2)],{type:'application/json'}),'chuong5-'+scene+'.json'));$('#csv').addEventListener('click',()=>{const head='t_s,Ax_m,Ay_m,Avx_mps,Avy_mps,Bx_m,By_m,Bvx_mps,Bvy_mps\n';const body=current.frames.map(z=>[z.t,z.A.x,z.A.y,z.A.vx,z.A.vy,z.B?.x??'',z.B?.y??'',z.B?.vx??'',z.B?.vy??''].join(',')).join('\n');saveBlob(new Blob([head+body],{type:'text/csv'}),'chuong5-'+scene+'.csv');});
-setup();
-
-</script></body></html>
+      const $ = (s) => document.querySelector(s),
+        can = $("#scene"),
+        ctx = can.getContext("2d");
+      let scene = "intersection",
+        current = null,
+        t = 0,
+        playing = false,
+        last = 0,
+        recording = false,
+        rec = null,
+        recordParts = [],
+        recordBlob = null,
+        recordUrl = null,
+        recordTrack = null;
+      const C = { blue: "#045ea7", gold: "#9a7500", red: "#95001a", gray: "#718698", green: "#23785a", ink: "#192f45" };
+      const f = (x, n = 3) => Number(x).toLocaleString("vi-VN", { maximumFractionDigits: n, minimumFractionDigits: n });
+      const field = (id, label, values, value) =>
+        `<label for="${id}">${label}</label><select id="${id}">${values
+          .map(([v, s]) => `<option value="${v}" ${String(v) === String(value) ? "selected" : ""}>${s}</option>`)
+          .join("")}</select>`;
+      const num = (id, label, min, max, step, value) =>
+        `<label for="${id}">${label}</label><input id="${id}" type="number" min="${min}" max="${max}" step="${step}" value="${value}">`;
+      function setup() {
+        playing = false;
+        t = 0;
+        $("#play").textContent = "Phát mô phỏng";
+        for (const b of document.querySelectorAll("[data-scene]")) b.setAttribute("aria-selected", String(b.dataset.scene === scene));
+        let h = "";
+        if (scene === "intersection") {
+          h =
+            field(
+              "mode",
+              "Cách phối hợp",
+              [
+                ["reserve", "Đặt chỗ theo ưu tiên"],
+                ["independent", "Cùng khởi hành, không điều phối"],
+              ],
+              "reserve"
+            ) +
+            field(
+              "first",
+              "Xe được đi trước",
+              [
+                ["A", "Xe A (xanh)"],
+                ["B", "Xe B (vàng)"],
+              ],
+              "A"
+            ) +
+            num("gap", "Đệm thời gian (s)", 0, 2, 0.1, 0.5) +
+            num("margin", "Biên lập lịch (m)", 0, 1, 0.1, 0.3) +
+            num("bShift", "B khởi hành muộn sẵn (s)", 0, 4, 0.1, 0);
+          $("#scenarioTitle").textContent = "Lịch phối hợp";
+        } else if (scene === "crossing") {
+          h =
+            field(
+              "mode",
+              "Cách xử lý vật cản",
+              [
+                ["predict", "Nhường: phanh – chờ – đi tiếp"],
+                ["static", "Bỏ qua chuyển động: giữ vận tốc"],
+              ],
+              "predict"
+            ) +
+            num("delay", "Độ trễ trước khi phanh (s)", 0, 1.5, 0.1, 0.2) +
+            num("v", "Vận tốc đầu của xe (m/s)", 2, 10, 0.5, 8) +
+            num("pedSpeed", "Tốc độ người đi bộ (m/s)", 0.8, 2.5, 0.1, 1.5);
+          $("#scenarioTitle").textContent = "Người đi bộ cắt ngang";
+        } else {
+          h =
+            field(
+              "speedMode",
+              "Cách chọn vận tốc",
+              [
+                ["cap", "Giới hạn theo khoảng nhìn"],
+                ["fixed", "Giữ vận tốc yêu cầu"],
+              ],
+              "cap"
+            ) +
+            num("v", "Vận tốc yêu cầu (m/s)", 2, 10, 0.5, 8) +
+            num("D", "Khoảng nhìn từ mép trước (m)", 4, 16, 0.5, 8) +
+            num("delay", "Độ trễ trước khi phanh (s)", 0, 1.5, 0.1, 0.6);
+          $("#scenarioTitle").textContent = "Điều kiện dừng trước vùng khuất";
+        }
+        $("#controls").innerHTML = h;
+        for (const a of $("#controls").querySelectorAll("input,select")) a.addEventListener(a.tagName === "INPUT" ? "input" : "change", calculate);
+        calculate();
+      }
+      function calculate() {
+        if (recording) return;
+        playing = false;
+        $("#play").textContent = "Phát mô phỏng";
+        const o = {};
+        for (const a of $("#controls").querySelectorAll("input,select")) {
+          if (a.tagName === "INPUT" && !a.checkValidity()) {
+            a.reportValidity();
+            return;
+          }
+          o[a.id] = a.tagName === "INPUT" ? Number(a.value) : a.value;
+        }
+        current = scene === "intersection" ? intersection(o) : scene === "crossing" ? crossing(o) : occlusion(o);
+        t = 0;
+        $("#time").max = current.T;
+        $("#time").value = 0;
+        const r = current,
+          bad = scene === "occlusion" ? !r.bufferSatisfied : r.metrics.collision;
+        $("#result").className = bad ? "bad" : "";
+        if (scene === "intersection") {
+          $("#result").innerHTML = `<strong>${
+            bad ? "Có tiếp xúc trong mô hình" : "Không phát hiện tiếp xúc theo kiểm khoảng"
+          }</strong>Khởi hành A: ${f(r.delays.A, 2)} s · B: ${f(r.delays.B, 2)} s<br>Khoảng giữa hai đặt chỗ: ${f(
+            r.timeGap,
+            2
+          )} s<br>Hở nhỏ nhất trên mẫu 1 ms: ${f(r.metrics.minSampledGap)} m`;
+          $("#explanation").textContent =
+            "Mỗi xe từ đứng yên, tăng tốc 2 m/s² tới 4 m/s. Điều phối dời giờ khởi hành khi xe chưa chạy. Mốc đích là đi qua vạch, chưa thiết kế phanh cuối tuyến.";
+        } else if (scene === "crossing") {
+          $("#result").innerHTML = `<strong>${bad ? "Có tiếp xúc trong mô hình" : "Không phát hiện tiếp xúc theo kiểm khoảng"}</strong>${
+            bad ? "Tiếp xúc đầu: " + f(r.metrics.firstContact, 4) + " s" : "Hở nhỏ nhất trên mẫu 1 ms: " + f(r.metrics.minSampledGap) + " m"
+          }<br>${
+            o.mode === "static"
+              ? "Giữ vận tốc; tham số trễ không áp dụng."
+              : "Quãng dừng: " + f(r.stoppingDistance) + " m; mép trước dừng tại " + f(r.stopFront) + " m."
+          }`;
+          $("#explanation").textContent =
+            "Tâm xe xuất phát ở −18 m; người ở (0,−3) m, đi ngang thẳng đều. Chế độ nhường biết trạng thái người ở t=0, phản ứng sau độ trễ và giữ phanh tới khi đứng yên; đi tiếp sau mốc dự báo có biên 0,5 m và đệm 0,4 s. Đây chưa là bộ dự báo cảm biến.";
+        } else {
+          $("#result").innerHTML = `<strong>${
+            bad ? "Không thỏa khoảng dừng đã đặt" : "Thỏa khoảng dừng trong mô hình lý tưởng"
+          }</strong>Vận tốc dùng: ${f(r.usedSpeed)} m/s<br>Quãng dừng: ${f(r.stoppingDistance)} m<br>Còn trước ranh giới: ${f(
+            r.remaining
+          )} m; yêu cầu 2 m`;
+          $("#explanation").textContent =
+            "Mô hình giữ tốc trong lúc trễ rồi phanh đều 3 m/s². Giới hạn vận tốc được chọn trước lúc lộ vùng, chưa phải lệnh hạ tốc tức thì từ một trạng thái đang chạy nhanh. Không có người ẩn được mô phỏng.";
+        }
+        draw();
+      }
+      function rr(x, y, w, h, r = 12, fill = "#fff", stroke = null) {
+        ctx.beginPath();
+        ctx.roundRect(x, y, w, h, r);
+        ctx.fillStyle = fill;
+        ctx.fill();
+        if (stroke) {
+          ctx.strokeStyle = stroke;
+          ctx.lineWidth = 2;
+          ctx.stroke();
+        }
+      }
+      function text(s, x, y, size = 26, color = C.ink, font = "system-ui", align = "left") {
+        ctx.fillStyle = color;
+        ctx.font = `${size}px ${font}`;
+        ctx.textAlign = align;
+        ctx.fillText(s, x, y);
+        ctx.textAlign = "left";
+      }
+      function line(x1, y1, x2, y2, color = C.gray, width = 2, dash = []) {
+        ctx.beginPath();
+        ctx.setLineDash(dash);
+        ctx.strokeStyle = color;
+        ctx.lineWidth = width;
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.stroke();
+        ctx.setLineDash([]);
+      }
+      function carDraw(a, map, color) {
+        const [x, y] = map(a.x, a.y),
+          sx = Math.hypot(...map(a.x + 1, a.y).map((z, i) => z - map(a.x, a.y)[i]));
+        const w = 2 * a.hx * sx,
+          h = 2 * a.hy * sx;
+        rr(x - w / 2, y - h / 2, w, h, 7, color + "28", color);
+        rr(x - w * 0.13, y - h * 0.33, w * 0.3, h * 0.66, 4, "#ffffffb0", color);
+        const vertical = a.hy > a.hx;
+        text(vertical ? "B" : "A", x, y + 8, 23, color, "system-ui", "center");
+      }
+      function chart(x, y, w, h, curves, ylim, label) {
+        const tmax = current.T;
+        rr(x - 12, y - 38, w + 45, h + 100, 8, "#fbfdff", "#dce6ed");
+        text(label, x, y - 24, 23, C.ink);
+        const xy = (tt, v) => [x + (tt / tmax) * w, y + h - ((v - ylim[0]) / (ylim[1] - ylim[0])) * h];
+        for (let j = 0; j < 3; j++) {
+          const v = ylim[0] + (j * (ylim[1] - ylim[0])) / 2,
+            yy = xy(0, v)[1];
+          line(x, yy, x + w, yy, "#e0e9f0", 1);
+          text(f(v, 1), x - 5, yy - 4, 17, C.gray);
+        }
+        for (let j = 0; j <= 4; j++) {
+          const tt = (j * tmax) / 4;
+          const xx = xy(tt, ylim[0])[0];
+          text(f(tt, 1), xx, y + h + 26, 17, C.gray, "system-ui", "center");
+        }
+        for (const [pts, color] of curves) {
+          ctx.beginPath();
+          ctx.strokeStyle = color;
+          ctx.lineWidth = 3;
+          let started = false;
+          for (const [tt, v] of pts) {
+            const [xx, yy] = xy(tt, v);
+            if (!started) {
+              ctx.moveTo(xx, yy);
+              started = true;
+            } else ctx.lineTo(xx, yy);
+          }
+          ctx.stroke();
+        }
+        const tx = xy(t, 0)[0];
+        line(tx, y, tx, y + h, C.red, 2, [5, 4]);
+        text("Thời gian (s)", x + w - 130, y + h + 53, 18, C.gray);
+      }
+      function draw() {
+        if (!current) return;
+        ctx.clearRect(0, 0, can.width, can.height);
+        ctx.fillStyle = "white";
+        ctx.fillRect(0, 0, can.width, can.height);
+        const r = current;
+        const frame = r.frames.reduce((best, z) => (Math.abs(z.t - t) < Math.abs(best.t - t) ? z : best), r.frames[0]);
+        text(
+          scene === "intersection" ? "HAI Ô TÔ QUA GIAO LỘ" : scene === "crossing" ? "Ô TÔ NHƯỜNG NGƯỜI ĐI BỘ" : "VẬN TỐC TRƯỚC VÙNG KHUẤT",
+          42,
+          48,
+          31,
+          C.blue
+        );
+        text("Mô phỏng giáo dục · Tính theo mô hình, chưa là thử nghiệm xe thật", 42, 82, 22, C.gray);
+        text("t = " + f(t, 2) + " s", 1394, 48, 26, C.red, "system-ui", "right");
+        const map = scene === "intersection" ? (x, y) => [730 + 11.4 * x, 355 - 11.4 * y] : (x, y) => [900 + 22 * x, 335 - 22 * y];
+        const scale = scene === "intersection" ? 11.4 : 22;
+        const [cx, cy] = map(0, 0);
+        rr(35, 110, 1370, 490, 12, "#f8fbfd", "#dce6ed");
+        ctx.save();
+        ctx.beginPath();
+        ctx.rect(36, 111, 1368, 488);
+        ctx.clip();
+        ctx.fillStyle = "#e7eef3";
+        ctx.fillRect(36, cy - 2.3 * scale, 1368, 4.6 * scale);
+        if (scene === "intersection") ctx.fillRect(cx - 2.3 * scale, 111, 4.6 * scale, 488);
+        line(40, cy, 1400, cy, "#b5c5d1", 2, [16, 14]);
+        if (scene === "intersection") {
+          line(cx, 115, cx, 595, "#b5c5d1", 2, [16, 14]);
+          const k = 3.1 + r.options.margin;
+          rr(cx - k * scale, cy - k * scale, 2 * k * scale, 2 * k * scale, 0, "#95001a0a", "#95001a50");
+          text("Vùng đặt chỗ", cx + 110, cy - 95, 20, C.red);
+        } else if (scene === "crossing") {
+          for (let j = 0; j < 9; j++) {
+            ctx.fillStyle = "#fff";
+            ctx.fillRect(cx - 43 + j * 10, cy - 2.2 * scale, 5, 4.4 * scale);
+          }
+          const b = frame.B;
+          const [px, py] = map(b.x, b.y);
+          ctx.strokeStyle = C.gold;
+          ctx.lineWidth = 3;
+          ctx.beginPath();
+          ctx.arc(px, py, 8, 0, Math.PI * 2);
+          ctx.stroke();
+          text("Người đi bộ", px + 18, py - 16, 22, C.gold);
+          text("Bắt đầu: (0, −3) m · đi thẳng đều", 50, 560, 21, C.gray);
+        } else {
+          const bx = map(0, 0)[0];
+          ctx.fillStyle = "#a17c0020";
+          ctx.fillRect(bx, 115, 1400 - bx, 480);
+          line(bx, 120, bx, 590, C.red, 3, [9, 6]);
+          rr(bx + 25, cy - 150, 145, 55, 6, "#cbd6df", C.gray);
+          text("Xe đỗ", bx + 95, cy - 116, 19, C.gray, "system-ui", "center");
+          text("Vùng chưa quan sát", bx + 20, 520, 22, C.gold);
+          const b = map(-2, 0)[0];
+          line(b, cy + 80, b, cy + 145, C.gold, 2);
+          text("Giữ lại 2 m", b - 65, cy + 175, 20, C.gold);
+          text("Chưa mô phỏng người ẩn; kiểm khoảng dừng trước ranh giới", 50, 560, 21, C.gray);
+        }
+        carDraw(frame.A, map, C.blue);
+        if (scene === "intersection") carDraw(frame.B, map, C.gold);
+        for (const v of [-20, -10, 0, 10, 20]) {
+          const [x] = map(v, 0);
+          if (x > 50 && x < 1390) text(v + " m", x, 585, 17, C.gray, "system-ui", "center");
+        }
+        ctx.restore();
+        text("Hình chiếu bằng · m", 60, 145, 20, C.gray);
+        const curvesA = r.frames.map((z) => [z.t, z.A.vx]),
+          curvesB = r.frames.map((z) => [z.t, z.B?.vy ?? 0]);
+        chart(
+          65,
+          670,
+          600,
+          205,
+          [[curvesA, C.blue], ...(scene === "intersection" ? [[curvesB, C.gold]] : [])],
+          [0, scene === "intersection" ? 4.5 : Math.max(9, r.usedSpeed || r.options.v)],
+          "Vận tốc theo tuyến (m/s)"
+        );
+        if (scene === "intersection") {
+          const xx = 770,
+            yy = 695,
+            w = 560;
+          const pos = (tt) => xx + (tt / r.T) * w;
+          text("Khoảng đặt chỗ (s)", xx, 660, 23, C.ink);
+          for (const [i, key, color] of [
+            [0, "A", C.blue],
+            [1, "B", C.gold],
+          ]) {
+            const a = r.reservations[key];
+            line(xx, yy + i * 105, xx + w, yy + i * 105, "#d7e2eb", 2);
+            rr(pos(a[0]), yy - 22 + i * 105, ((a[1] - a[0]) / r.T) * w, 44, 5, color + "22", color);
+            text(key, xx - 30, yy + 8 + i * 105, 24, color);
+            text(f(a[0], 2) + "–" + f(a[1], 2) + " s", pos(a[0]), yy + 58 + i * 105, 21, color);
+          }
+          line(pos(t), yy - 42, pos(t), yy + 180, C.red, 2, [5, 5]);
+        } else {
+          const xs = r.frames.map((z) => [z.t, z.A.x + z.A.hx]),
+            ys = r.frames.map((z) => [z.t, z.B?.y ?? 0]);
+          chart(
+            780,
+            670,
+            570,
+            205,
+            [[xs, C.blue], ...(scene === "crossing" ? [[ys, C.gold]] : [])],
+            [-20, Math.max(18, ...xs.map((z) => z[1]))],
+            scene === "crossing" ? "Mép trước xe / vị trí ngang người (m)" : "Vị trí mép trước so với ranh giới (m)"
+          );
+        }
+        const bad = scene === "occlusion" ? !r.bufferSatisfied : r.metrics.collision;
+        rr(38, 965, 1364, 78, 10, bad ? "#fff1f4" : "#eef7f3");
+        text(
+          scene === "occlusion"
+            ? r.bufferSatisfied
+              ? "Thỏa điều kiện dừng của mô hình"
+              : "Không thỏa điều kiện dừng đã đặt"
+            : bad
+              ? "Có tiếp xúc: " + r.metrics.contactIntervals.map((z) => f(z[0], 3) + "–" + f(z[1], 3) + " s").join(", ")
+              : "Không phát hiện tiếp xúc theo bộ kiểm khoảng",
+          60,
+          998,
+          24,
+          bad ? C.red : C.green
+        );
+        text(
+          scene === "occlusion"
+            ? "Quãng dừng " + f(r.stoppingDistance) + " m · còn " + f(r.remaining) + " m"
+            : "Khoảng hở trên mẫu 1 ms: " + f(r.metrics.minSampledGap) + " m · tiếp xúc được kiểm riêng theo khoảng",
+          60,
+          1028,
+          21,
+          C.gray
+        );
+        $("#timeText").textContent = f(t, 2) + " / " + f(r.T, 2) + " s";
+        $("#time").value = t;
+        if (recording && recordTrack?.requestFrame) recordTrack.requestFrame();
+      }
+      function tick(now) {
+        if (playing) {
+          if (last) t = Math.min(current.T, t + (recording ? 1 / 30 : (Math.min(now - last, 100) / 1000) * 2));
+          last = now;
+          draw();
+          if (t >= current.T) {
+            playing = false;
+            $("#play").textContent = "Phát lại mô phỏng";
+            if (recording && rec?.state === "recording")
+              setTimeout(() => {
+                if (rec.state === "recording") rec.stop();
+              }, 700);
+          }
+        } else last = 0;
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+      $("#play").addEventListener("click", () => {
+        if (recording) return;
+        if (t >= current.T) t = 0;
+        playing = !playing;
+        last = 0;
+        $("#play").textContent = playing ? "Tạm dừng" : "Phát mô phỏng";
+      });
+      $("#time").addEventListener("input", () => {
+        if (recording) return;
+        playing = false;
+        t = Number($("#time").value);
+        $("#play").textContent = "Phát mô phỏng";
+        draw();
+      });
+      for (const b of document.querySelectorAll("[data-scene]"))
+        b.addEventListener("click", () => {
+          if (recording) return;
+          scene = b.dataset.scene;
+          setup();
+        });
+      $("#reset").addEventListener("click", () => {
+        if (!recording) setup();
+      });
+      function saveBlob(blob, name) {
+        const u = URL.createObjectURL(blob),
+          a = document.createElement("a");
+        a.href = u;
+        a.download = name;
+        a.click();
+        setTimeout(() => URL.revokeObjectURL(u), 10000);
+      }
+      $("#json").addEventListener("click", () =>
+        saveBlob(new Blob([JSON.stringify(current, null, 2)], { type: "application/json" }), "chuong5-" + scene + ".json")
+      );
+      $("#csv").addEventListener("click", () => {
+        const head = "t_s,Ax_m,Ay_m,Avx_mps,Avy_mps,Bx_m,By_m,Bvx_mps,Bvy_mps\n";
+        const body = current.frames
+          .map((z) => [z.t, z.A.x, z.A.y, z.A.vx, z.A.vy, z.B?.x ?? "", z.B?.y ?? "", z.B?.vx ?? "", z.B?.vy ?? ""].join(","))
+          .join("\n");
+        saveBlob(new Blob([head + body], { type: "text/csv" }), "chuong5-" + scene + ".csv");
+      });
+      setup();
+    </script>
+  </body>
+</html>
