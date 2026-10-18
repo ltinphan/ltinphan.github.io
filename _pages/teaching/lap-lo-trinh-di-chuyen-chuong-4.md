@@ -41,6 +41,40 @@ Kiểm dày 20 mẫu trên mỗi khoảng của ví dụ IPOPT chưa là chứng
 
 Các kết quả chưa kiểm chứng xe, cảm biến hoặc khả năng đáp ứng thời gian thực của ROS 2. Thời gian đo trên trang chỉ tính riêng bộ QP, còn phụ thuộc trình duyệt và máy.
 
+## Xem video, đối chiếu với mô hình
+
+Ba video bên dưới gồm hai đoạn ghi từ demo của chương và một đoạn mô phỏng MPCC của ETH. Video IPOPT phát lại nghiệm Python đã tính; video MPC ghi kết quả QP chạy trong trình duyệt. Thời gian phát video có thể khác thời gian của mô hình.
+
+Trong video MPCC, hãy quan sát xe và đường đua. [Repo của Alex Liniger / ETH](https://github.com/alexliniger/MPCC) giải thích cách bản Matlab dùng tìm kiếm để chọn hành lang rồi tối ưu chuyển động. Clip được chuyển từ GIF gốc sang MP4 theo giấy phép Apache-2.0, giữ kích thước và diễn biến gốc. Đây là tư liệu mô phỏng của tác giả.
+
+### Xe và robot thật
+
+**Stanford MARTY:** quan sát hướng thân xe khi trượt hình số 8, rồi nêu vì sao mô hình không trượt của ví dụ lớp học chưa đủ. Video dùng để thảo luận phạm vi mô hình; không gán bộ điều khiển của MARTY thành MPC. Xem khoảng 00:10–00:35.
+
+<iframe width="100%" height="420" src="https://www.youtube-nocookie.com/embed/nTK56vPb8Zo?start=10&end=35&rel=0" title="Stanford MARTY — thí nghiệm trượt hình số 8 trên xe thật" loading="lazy" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+[Nguồn video: Stanford](https://www.youtube.com/watch?v=nTK56vPb8Zo) · [Mô tả kỹ thuật của Dynamic Design Lab](https://ddl.stanford.edu/people/jonathan-goh).
+
+**MIT Cheetah 3:** xác định trạng thái, đầu vào và ràng buộc tiếp xúc. Nghiên cứu dùng MPC lồi để tối ưu lực tiếp xúc của robot; bài toán khác mô hình gia tốc ngang ô tô trong demo.
+
+<iframe width="100%" height="420" src="https://www.youtube-nocookie.com/embed/q6zxCvCxhic?rel=0" title="Biomimetics MIT — Cheetah 3 với điều khiển dự báo lồi trên robot thật" loading="lazy" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+[Nguồn video: Biomimetics MIT](https://www.youtube.com/watch?v=q6zxCvCxhic) · [Di Carlo và cộng sự, IROS 2018](https://dspace.mit.edu/entities/publication/96d12c0a-997a-4e3f-a3e8-75a9c8072231).
+
+Các video xe và robot thật là thí nghiệm của nhóm tác giả. Chúng chưa kiểm chứng phần cứng cho demo của lớp. [Nguồn tư liệu và thay đổi định dạng](/assets/teaching/hki-2026-2027/lap-lo-trinh-di-chuyen/chuong-4/MEDIA-SOURCES.md) · [Giấy phép MPCC](/assets/teaching/hki-2026-2027/lap-lo-trinh-di-chuyen/chuong-4/MPCC-LICENSE.txt).
+
+## Ảnh chụp trực tiếp từ demo
+
+Hai ảnh đầu so khoảng hở khi chỉ thay biên tại nút; hai ảnh sau cho thấy cập nhật dự báo và một lần dừng vì chưa giải đạt. Mỗi ảnh tương ứng một cấu hình cụ thể để sinh viên chạy lại và đối chiếu.
+
+![Ảnh chụp kiểm hở với biên thêm 0 m: đường kiểm dày xuống dưới 0](/assets/teaching/hki-2026-2027/lap-lo-trinh-di-chuyen/chuong-4/sim53.png)
+
+![Ảnh chụp kiểm hở với biên thêm 0,05 m: khoảng hở nhỏ nhất dương tại các mẫu kiểm](/assets/teaching/hki-2026-2027/lap-lo-trinh-di-chuyen/chuong-4/sim54.png)
+
+![Ảnh chụp MPC N bằng 10 tại 2,4 giây sau tác động cộng vận tốc ngang](/assets/teaching/hki-2026-2027/lap-lo-trinh-di-chuyen/chuong-4/sim68.png)
+
+![Ảnh chụp MPC N bằng 5, một lượt quét: dự đoán tại chu kỳ 11 chưa được nhận](/assets/teaching/hki-2026-2027/lap-lo-trinh-di-chuyen/chuong-4/sim73.png)
+
 ## Đọc thêm
 
 - [MIT Underactuated Robotics — Trajectory Optimization](https://underactuated.mit.edu/trajopt.html)
