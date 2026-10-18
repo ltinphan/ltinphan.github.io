@@ -39,7 +39,7 @@ ninja.data = [{
           },
         },{id: "nav-teaching",
           title: "teaching",
-          description: "Materials for courses I taught as a lecturer",
+          description: "Các học phần, hướng dẫn và bài thực hành của tôi",
           section: "Navigation",
           handler: () => {
             window.location.href = "/teaching/";

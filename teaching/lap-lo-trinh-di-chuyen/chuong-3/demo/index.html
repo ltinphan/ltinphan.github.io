@@ -1,0 +1,1479 @@
+<!doctype html>
+<html lang="vi">
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" /><title>
+    Thực hành Chương 3 – Lập lộ trình di chuyển
+  </title>
+  <style>
+    .teaching-site-nav {
+      box-sizing: border-box;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 22px;
+      padding: 12px 20px;
+      background: #eef3f7;
+      color: #163c56;
+      font:
+        15px/1.5 system-ui,
+        sans-serif;
+      border-bottom: 1px solid #b8c8d4;
+    }
+    .teaching-site-nav a {
+      color: #174f78;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .teaching-site-nav a:focus-visible {
+      outline: 3px solid #95001a;
+      outline-offset: 4px;
+    }
+    @media (max-width: 1000px) {
+      body {
+        max-width: 100%;
+      }
+      main {
+        display: block !important;
+        padding: 16px !important;
+      }
+      header {
+        display: block !important;
+        padding: 16px !important;
+      }
+      header span {
+        display: block;
+        margin-top: 8px;
+      }
+      aside {
+        margin-top: 24px;
+      }
+      nav {
+        flex-wrap: wrap;
+      }
+      fieldset {
+        min-width: 0;
+      }
+      canvas {
+        max-width: 100%;
+        height: auto;
+      }
+      table {
+        font-size: 14px;
+      }
+      th,
+      td {
+        padding: 6px !important;
+      }
+      h1 {
+        font-size: 27px !important;
+      }
+      .row {
+        grid-template-columns: 1fr !important;
+      }
+    }
+    @media (max-width: 600px) {
+      body {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+      body > h1,
+      body > p,
+      body > fieldset,
+      body > section {
+        margin-left: 14px;
+        margin-right: 14px;
+      }
+      .teaching-site-nav {
+        padding: 10px 14px;
+        font-size: 14px;
+      }
+      button {
+        max-width: 100%;
+      }
+    }
+    :root {
+      --blue: #045ea7;
+      --red: #95001a;
+      --gold: #a17c00;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      color: #222;
+      background: white;
+      font:
+        17px/1.55 system-ui,
+        -apple-system,
+        sans-serif;
+    }
+    main {
+      max-width: 1280px;
+      margin: auto;
+      padding: 24px;
+    }
+    h1,
+    h2 {
+      font-family: Georgia, "Times New Roman", serif;
+      color: var(--red);
+      line-height: 1.25;
+    }
+    h1 {
+      font-size: 32px;
+      margin: 0 0 8px;
+    }
+    h2 {
+      font-size: 25px;
+    }
+    p {
+      max-width: 1100px;
+    }
+    .sub {
+      color: #555;
+      margin: 4px 0 20px;
+    }
+    nav {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      border-bottom: 2px solid #d9e4ed;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+    button,
+    select,
+    input {
+      font: inherit;
+      padding: 7px 12px;
+      border: 1px solid #aab8c4;
+      border-radius: 3px;
+      background: #fff;
+      color: #222;
+    }
+    button {
+      cursor: pointer;
+    }
+    button:hover,
+    nav button[aria-selected="true"] {
+      background: #e7eef4;
+      border-color: var(--blue);
+      color: var(--blue);
+    }
+    button.primary {
+      color: white;
+      background: var(--blue);
+      border-color: var(--blue);
+    }
+    label {
+      display: inline-flex;
+      gap: 6px;
+      align-items: center;
+      margin: 3px 12px 6px 0;
+      flex-wrap: wrap;
+    }
+    input[type="number"] {
+      width: 100px;
+    }
+    .controls {
+      margin-bottom: 10px;
+    }
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0;
+    }
+    .split {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(230px, 1fr);
+      gap: 22px;
+    }
+    canvas {
+      display: block;
+      width: 100%;
+      height: auto;
+      border: 1px solid #b8c5ce;
+      background: white;
+    }
+    output {
+      display: block;
+      white-space: pre-line;
+      font:
+        20px/1.6 Georgia,
+        "Times New Roman",
+        serif;
+      color: #003d6a;
+      margin: 8px 0;
+    }
+    .note {
+      font-size: 15px;
+      color: #555;
+    }
+    .warn {
+      color: var(--red);
+    }
+    .math {
+      font-family: "Times New Roman", serif;
+      font-size: 22px;
+    }
+    .legend {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+    .legend span:before {
+      content: "";
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      background: var(--color);
+      margin-right: 5px;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 14px 0;
+    }
+    th,
+    td {
+      text-align: left;
+      padding: 8px 12px;
+      border-bottom: 1px solid #dce4eb;
+      font-variant-numeric: tabular-nums;
+    }
+    th {
+      color: var(--red);
+    }
+    section[hidden] {
+      display: none;
+    }
+    a {
+      color: var(--blue);
+    }
+    footer {
+      border-top: 1px solid #ddd;
+      margin-top: 24px;
+      padding-top: 15px;
+      font-size: 14px;
+      color: #555;
+    }
+    @media (max-width: 850px) {
+      .split {
+        grid-template-columns: 1fr;
+      }
+      main {
+        padding: 14px;
+      }
+      h1 {
+        font-size: 27px;
+      }
+    }
+  </style>
+  <div class="teaching-site-nav" role="navigation" aria-label="Điều hướng học phần">
+    <a href="/teaching/">Teaching</a><a href="/teaching/lap-lo-trinh-di-chuyen/">Lập lộ trình di chuyển</a
+    ><a href="/teaching/lap-lo-trinh-di-chuyen/chuong-3/">Hướng dẫn Chương 3</a>
+  </div>
+  <main>
+    <h1>Thực hành Chương 3: Tìm kiếm và cải thiện đường</h1>
+    <p class="sub">Lập lộ trình di chuyển – Đại học Nguyễn Tất Thành. Gói chạy ngoại tuyến, dùng cùng mô hình và dữ liệu với bài giảng.</p>
+    <nav aria-label="Các thí nghiệm">
+      <button data-tab="grid" aria-selected="true">Dijkstra và A*</button><button data-tab="risk" aria-selected="false">Chi phí dưới bất định</button
+      ><button data-tab="tree" aria-selected="false">RRT và RRT*</button><button data-tab="bit" aria-selected="false">Một batch BIT* minh họa</button>
+    </nav>
+    <section id="section-grid">
+      <h2>Dijkstra và A* trên cùng một đồ thị</h2>
+      <p>
+        Trước khi chạy, dự đoán cách thuật toán mở rộng vùng tìm kiếm. Robot đĩa có bán kính 0,45 m cộng biên 0,15 m. Điểm đầu <i>S</i>=(2,6), đích
+        <i>G</i>=(18,6), miền 20 m × 12 m.
+      </p>
+      <div class="controls">
+        <label
+          >Bản đồ
+          <select id="grid-scene">
+            <option value="central">Vật cản trung tâm</option>
+            <option value="narrow">Khe hẹp</option>
+            <option value="closed">Vách kín</option>
+          </select></label
+        ><label
+          >Láng giềng
+          <select id="grid-neighbors">
+            <option value="8">8 hướng</option>
+            <option value="4">4 hướng</option>
+          </select></label
+        ><label
+          >Khoảng lưới
+          <select id="grid-resolution">
+            <option value="1">1 m</option>
+            <option value="0.5">0,5 m</option>
+          </select></label
+        ><label
+          >Thuật toán
+          <select id="grid-alg">
+            <option value="astar">A*</option>
+            <option value="dijkstra">Dijkstra</option>
+            <option value="weighted">Weighted A*, w = 3</option>
+            <option value="greedy">Greedy, chỉ h</option>
+          </select></label
+        ><label
+          >Heuristic
+          <select id="grid-h">
+            <option value="octile">Octile</option>
+            <option value="manhattan">Manhattan</option>
+            <option value="euclidean">Euclid</option>
+            <option value="zero">Bằng 0</option>
+          </select></label
+        >
+      </div>
+      <div class="buttons">
+        <button id="grid-run" class="primary">Chạy đến kết quả</button><button id="grid-reset">Bắt đầu lại từng bước</button
+        ><button id="grid-step">Bước tiếp</button><button id="grid-play">Tự chạy</button><button id="grid-stop">Dừng hình động</button
+        ><button id="grid-compare">So sánh 4 cách ưu tiên</button>
+      </div>
+      <div class="split">
+        <div>
+          <canvas id="grid-canvas" width="1200" height="760" aria-label="Đồ thị lưới và vùng tìm kiếm"></canvas>
+          <p class="legend">
+            <span style="--color: #045ea7">Đã mở rộng</span><span style="--color: #a17c00">Đang chờ hoặc đường kết quả</span
+            ><span style="--color: #95001a">Đỉnh hiện tại</span>
+          </p>
+        </div>
+        <div>
+          <output id="grid-result" aria-live="polite"></output>
+          <p id="grid-warning" class="warn"></p>
+          <p class="note">
+            Lượt mở rộng tính cả lần lấy đích ra bằng mục còn hiệu lực. Mục cũ bị bỏ qua không được tính. Khi hòa khóa, ưu tiên h nhỏ hơn rồi thứ tự
+            chèn. Dijkstra luôn dùng h=0.
+          </p>
+          <p class="note">
+            Cạnh chéo cần cả hai nút trung gian ngang và dọc tự do, đồng thời toàn đoạn phải qua bộ kiểm hình học. Chi phí tối ưu được hiểu trên đồ
+            thị đã xây.
+          </p>
+        </div>
+      </div>
+      <div id="grid-table"></div>
+      <button id="grid-csv">Tải bảng so sánh CSV</button>
+    </section>
+    <section id="section-risk" hidden>
+      <h2>Thay đổi mức đánh đổi với rủi ro</h2>
+      <p>
+        Đây là trường xác suất minh họa, không có vật cản cứng ở giữa. Các nút trong dải giữa có p=0,12, các nút còn lại p=0,005. Ta giả sử các biến
+        cố ở những nút khác nhau độc lập.
+      </p>
+      <p class="math">
+        <i>J</i> = <i>L</i> + <i>λR</i>, &nbsp; <i>R</i> = −Σ ln(1−<i>p</i><sub>i</sub>), &nbsp; <i>P</i>(có nút bị chiếm) = 1−Π(1−<i>p</i
+        ><sub>i</sub>)
+      </p>
+      <label
+        >Trọng số λ
+        <select id="risk-lambda">
+          <option value="0">0</option>
+          <option value="2">2</option>
+          <option value="8">8</option>
+          <option value="20">20</option>
+        </select></label
+      ><button id="risk-run" class="primary">Tìm đường theo chi phí mới</button>
+      <div class="split">
+        <canvas id="risk-canvas" width="1200" height="760" aria-label="Đường qua trường xác suất minh họa"></canvas>
+        <div>
+          <output id="risk-result" aria-live="polite"></output>
+          <p class="warn">Các xác suất này thuộc mô hình nút độc lập của bài học. Chúng chưa biểu diễn xác suất va chạm thật của toàn thân robot.</p>
+          <p class="note">
+            Chi phí R cộng ở các nút đến sau điểm đầu. Xác suất toàn đường tính cả nút đầu. Khoản đầu này giống nhau cho mọi đường nên không đổi thứ
+            tự tối ưu.
+          </p>
+          <p class="note">
+            Nếu cùng một ô tĩnh được đi lại nhiều lần, không được nhân như các biến cố độc lập mới. Tương quan và sai số vị trí cần mô hình riêng.
+          </p>
+        </div>
+      </div>
+    </section>
+    <section id="section-tree" hidden>
+      <h2>RRT và RRT*: cùng mẫu, khác liên kết cha</h2>
+      <p>
+        Cả hai cách chạy tiếp tục tới hết ngân sách và giữ đường tốt nhất. Bước mở rộng 2 m, goal bias 0,05, bán kính hiệu dụng 0,60 m. RRT* dùng
+        r<sub>n</sub>=min(2,24√(ln n/n)) m và cập nhật chi phí cả cây con khi nối lại.
+      </p>
+      <div class="controls">
+        <label
+          >Cách chạy
+          <select id="tree-alg">
+            <option value="star">RRT*</option>
+            <option value="rrt">RRT, không nối lại</option>
+          </select></label
+        ><label
+          >Bản đồ
+          <select id="tree-scene">
+            <option value="central">Vật cản trung tâm</option>
+            <option value="narrow">Khe hẹp</option>
+            <option value="closed">Vách kín</option>
+          </select></label
+        ><label>Seed <input type="number" id="tree-seed" value="7" min="1" max="100000" /></label
+        ><label
+          >Vòng lặp
+          <select id="tree-budget">
+            <option value="300">300</option>
+            <option value="40">40</option>
+            <option value="600">600</option>
+            <option value="1200">1200</option>
+          </select></label
+        >
+      </div>
+      <div class="buttons">
+        <button id="tree-run" class="primary">Chạy đến kết quả</button><button id="tree-reset">Xem từng mốc</button
+        ><button id="tree-step">Mốc tiếp</button><button id="tree-play">Tự chạy các mốc</button><button id="tree-stop">Dừng hình động</button
+        ><button id="tree-batch">Chạy seed 1–20</button>
+      </div>
+      <div class="split">
+        <div>
+          <canvas id="tree-canvas" width="1200" height="760" aria-label="Cây RRT và đường tốt nhất"></canvas
+          ><canvas id="tree-plot" width="1200" height="300" aria-label="Chi phí tốt nhất theo số vòng"></canvas>
+        </div>
+        <div>
+          <output id="tree-result" aria-live="polite"></output>
+          <p class="note">
+            Hình động hiện các ảnh chụp trạng thái thật ở mốc 50, 100, 200, 300, 600, 1200 nếu có. Nó không dựng lại quá khứ từ các cha cuối cùng.
+          </p>
+          <p class="note">
+            Cùng số vòng chưa là cùng số lần kiểm cạnh hoặc thời gian chạy. Trước lời giải đầu, đồ thị để trống phần chi phí. Chưa có đường trong ngân
+            sách không được gán độ dài bằng 0.
+          </p>
+          <p class="note">
+            Đây là demo hình học, chưa phải triển khai ROS 2, OMPL hoặc kiểm thử phần cứng. Không suy ra tối ưu liên tục từ một ngân sách hữu hạn.
+          </p>
+        </div>
+      </div>
+      <div id="tree-table"></div>
+      <button id="tree-csv">Tải kết quả 20 seed CSV</button>
+    </section>
+    <section id="section-bit" hidden>
+      <h2>Ưu tiên cạnh trong một batch minh họa</h2>
+      <p>
+        Mốc lời giải đang giữ là c<sub>best</sub>=18,5. Khóa qua cạnh dùng nhãn tiền tố hiện tại và các cận ước lượng. Hãy dự đoán quyết định trước
+        mỗi lần bấm.
+      </p>
+      <p class="math"><i>key</i>(<i>u,v</i>) = <i>g</i><sub>T</sub>(<i>u</i>) + ĉ(<i>u,v</i>) + ĥ(<i>v</i>)</p>
+      <div class="buttons"><button id="bit-reset">Bắt đầu lại</button><button id="bit-step" class="primary">Xét cạnh tiếp</button></div>
+      <canvas id="bit-canvas" width="1200" height="570" aria-label="Ba cạnh ứng viên và quyết định"></canvas
+      ><output id="bit-result" aria-live="polite"></output>
+      <div id="bit-table"></div>
+      <p class="warn">Đây là mô phỏng ba cạnh để học cơ chế. Nó chưa triển khai BIT* đầy đủ với nhiều batch, cập nhật hàng đợi và cắt tỉa.</p>
+      <p>
+        Khi nhãn cây thay đổi, khả năng cải thiện của một cạnh có thể thay đổi. Nhận một cạnh cũng chưa có nghĩa đã tìm được đường đầy đủ tới đích.
+        Bài mở rộng dùng <a href="https://ompl.kavrakilab.org/classompl_1_1geometric_1_1BITstar.html">triển khai BIT* của OMPL</a>.
+      </p>
+    </section>
+    <footer>
+      Ví dụ và số liệu do bài học thiết lập. Các nguồn khái niệm gồm <a href="https://lavalle.pl/planning/">Planning Algorithms</a>,
+      <a href="https://arxiv.org/abs/1105.1186">bài báo RRT*</a>, <a href="https://arxiv.org/abs/1405.5848">bài báo BIT*</a> và tài liệu Nav2. Các
+      liên kết tài liệu cần Internet; toàn bộ thí nghiệm trên trang chạy ngoại tuyến.
+    </footer>
+  </main>
+  <script>
+    const MODEL = { width: 20, height: 12, start: { x: 2, y: 6 }, goal: { x: 18, y: 6 }, radius: 0.45, margin: 0.15 };
+    const SCENES = {
+      central: [{ x0: 8, x1: 12, y0: 4, y1: 8 }],
+      narrow: [
+        { x0: 9, x1: 11, y0: 0, y1: 5.1 },
+        { x0: 9, x1: 11, y0: 6.9, y1: 12 },
+      ],
+      closed: [{ x0: 9, x1: 11, y0: 0, y1: 12 }],
+    };
+    const dist = (a, b) => Math.hypot(a.x - b.x, a.y - b.y);
+    function rng(seed) {
+      let a = seed >>> 0;
+      return () => {
+        a += 0x6d2b79f5;
+        let t = a;
+        t = Math.imul(t ^ (t >>> 15), t | 1);
+        t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+      };
+    }
+    const cross = (a, b, c) => (b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x);
+    function on(p, a, b) {
+      return (
+        Math.abs(cross(a, b, p)) < 1e-10 &&
+        p.x >= Math.min(a.x, b.x) - 1e-10 &&
+        p.x <= Math.max(a.x, b.x) + 1e-10 &&
+        p.y >= Math.min(a.y, b.y) - 1e-10 &&
+        p.y <= Math.max(a.y, b.y) + 1e-10
+      );
+    }
+    function intersects(a, b, c, d) {
+      const v = [cross(a, b, c), cross(a, b, d), cross(c, d, a), cross(c, d, b)];
+      return (v[0] * v[1] < 0 && v[2] * v[3] < 0) || on(c, a, b) || on(d, a, b) || on(a, c, d) || on(b, c, d);
+    }
+    function pointSegment(p, a, b) {
+      let dx = b.x - a.x,
+        dy = b.y - a.y,
+        l = dx * dx + dy * dy;
+      if (!l) return dist(p, a);
+      let t = Math.max(0, Math.min(1, ((p.x - a.x) * dx + (p.y - a.y) * dy) / l));
+      return dist(p, { x: a.x + t * dx, y: a.y + t * dy });
+    }
+    function segmentDistance(a, b, c, d) {
+      if (intersects(a, b, c, d)) return 0;
+      return Math.min(pointSegment(a, c, d), pointSegment(b, c, d), pointSegment(c, a, b), pointSegment(d, a, b));
+    }
+    function pointRect(p, o) {
+      return Math.hypot(Math.max(o.x0 - p.x, 0, p.x - o.x1), Math.max(o.y0 - p.y, 0, p.y - o.y1));
+    }
+    function segmentRect(a, b, o) {
+      if (pointRect(a, o) === 0 || pointRect(b, o) === 0) return 0;
+      const v = [
+        { x: o.x0, y: o.y0 },
+        { x: o.x1, y: o.y0 },
+        { x: o.x1, y: o.y1 },
+        { x: o.x0, y: o.y1 },
+      ];
+      return Math.min(...v.map((p, i) => segmentDistance(a, b, p, v[(i + 1) % 4])));
+    }
+    function stateFree(p, scene = "central", r = 0.6) {
+      return p.x > r && p.x < 20 - r && p.y > r && p.y < 12 - r && SCENES[scene].every((o) => pointRect(p, o) > r + 1e-10);
+    }
+    function edgeFree(a, b, scene = "central", r = 0.6) {
+      return stateFree(a, scene, r) && stateFree(b, scene, r) && SCENES[scene].every((o) => segmentRect(a, b, o) > r + 1e-10);
+    }
+    function pathLength(path) {
+      return path.slice(1).reduce((s, p, i) => s + dist(path[i], p), 0);
+    }
+    function rrt({ seed = 7, scene = "central", step = 0.8, budget = 800, bias = 0.08, radius = 0.45, margin = 0.15 } = {}) {
+      const r = radius + margin,
+        random = rng(seed),
+        nodes = [{ ...MODEL.start, parent: -1 }],
+        trace = [],
+        goal = MODEL.goal;
+      let result = [];
+      if (!stateFree(nodes[0], scene, r) || !stateFree(goal, scene, r))
+        return { algorithm: "RRT", seed, scene, nodes, edges: [], path: [], success: false, attempts: 0, reason: "invalid_endpoint", trace };
+      for (let i = 0; i < budget; i++) {
+        const sample = random() < bias ? { ...goal } : { x: 20 * random(), y: 12 * random() };
+        let nearest = 0,
+          dd = Infinity;
+        for (let j = 0; j < nodes.length; j++) {
+          let d = dist(nodes[j], sample);
+          if (d < dd) {
+            dd = d;
+            nearest = j;
+          }
+        }
+        if (dd < 1e-10) continue;
+        const a = nodes[nearest],
+          f = Math.min(1, step / dd),
+          b = { x: a.x + f * (sample.x - a.x), y: a.y + f * (sample.y - a.y), parent: nearest };
+        const valid = edgeFree(a, b, scene, r);
+        trace.push({ i: i + 1, sample, nearest, candidate: { x: b.x, y: b.y }, valid, before: nodes.length });
+        if (!valid) continue;
+        nodes.push(b);
+        if (dist(b, goal) <= step && edgeFree(b, goal, scene, r)) {
+          nodes.push({ ...goal, parent: nodes.length - 1 });
+          let id = nodes.length - 1;
+          while (id >= 0) {
+            result.push({ x: nodes[id].x, y: nodes[id].y });
+            id = nodes[id].parent;
+          }
+          result.reverse();
+          break;
+        }
+      }
+      const edges = nodes.slice(1).map((p, i) => [i + 1, p.parent]);
+      return {
+        algorithm: "RRT",
+        seed,
+        scene,
+        nodes,
+        edges,
+        path: result,
+        success: result.length > 0,
+        attempts: trace.length,
+        length: result.length ? pathLength(result) : null,
+        trace,
+      };
+    }
+    function shortest(nodes, edges, start, goal) {
+      const adj = nodes.map(() => []);
+      for (const [a, b] of edges) {
+        const w = dist(nodes[a], nodes[b]);
+        adj[a].push([b, w]);
+        adj[b].push([a, w]);
+      }
+      let ds = nodes.map(() => Infinity),
+        prev = nodes.map(() => -1),
+        closed = new Set();
+      ds[start] = 0;
+      for (let k = 0; k < nodes.length; k++) {
+        let u = -1;
+        for (let i = 0; i < nodes.length; i++) if (!closed.has(i) && (u === -1 || ds[i] < ds[u])) u = i;
+        if (u < 0 || !Number.isFinite(ds[u])) break;
+        if (u === goal) {
+          const path = [];
+          for (let i = goal; i !== -1; i = prev[i]) path.push({ ...nodes[i] });
+          return path.reverse();
+        }
+        closed.add(u);
+        for (const [v, w] of adj[u])
+          if (ds[u] + w < ds[v]) {
+            ds[v] = ds[u] + w;
+            prev[v] = u;
+          }
+      }
+      return [];
+    }
+    function prm({ seed = 7, scene = "central", samples = 200, k = 10, connection = 3, radius = 0.45, margin = 0.15 } = {}) {
+      const r = radius + margin,
+        random = rng(seed),
+        nodes = [],
+        edges = [],
+        seen = new Set();
+      let draws = 0;
+      while (nodes.length < samples && draws < samples * 100) {
+        draws++;
+        const p = { x: 20 * random(), y: 12 * random() };
+        if (stateFree(p, scene, r)) nodes.push(p);
+      }
+      const roadmapCount = nodes.length;
+      function connect(i, eligible) {
+        const near = eligible
+          .filter((j) => j !== i)
+          .map((j) => ({ j, d: dist(nodes[i], nodes[j]) }))
+          .sort((a, b) => a.d - b.d)
+          .filter((x) => x.d <= connection)
+          .slice(0, k);
+        for (const { j } of near) {
+          const pair = [Math.min(i, j), Math.max(i, j)],
+            key = pair.join(":");
+          if (seen.has(key)) continue;
+          seen.add(key);
+          if (edgeFree(nodes[i], nodes[j], scene, r)) edges.push(pair);
+        }
+      }
+      for (let i = 0; i < roadmapCount; i++)
+        connect(
+          i,
+          Array.from({ length: roadmapCount }, (_, j) => j)
+        );
+      const roadmapEdges = edges.length;
+      nodes.push({ ...MODEL.start }, { ...MODEL.goal });
+      const start = roadmapCount,
+        goal = start + 1;
+      if (stateFree(nodes[start], scene, r) && stateFree(nodes[goal], scene, r)) {
+        connect(
+          start,
+          Array.from({ length: nodes.length }, (_, j) => j)
+        );
+        connect(
+          goal,
+          Array.from({ length: nodes.length }, (_, j) => j)
+        );
+      }
+      const path = shortest(nodes, edges, start, goal);
+      return {
+        algorithm: "PRM",
+        seed,
+        scene,
+        nodes,
+        edges,
+        path,
+        success: path.length > 0,
+        length: path.length ? pathLength(path) : null,
+        roadmapCount,
+        roadmapEdges,
+        draws,
+      };
+    }
+    function validateResult(result, { radius = 0.45, margin = 0.15 } = {}) {
+      return (
+        !result.success ||
+        (result.path.every((p) => stateFree(p, result.scene, radius + margin)) &&
+          result.path.slice(1).every((p, i) => edgeFree(result.path[i], p, result.scene, radius + margin)))
+      );
+    }
+
+    const HAND = {
+      nodes: ["S", "A", "B", "G"],
+      edges: [
+        ["S", "A", 4],
+        ["S", "B", 1],
+        ["B", "A", 2],
+        ["A", "G", 1],
+        ["B", "G", 7],
+      ],
+    };
+    function searchGraph({ nodes, edges, start, goal, heuristic = () => 0, mode = "astar", weight = 1, trace = true }) {
+      const adj = Object.fromEntries(nodes.map((x) => [x, []]));
+      for (const [u, v, c] of edges) {
+        if (c < 0) throw Error("Nonnegative costs required");
+        adj[u].push([v, c]);
+      }
+      const g = Object.fromEntries(nodes.map((x) => [x, Infinity])),
+        parent = {},
+        closed = new Set(),
+        expanded = [],
+        events = [],
+        queue = [];
+      let serial = 0,
+        reopens = 0,
+        stale = 0;
+      g[start] = 0;
+      const priority = (u) => (mode === "greedy" ? heuristic(u) : g[u] + (mode === "dijkstra" ? 0 : weight * heuristic(u)));
+      function push(u) {
+        queue.push({ u, g: g[u], f: priority(u), h: heuristic(u), serial: serial++ });
+      }
+      push(start);
+      let success = false;
+      while (queue.length) {
+        queue.sort((a, b) => a.f - b.f || a.h - b.h || a.serial - b.serial);
+        const item = queue.shift(),
+          u = item.u;
+        if (item.g > g[u] + 1e-10 || closed.has(u)) {
+          stale++;
+          continue;
+        }
+        closed.add(u);
+        expanded.push(u);
+        const changes = [];
+        if (u === goal) {
+          success = true;
+          if (trace)
+            events.push({ u, g: { ...g }, parent: { ...parent }, changes, open: queue.map((x) => ({ ...x })), closed: [...closed], goal: true });
+          break;
+        }
+        for (const [v, c] of adj[u]) {
+          const alt = g[u] + c;
+          if (alt + 1e-10 < g[v]) {
+            changes.push({ v, old: Number.isFinite(g[v]) ? g[v] : null, alt, parent: u, c });
+            g[v] = alt;
+            parent[v] = u;
+            if (closed.delete(v)) reopens++;
+            push(v);
+          }
+        }
+        if (trace)
+          events.push({ u, g: { ...g }, parent: { ...parent }, changes, open: queue.map((x) => ({ ...x })), closed: [...closed], goal: false });
+      }
+      const path = [];
+      if (success) {
+        for (let u = goal; u !== undefined; u = parent[u]) {
+          path.push(u);
+          if (path.length > nodes.length + 1) throw Error("Parent cycle");
+        }
+        path.reverse();
+      }
+      return { success, cost: success ? g[goal] : null, path, expanded, events, g, parent, reopens, stale };
+    }
+    function makeGrid({ scene = "central", resolution = 1, neighbors = 8, cutCorners = false, riskWeight = 0 } = {}) {
+      const nx = Math.round(20 / resolution) + 1,
+        ny = Math.round(12 / resolution) + 1,
+        point = (i, j) => ({ x: i * resolution, y: j * resolution }),
+        id = (i, j) => i + "," + j;
+      const free = (i, j) =>
+        i >= 0 &&
+        i < nx &&
+        j >= 0 &&
+        j < ny &&
+        (scene === "risk"
+          ? stateFree(point(i, j), "central", 0.6) && !(point(i, j).x >= 7 && point(i, j).x <= 13 && point(i, j).y >= 3 && point(i, j).y <= 9)
+          : stateFree(point(i, j), scene, 0.6));
+      // The risk scene has no solid central obstacle. Its red patch is a synthetic occupancy probability field.
+      const isFree =
+        scene === "risk"
+          ? (i, j) =>
+              i >= 0 && i < nx && j >= 0 && j < ny && point(i, j).x > 0.6 && point(i, j).x < 19.4 && point(i, j).y > 0.6 && point(i, j).y < 11.4
+          : free;
+      const probability = (i, j) =>
+        scene === "risk" && point(i, j).x >= 7 && point(i, j).x <= 13 && point(i, j).y >= 4 && point(i, j).y <= 8 ? 0.12 : 0.005;
+      const dirs = [
+          [1, 0],
+          [0, 1],
+          [-1, 0],
+          [0, -1],
+          ...(neighbors === 8
+            ? [
+                [1, 1],
+                [-1, 1],
+                [-1, -1],
+                [1, -1],
+              ]
+            : []),
+        ],
+        nodes = [],
+        edges = [],
+        positions = {},
+        probabilities = {};
+      for (let j = 0; j < ny; j++)
+        for (let i = 0; i < nx; i++)
+          if (isFree(i, j)) {
+            const u = id(i, j);
+            nodes.push(u);
+            positions[u] = point(i, j);
+            probabilities[u] = probability(i, j);
+          }
+      for (const u of nodes) {
+        const [i, j] = u.split(",").map(Number);
+        for (const [di, dj] of dirs) {
+          const a = i + di,
+            b = j + dj;
+          if (!isFree(a, b)) continue;
+          if (di && dj && !cutCorners && (!isFree(i + di, j) || !isFree(i, j + dj))) continue;
+          if (scene !== "risk" && !edgeFree(point(i, j), point(a, b), scene, 0.6)) continue;
+          const length = resolution * Math.hypot(di, dj),
+            risk = -Math.log1p(-probability(a, b));
+          edges.push([u, id(a, b), length + riskWeight * risk]);
+        }
+      }
+      return {
+        nodes,
+        edges,
+        positions,
+        probabilities,
+        start: id(2 / resolution, 6 / resolution),
+        goal: id(18 / resolution, 6 / resolution),
+        scene,
+        resolution,
+        neighbors,
+        cutCorners,
+        riskWeight,
+        nx,
+        ny,
+      };
+    }
+    function solveGrid({ heuristic = "octile", mode = "astar", weight = 1, trace = true, ...settings } = {}) {
+      const grid = makeGrid(settings),
+        target = grid.positions[grid.goal];
+      const h = (u) => {
+        if (mode === "dijkstra") return 0;
+        const p = grid.positions[u],
+          dx = Math.abs(p.x - target.x),
+          dy = Math.abs(p.y - target.y);
+        return heuristic === "zero"
+          ? 0
+          : heuristic === "manhattan"
+            ? dx + dy
+            : heuristic === "euclidean"
+              ? Math.hypot(dx, dy)
+              : Math.max(dx, dy) + (Math.SQRT2 - 1) * Math.min(dx, dy);
+      };
+      const result = searchGraph({ ...grid, heuristic: h, mode, weight, trace });
+      const points = result.path.map((x) => grid.positions[x]);
+      return {
+        ...grid,
+        ...result,
+        algorithm: mode === "dijkstra" ? "Dijkstra" : mode === "greedy" ? "Greedy" : weight === 1 ? "A*" : "Weighted A*",
+        heuristic: mode === "dijkstra" ? "zero" : heuristic,
+        weight,
+        points,
+        length: points.length ? pathLength(points) : null,
+        risk: result.success ? 1 - Math.exp(result.path.reduce((s, u) => s + Math.log1p(-grid.probabilities[u]), 0)) : null,
+      };
+    }
+    function samplingTree({ star = true, seed = 7, budget = 1200, scene = "central", step = 2, gamma = 24, bias = 0.05, trace = false } = {}) {
+      const nodes = [{ ...MODEL.start, parent: -1, g: 0, children: [] }],
+        random = rng(seed),
+        candidates = new Set(),
+        rewires = [],
+        history = [],
+        snapshots = [];
+      let checks = 0,
+        first = null,
+        best = null,
+        bestParent = -1;
+      const valid = (a, b) => {
+        checks++;
+        return edgeFree(a, b, scene, 0.6);
+      };
+      function recordBest(it) {
+        let value = Infinity,
+          idx = -1;
+        for (const j of candidates) {
+          const c = nodes[j].g + dist(nodes[j], MODEL.goal);
+          if (c < value) {
+            value = c;
+            idx = j;
+          }
+        }
+        if (Number.isFinite(value)) {
+          if (first === null) first = it;
+          best = value;
+          bestParent = idx;
+        }
+        history.push({ iteration: it, best, checks, nodes: nodes.length, rewires: rewires.length });
+      }
+      function isAncestor(a, u) {
+        while (u >= 0) {
+          if (u === a) return true;
+          u = nodes[u].parent;
+        }
+        return false;
+      }
+      function updateSubtree(root, delta) {
+        const todo = [root];
+        while (todo.length) {
+          const u = todo.pop();
+          nodes[u].g += delta;
+          todo.push(...nodes[u].children);
+        }
+      }
+      if (trace) snapshots.push({ iteration: 0, nodes: [{ x: MODEL.start.x, y: MODEL.start.y, parent: -1, g: 0 }], best: null, bestParent: -1 });
+      for (let it = 1; it <= budget; it++) {
+        const sample = random() < bias ? { ...MODEL.goal } : { x: 20 * random(), y: 12 * random() };
+        let nearest = 0,
+          dmin = Infinity;
+        for (let j = 0; j < nodes.length; j++) {
+          const d = dist(nodes[j], sample);
+          if (d < dmin) {
+            dmin = d;
+            nearest = j;
+          }
+        }
+        if (dmin > 1e-10) {
+          const a = nodes[nearest],
+            ratio = Math.min(1, step / dmin),
+            q = {
+              x: a.x + (sample.x - a.x) * ratio,
+              y: a.y + (sample.y - a.y) * ratio,
+              parent: nearest,
+              g: a.g + Math.min(step, dmin),
+              children: [],
+            };
+          if (valid(a, q)) {
+            const n = nodes.length + 1,
+              radius = Math.min(step, gamma * Math.sqrt(Math.log(n) / n)),
+              near = star ? nodes.map((p, j) => ({ j, d: dist(p, q) })).filter((x) => x.d <= radius + 1e-10) : [];
+            for (const { j, d } of near)
+              if (nodes[j].g + d + 1e-10 < q.g && valid(nodes[j], q)) {
+                q.parent = j;
+                q.g = nodes[j].g + d;
+              }
+            const qi = nodes.length;
+            nodes.push(q);
+            nodes[q.parent].children.push(qi);
+            if (star)
+              for (const { j, d } of near) {
+                if (j === 0 || j === q.parent || isAncestor(j, qi)) continue;
+                const alt = q.g + d;
+                if (alt + 1e-10 < nodes[j].g && valid(q, nodes[j])) {
+                  const oldParent = nodes[j].parent,
+                    oldCost = nodes[j].g,
+                    delta = alt - oldCost;
+                  nodes[oldParent].children = nodes[oldParent].children.filter((x) => x !== j);
+                  nodes[j].parent = qi;
+                  q.children.push(j);
+                  updateSubtree(j, delta);
+                  rewires.push({ iteration: it, node: j, oldParent, newParent: qi, oldCost, newCost: alt, delta });
+                }
+              }
+            if (dist(q, MODEL.goal) <= step && valid(q, MODEL.goal)) candidates.add(qi);
+          }
+        }
+        recordBest(it);
+        if (trace && ([50, 100, 200, 300, 600, 1200].includes(it) || it === budget))
+          snapshots.push({ iteration: it, nodes: nodes.map(({ children, ...p }) => ({ ...p })), best, bestParent });
+      }
+      const path = [];
+      if (bestParent >= 0) {
+        path.push({ ...MODEL.goal });
+        for (let j = bestParent; j >= 0; j = nodes[j].parent) {
+          path.push({ x: nodes[j].x, y: nodes[j].y });
+          if (path.length > nodes.length + 2) throw Error("Cycle");
+        }
+        path.reverse();
+        if (path.length > 1 && dist(path.at(-1), path.at(-2)) < 1e-9) path.pop();
+      }
+      return {
+        algorithm: star ? "RRT*" : "RRT",
+        seed,
+        budget,
+        scene,
+        step,
+        gamma,
+        bias,
+        nodes: nodes.map(({ children, ...p }) => p),
+        path,
+        success: best !== null,
+        length: best,
+        first,
+        checks,
+        rewires,
+        history,
+        snapshots,
+      };
+    }
+    function validateTree(result) {
+      for (let i = 1; i < result.nodes.length; i++) {
+        const n = result.nodes[i],
+          p = result.nodes[n.parent];
+        if (!p || !edgeFree(p, n, result.scene, 0.6) || Math.abs(n.g - p.g - dist(n, p)) > 1e-7) return false;
+        let j = i,
+          seen = new Set();
+        while (j >= 0) {
+          if (seen.has(j)) return false;
+          seen.add(j);
+          j = result.nodes[j].parent;
+        }
+      }
+      if (result.success && Math.abs(pathLength(result.path) - result.length) > 1e-7) return false;
+      return !result.success || result.path.slice(1).every((p, i) => edgeFree(result.path[i], p, result.scene, 0.6));
+    }
+
+    const $ = (id) => document.getElementById(id),
+      fmt = (v, k = 2) => (v === null ? "Chưa có đường" : v.toFixed(k).replace(".", ",")),
+      BLUE = "#045ea7",
+      GOLD = "#a17c00",
+      RED = "#95001a";
+    let gridResult = null,
+      gridIndex = 0,
+      gridTimer = null,
+      gridRows = [],
+      treeResult = null,
+      treeIndex = 0,
+      treeTimer = null,
+      treeRows = [],
+      bitIndex = 0;
+    function stopGrid() {
+      clearInterval(gridTimer);
+      gridTimer = null;
+    }
+    function stopTree() {
+      clearInterval(treeTimer);
+      treeTimer = null;
+    }
+    document.querySelectorAll("nav button").forEach((b) =>
+      b.addEventListener("click", () => {
+        stopGrid();
+        stopTree();
+        document.querySelectorAll("nav button").forEach((x) => x.setAttribute("aria-selected", String(x === b)));
+        ["grid", "risk", "tree", "bit"].forEach((x) => ($("section-" + x).hidden = x !== b.dataset.tab));
+        if (b.dataset.tab === "risk") runRisk();
+        if (b.dataset.tab === "bit") renderBit();
+      })
+    );
+    function transform(canvas) {
+      const pad = 40,
+        W = canvas.width - 2 * pad,
+        H = (canvas.width - 2 * pad) * 0.6;
+      return { x: (x) => pad + (x / 20) * W, y: (y) => pad + ((12 - y) / 12) * H, W, H, pad };
+    }
+    function base(canvas, scene) {
+      const ctx = canvas.getContext("2d"),
+        T = transform(canvas);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.strokeStyle = "#788d9d";
+      ctx.lineWidth = 2;
+      ctx.strokeRect(T.pad, T.pad, T.W, T.H);
+      ctx.fillStyle = "#b3b9bd";
+      for (const o of SCENES[scene] || []) ctx.fillRect(T.x(o.x0), T.y(o.y1), ((o.x1 - o.x0) / 20) * T.W, ((o.y1 - o.y0) / 12) * T.H);
+      ctx.font = "22px Times New Roman";
+      ctx.fillStyle = "#555";
+      ctx.textAlign = "center";
+      for (const x of [0, 5, 10, 15, 20]) ctx.fillText(x + " m", T.x(x), T.pad + T.H + 30);
+      return { ctx, T };
+    }
+    function segment(ctx, T, a, b, color, width = 3) {
+      ctx.strokeStyle = color;
+      ctx.lineWidth = width;
+      ctx.beginPath();
+      ctx.moveTo(T.x(a.x), T.y(a.y));
+      ctx.lineTo(T.x(b.x), T.y(b.y));
+      ctx.stroke();
+    }
+    function circle(ctx, T, a, color, r = 5) {
+      ctx.fillStyle = color;
+      ctx.beginPath();
+      ctx.arc(T.x(a.x), T.y(a.y), r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    function showPath(ctx, T, points) {
+      for (let i = 1; i < points.length; i++) segment(ctx, T, points[i - 1], points[i], GOLD, 7);
+    }
+    function endpoints(ctx, T) {
+      ctx.font = "italic 30px Times New Roman";
+      ctx.textAlign = "center";
+      for (const [a, s] of [
+        [MODEL.start, "S"],
+        [MODEL.goal, "G"],
+      ]) {
+        circle(ctx, T, a, "white", 12);
+        ctx.strokeStyle = BLUE;
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.arc(T.x(a.x), T.y(a.y), 12, 0, Math.PI * 2);
+        ctx.stroke();
+        circle(ctx, T, a, BLUE, 4);
+        ctx.fillStyle = "white";
+        ctx.fillRect(T.x(a.x) - 20, T.y(a.y) - 53, 40, 35);
+        ctx.fillStyle = BLUE;
+        ctx.fillText(s, T.x(a.x), T.y(a.y) - 25);
+      }
+    }
+    function gridSettings() {
+      const v = $("grid-alg").value;
+      return {
+        scene: $("grid-scene").value,
+        neighbors: Number($("grid-neighbors").value),
+        resolution: Number($("grid-resolution").value),
+        mode: v === "dijkstra" ? "dijkstra" : v === "greedy" ? "greedy" : "astar",
+        weight: v === "weighted" ? 3 : 1,
+        heuristic: $("grid-h").value,
+      };
+    }
+    function prepareGrid(final = true) {
+      stopGrid();
+      gridResult = solveGrid(gridSettings());
+      gridIndex = final ? gridResult.events.length - 1 : 0;
+      renderGrid();
+    }
+    function renderGrid() {
+      if (!gridResult) return;
+      const d = gridResult,
+        e = d.events[gridIndex],
+        { ctx, T } = base($("grid-canvas"), d.scene);
+      for (const p of Object.values(d.positions)) circle(ctx, T, p, "#b9c7d2", 2.2);
+      for (const u of e.closed) circle(ctx, T, d.positions[u], BLUE, 5);
+      for (const a of e.open) circle(ctx, T, d.positions[a.u], GOLD, 5);
+      if (gridIndex === d.events.length - 1 && d.success) showPath(ctx, T, d.points);
+      circle(ctx, T, d.positions[e.u], RED, 9);
+      endpoints(ctx, T);
+      const done = gridIndex === d.events.length - 1;
+      $("grid-result").textContent =
+        (done ? (d.success ? "Đã tìm được đường" : "Không có đường trên đồ thị này") : "Đang mở rộng đỉnh " + e.u) +
+        "\nĐã mở rộng: " +
+        (gridIndex + 1) +
+        (done ? "\nChi phí đường: " + fmt(d.cost) + (d.cost !== null ? " m" : "") + "\nSố lần mở lại: " + d.reopens : "");
+      $("grid-warning").textContent =
+        d.neighbors === 8 && d.heuristic === "manhattan" && d.algorithm !== "Dijkstra"
+          ? "Manhattan có thể vượt cận trên lưới 8 hướng. Kết quả này không được gán bảo đảm tối ưu chỉ từ tên A*."
+          : "";
+    }
+    $("grid-run").onclick = () => prepareGrid(true);
+    $("grid-reset").onclick = () => prepareGrid(false);
+    $("grid-step").onclick = () => {
+      stopGrid();
+      if (!gridResult) prepareGrid(false);
+      else {
+        gridIndex = Math.min(gridIndex + 1, gridResult.events.length - 1);
+        renderGrid();
+      }
+    };
+    $("grid-play").onclick = () => {
+      stopGrid();
+      if (!gridResult || gridIndex === gridResult.events.length - 1) prepareGrid(false);
+      gridTimer = setInterval(() => {
+        gridIndex = Math.min(gridIndex + 1, gridResult.events.length - 1);
+        renderGrid();
+        if (gridIndex === gridResult.events.length - 1) stopGrid();
+      }, 100);
+    };
+    $("grid-stop").onclick = stopGrid;
+    ["grid-scene", "grid-neighbors", "grid-resolution", "grid-alg", "grid-h"].forEach(
+      (id) =>
+        ($(id).onchange = () => {
+          gridResult = null;
+          gridRows = [];
+          $("grid-table").innerHTML = "";
+          stopGrid();
+          $("grid-result").textContent = "Cấu hình đã đổi. Bấm chạy hoặc bắt đầu từng bước.";
+        })
+    );
+    function tableHTML(headers, rows) {
+      return (
+        "<table><thead><tr>" +
+        headers.map((x) => "<th>" + x + "</th>").join("") +
+        "</tr></thead><tbody>" +
+        rows.map((r) => "<tr>" + r.map((x) => "<td>" + x + "</td>").join("") + "</tr>").join("") +
+        "</tbody></table>"
+      );
+    }
+    $("grid-compare").onclick = () => {
+      const s = gridSettings();
+      gridRows = [
+        ["Dijkstra", "dijkstra", 1],
+        ["A*", "astar", 1],
+        ["Weighted A*", "astar", 3],
+        ["Greedy", "greedy", 1],
+      ].map(([name, mode, weight]) => {
+        const r = solveGrid({ ...s, mode, weight });
+        return { name, cost: r.cost, expanded: r.expanded.length, success: r.success };
+      });
+      $("grid-table").innerHTML = tableHTML(
+        ["Cách ưu tiên", "Chi phí (m)", "Lượt mở rộng", "Trạng thái"],
+        gridRows.map((r) => [r.name, fmt(r.cost), r.expanded, r.success ? "Có đường" : "Chưa có đường"])
+      );
+    };
+    function downloadCSV(name, rows) {
+      const csv = rows.map((r) => r.map((v) => '"' + String(v ?? "").replaceAll('"', '""') + '"').join(",")).join("\n"),
+        a = document.createElement("a");
+      a.href = URL.createObjectURL(new Blob(["\ufeff" + csv], { type: "text/csv;charset=utf-8" }));
+      a.download = name;
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    }
+    $("grid-csv").onclick = () => {
+      if (!gridRows.length) $("grid-compare").click();
+      downloadCSV("So_sanh_tim_kiem_luoi.csv", [
+        ["algorithm", "cost_m", "expanded", "success"],
+        ...gridRows.map((r) => [r.name, r.cost, r.expanded, r.success]),
+      ]);
+    };
+    function runRisk() {
+      const d = solveGrid({ scene: "risk", neighbors: 4, heuristic: "manhattan", riskWeight: Number($("risk-lambda").value) }),
+        { ctx, T } = base($("risk-canvas"), "risk");
+      for (const [u, a] of Object.entries(d.positions)) circle(ctx, T, a, d.probabilities[u] > 0.1 ? "#c66571" : "#d6e4ef", 10);
+      showPath(ctx, T, d.points);
+      endpoints(ctx, T);
+      $("risk-result").textContent =
+        "Độ dài: " +
+        fmt(d.length) +
+        " m\nChi phí J: " +
+        fmt(d.cost) +
+        " m quy đổi\nP mô hình có nút bị chiếm: " +
+        fmt(100 * d.risk, 1) +
+        "%\nLượt mở rộng: " +
+        d.expanded.length;
+    }
+    $("risk-run").onclick = runRisk;
+    $("risk-lambda").onchange = runRisk;
+    function treeSettings() {
+      return {
+        star: $("tree-alg").value === "star",
+        scene: $("tree-scene").value,
+        seed: Math.max(1, Number($("tree-seed").value) || 7),
+        budget: Number($("tree-budget").value),
+        trace: true,
+      };
+    }
+    function prepareTree(final = true) {
+      stopTree();
+      treeResult = samplingTree(treeSettings());
+      treeIndex = final ? treeResult.snapshots.length - 1 : 0;
+      renderTree();
+    }
+    function snapshotPath(s) {
+      if (s.bestParent < 0) return [];
+      const path = [{ ...MODEL.goal }];
+      for (let j = s.bestParent; j >= 0; j = s.nodes[j].parent) path.push(s.nodes[j]);
+      return path.reverse();
+    }
+    function renderTree() {
+      if (!treeResult) return;
+      const d = treeResult,
+        s = d.snapshots[treeIndex],
+        { ctx, T } = base($("tree-canvas"), d.scene);
+      for (let i = 1; i < s.nodes.length; i++) {
+        const q = s.nodes[i];
+        segment(ctx, T, q, s.nodes[q.parent], "#a9bbc9", 1.5);
+      }
+      for (const q of s.nodes) circle(ctx, T, q, BLUE, 2);
+      const path = snapshotPath(s);
+      if (path.length) showPath(ctx, T, path);
+      endpoints(ctx, T);
+      const h = d.history[s.iteration - 1] || { checks: 0, rewires: 0 };
+      $("tree-result").textContent =
+        "Mốc: " +
+        s.iteration +
+        " / " +
+        d.budget +
+        " vòng\nĐỉnh trong cây: " +
+        s.nodes.length +
+        "\nĐường tốt nhất: " +
+        fmt(s.best) +
+        (s.best !== null ? " m" : "") +
+        "\nKiểm cạnh: " +
+        h.checks +
+        "\nSố lần nối lại: " +
+        h.rewires +
+        (d.first !== null && d.first <= s.iteration
+          ? "\nCó đường đầu tại vòng: " + d.first
+          : s.iteration === d.budget
+            ? "\nChưa có đường trong ngân sách"
+            : "\nChưa có đường tại mốc đang xem");
+      plotTree(s.iteration);
+    }
+    function plotTree(until) {
+      const canvas = $("tree-plot"),
+        ctx = canvas.getContext("2d"),
+        hist = treeResult.history.filter((x) => x.iteration <= until && x.best !== null);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const x = (t) => 75 + (t / treeResult.budget) * 1070,
+        vals = hist.map((x) => x.best),
+        lo = vals.length ? Math.min(...vals) - 0.3 : 0,
+        hi = vals.length ? Math.max(...vals) + 0.5 : 1,
+        y = (v) => 230 - ((v - lo) / Math.max(0.5, hi - lo)) * 170;
+      ctx.strokeStyle = "#8093a1";
+      ctx.beginPath();
+      ctx.moveTo(75, 40);
+      ctx.lineTo(75, 230);
+      ctx.lineTo(1145, 230);
+      ctx.stroke();
+      ctx.font = "22px Times New Roman";
+      ctx.fillStyle = BLUE;
+      ctx.fillText("Độ dài tốt nhất (m)", 85, 25);
+      ctx.fillText("Vòng lặp", 1010, 280);
+      if (hist.length) {
+        ctx.strokeStyle = BLUE;
+        ctx.lineWidth = 4;
+        ctx.beginPath();
+        hist.forEach((h, i) => {
+          if (i === 0) ctx.moveTo(x(h.iteration), y(h.best));
+          else ctx.lineTo(x(h.iteration), y(h.best));
+        });
+        ctx.stroke();
+        for (const v of [lo + 0.3, hi - 0.5]) {
+          ctx.fillText(fmt(v), 5, y(v) + 8);
+        }
+      } else ctx.fillText("Chưa có đường: phần chi phí được để trống", 220, 130);
+      for (const v of [0, Math.floor(treeResult.budget / 2), treeResult.budget]) ctx.fillText(v, x(v) - 10, 258);
+    }
+    $("tree-run").onclick = () => prepareTree(true);
+    $("tree-reset").onclick = () => prepareTree(false);
+    $("tree-step").onclick = () => {
+      stopTree();
+      if (!treeResult) prepareTree(false);
+      else {
+        treeIndex = Math.min(treeIndex + 1, treeResult.snapshots.length - 1);
+        renderTree();
+      }
+    };
+    $("tree-play").onclick = () => {
+      stopTree();
+      if (!treeResult || treeIndex === treeResult.snapshots.length - 1) prepareTree(false);
+      treeTimer = setInterval(() => {
+        treeIndex = Math.min(treeIndex + 1, treeResult.snapshots.length - 1);
+        renderTree();
+        if (treeIndex === treeResult.snapshots.length - 1) stopTree();
+      }, 900);
+    };
+    $("tree-stop").onclick = stopTree;
+    ["tree-alg", "tree-scene", "tree-seed", "tree-budget"].forEach(
+      (id) =>
+        ($(id).onchange = () => {
+          treeResult = null;
+          treeRows = [];
+          $("tree-table").innerHTML = "";
+          stopTree();
+          $("tree-result").textContent = "Cấu hình đã đổi. Bấm chạy để tạo kết quả mới.";
+        })
+    );
+    $("tree-batch").onclick = async () => {
+      stopTree();
+      const s = treeSettings(),
+        controls = ["tree-alg", "tree-scene", "tree-seed", "tree-budget", "tree-batch"];
+      controls.forEach((id) => ($(id).disabled = true));
+      treeRows = [];
+      try {
+        for (let seed = 1; seed <= 20; seed++) {
+          const r = samplingTree({ ...s, seed, trace: false });
+          if (!validateTree(r)) throw Error("Bất nhất cấu trúc cây");
+          treeRows.push({
+            algorithm: r.algorithm,
+            scene: s.scene,
+            budget: s.budget,
+            seed,
+            success: r.success,
+            length: r.length,
+            checks: r.checks,
+            rewires: r.rewires.length,
+            first: r.first,
+          });
+          $("tree-table").textContent = "Đang chạy seed " + seed + " / 20...";
+          await new Promise((resolve) => setTimeout(resolve, 0));
+        }
+        const success = treeRows.filter((r) => r.success).length,
+          values = treeRows
+            .filter((r) => r.success)
+            .map((r) => r.length)
+            .sort((a, b) => a - b),
+          med = values.length ? (values[Math.floor((values.length - 1) / 2)] + values[Math.ceil((values.length - 1) / 2)]) / 2 : null;
+        $("tree-table").innerHTML =
+          "<p><strong>" +
+          success +
+          "/20 seed có đường.</strong> " +
+          (s.star ? "RRT*" : "RRT") +
+          ", bản đồ " +
+          s.scene +
+          ", " +
+          s.budget +
+          " vòng. Trung vị chiều dài chỉ trên lần thành công: " +
+          fmt(med) +
+          (med !== null ? " m" : "") +
+          ".</p>" +
+          tableHTML(
+            ["Seed", "Trạng thái", "Dài (m)", "Kiểm cạnh", "Nối lại"],
+            treeRows.map((r) => [r.seed, r.success ? "Có đường" : "Chưa có đường", fmt(r.length), r.checks, r.rewires])
+          );
+      } finally {
+        controls.forEach((id) => ($(id).disabled = false));
+      }
+    };
+    $("tree-csv").onclick = () => {
+      if (!treeRows.length) {
+        $("tree-table").textContent = "Hãy bấm Chạy seed 1–20 trước khi tải bảng.";
+        return;
+      }
+      downloadCSV("Ket_qua_20_seed.csv", [
+        ["algorithm", "scene", "budget", "seed", "success", "length_m", "checks", "rewires", "first_iteration"],
+        ...treeRows.map((r) => [r.algorithm, r.scene, r.budget, r.seed, r.success, r.length, r.checks, r.rewires, r.first]),
+      ]);
+    };
+    const bitEdges = [
+      { name: "A tới B", g: 5, c: 2, h: 8, key: 15, state: "Bị chặn bởi vật cản" },
+      { name: "C tới D", g: 6, c: 3, h: 9, key: 18, state: "Cạnh hợp lệ, xét cải thiện nhãn đỉnh" },
+      { name: "A tới E", g: 5, c: 4, h: 10, key: 19, state: "Chưa cải thiện mốc 18,5 qua nhãn hiện tại" },
+    ];
+    function renderBit() {
+      const c = $("bit-canvas"),
+        ctx = c.getContext("2d");
+      ctx.clearRect(0, 0, c.width, c.height);
+      ctx.font = "30px Times New Roman";
+      for (let i = 0; i < 3; i++) {
+        const y = 100 + i * 150,
+          seen = i < bitIndex,
+          col = seen ? (i === 0 ? RED : i === 1 ? BLUE : "#788c99") : "#a9bbc9";
+        ctx.strokeStyle = col;
+        ctx.lineWidth = 6;
+        ctx.beginPath();
+        ctx.moveTo(170, y);
+        ctx.lineTo(850, y);
+        ctx.stroke();
+        ctx.fillStyle = col;
+        ctx.beginPath();
+        ctx.arc(170, y, 9, 0, Math.PI * 2);
+        ctx.arc(850, y, 9, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillText(bitEdges[i].name, 180, y - 28);
+        ctx.fillText("Khóa " + bitEdges[i].key, 930, y + 10);
+        if (i === 0) {
+          ctx.fillStyle = "#a9b2b8";
+          ctx.fillRect(470, y - 40, 45, 80);
+          if (seen) {
+            ctx.strokeStyle = RED;
+            ctx.beginPath();
+            ctx.moveTo(470, y - 20);
+            ctx.lineTo(515, y + 20);
+            ctx.moveTo(515, y - 20);
+            ctx.lineTo(470, y + 20);
+            ctx.stroke();
+          }
+        }
+      }
+      $("bit-table").innerHTML = tableHTML(
+        ["Cạnh", "g hiện tại", "Cận cạnh", "Cận còn", "Khóa", "Trạng thái"],
+        bitEdges.map((e, i) => [e.name, e.g, e.c, e.h, e.key, i < bitIndex ? e.state : "Đang chờ"])
+      );
+      $("bit-result").textContent =
+        bitIndex === 0
+          ? "Chưa xét cạnh nào. Mốc lời giải đang giữ là 18,5."
+          : bitEdges[bitIndex - 1].name +
+            ": " +
+            bitEdges[bitIndex - 1].state +
+            (bitIndex === 2 ? "\nNếu chi phí cạnh thực là 3 thì tiền tố tới D có giá 9. Chưa kết luận đã có đường đầy đủ tới G." : "");
+    }
+    $("bit-step").onclick = () => {
+      bitIndex = Math.min(3, bitIndex + 1);
+      renderBit();
+    };
+    $("bit-reset").onclick = () => {
+      bitIndex = 0;
+      renderBit();
+    };
+    prepareGrid(false);
+  </script>
+</html>
