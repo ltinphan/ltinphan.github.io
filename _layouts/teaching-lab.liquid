@@ -32,7 +32,15 @@ layout: page
     <p>Các đoạn ghi hình dùng để đối chiếu khi thực hành. Sinh viên vẫn cần tự chạy và lưu kết quả của mình.</p>
     {% for video in lab.videos %}
       <figure class="teaching-video">
-        <video controls preload="none" playsinline aria-label="{{ video.title | escape }}">
+        <video
+          controls
+          preload="none"
+          playsinline
+          aria-label="{{ video.title | escape }}"
+          {% if video.poster %}
+            poster="{{ video.poster | relative_url }}"
+          {% endif %}
+        >
           <source src="{{ video.url | relative_url }}" type="video/mp4">
           Trình duyệt không phát được video. <a href="{{ video.url | relative_url }}">Tải video MP4</a>.
         </video>

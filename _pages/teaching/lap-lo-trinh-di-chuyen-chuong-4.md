@@ -51,13 +51,13 @@ Trong video MPCC, hãy quan sát xe và đường đua. [Repo của Alex Liniger
 
 **Stanford MARTY:** quan sát hướng thân xe khi trượt hình số 8, rồi nêu vì sao mô hình không trượt của ví dụ lớp học chưa đủ. Video dùng để thảo luận phạm vi mô hình; không gán bộ điều khiển của MARTY thành MPC. Xem khoảng 00:10–00:35.
 
-<iframe width="100%" height="420" src="https://www.youtube-nocookie.com/embed/nTK56vPb8Zo?start=10&end=35&rel=0" title="Stanford MARTY — thí nghiệm trượt hình số 8 trên xe thật" loading="lazy" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<p class="teaching-actions"><a href="https://www.youtube.com/watch?v=nTK56vPb8Zo&amp;t=10s" target="_blank" rel="noopener noreferrer">Xem video Stanford MARTY trên kênh chính thức ↗</a></p>
 
 [Nguồn video: Stanford](https://www.youtube.com/watch?v=nTK56vPb8Zo) · [Mô tả kỹ thuật của Dynamic Design Lab](https://ddl.stanford.edu/people/jonathan-goh).
 
 **AMZ dufour — xe điện tự hành:** xem Trackdrive FSG 2024, khoảng 00:30–00:55, rồi chỉ ra trạng thái, đầu vào và các giới hạn quan trọng khi vào cua. [Mô tả chính thức của AMZ](https://www.amzracing.ch/en/cars/2024) nêu hệ thống dùng ROS 2, camera/LiDAR và NMPC cho xe điện này. Liên hệ bài học với giới hạn lái, lực kéo/phanh và độ bám của ô tô.
 
-<iframe width="100%" height="420" src="https://www.youtube-nocookie.com/embed/X_9zMuQ9sNw?start=30&end=55&rel=0" title="AMZ dufour — xe điện tự hành tại Trackdrive FSG 2024" loading="lazy" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<p class="teaching-actions"><a href="https://www.youtube.com/watch?v=X_9zMuQ9sNw&amp;t=30s" target="_blank" rel="noopener noreferrer">Xem xe điện tự hành AMZ dufour tại FSG 2024 ↗</a></p>
 
 [Nguồn video: AMZFormulaStudent](https://www.youtube.com/watch?v=X_9zMuQ9sNw). Theo chú thích của nhóm, cảnh quay bên ngoài thuộc ©FSG media team, ảnh thumbnail ©FSG Schulte. Giữ video nhúng tại kênh gốc.
 

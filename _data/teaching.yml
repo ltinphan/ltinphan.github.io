@@ -47,10 +47,13 @@ courses:
         videos:
           - title: "IPOPT: quỹ đạo xe đạp động học — ghi từ demo của chương"
             url: /assets/teaching/hki-2026-2027/lap-lo-trinh-di-chuyen/chuong-4/ipopt-simulation.mp4
+            poster: /assets/teaching/hki-2026-2027/lap-lo-trinh-di-chuyen/chuong-4/ipopt-poster.png
           - title: "MPC: chân trời lùi — ghi từ demo của chương"
             url: /assets/teaching/hki-2026-2027/lap-lo-trinh-di-chuyen/chuong-4/mpc-simulation.mp4
+            poster: /assets/teaching/hki-2026-2027/lap-lo-trinh-di-chuyen/chuong-4/mpc-poster.png
           - title: "ETH MPCC: video mô phỏng do tác giả công bố — Alex Liniger, Apache-2.0"
             url: /assets/teaching/hki-2026-2027/lap-lo-trinh-di-chuyen/chuong-4/eth-mpcc-simulation.mp4
+            poster: /assets/teaching/hki-2026-2027/lap-lo-trinh-di-chuyen/chuong-4/eth-mpcc-poster.png
   - slug: he-dieu-hanh-robot
     title: Hệ điều hành robot
     level: Đại học
