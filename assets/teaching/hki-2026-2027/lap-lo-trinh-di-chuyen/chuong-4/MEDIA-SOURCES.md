@@ -5,9 +5,9 @@
 - `eth-mpcc-simulation.mp4`: video mô phỏng công bố trong repo Alex Liniger / ETH Automatic Control Lab. Nguồn gốc https://github.com/alexliniger/MPCC/blob/bd331621ba47ae3326711922a863bdb1cdf2d2ea/Images/MPC_sim.gif . Chuyển GIF sang H.264 MP4, giữ kích thước gốc 574×452 và diễn biến 8 s. Repo phát hành Apache-2.0; bản giấy phép đầy đủ ở `licenses/MPCC-LICENSE.txt`. Tư liệu của tác giả, không phải một lần chạy lại do lớp thực hiện.
 - Ảnh sim53/sim54/sim68/sim73 trong bài giảng và Teaching: chụp trực tiếp demo Chương 4 tương ứng kiểm hở biên 0, kiểm hở biên 0,05 m, MPC với tác động +0,15 m/s tại 2,4 s, và MPC N=5 chỉ một lượt quét dừng ở chu kỳ 11.
 
-## Video phần cứng, chỉ nhúng từ kênh chính thức
+## Video ô tô tự hành thật, chỉ nhúng từ kênh chính thức
 
 - Stanford / Dynamic Design Lab, MARTY figure 8 drift: https://www.youtube.com/watch?v=nTK56vPb8Zo . Video xe thật của Stanford; dùng để bàn về trượt và giới hạn mô hình. Kỹ thuật lập quỹ đạo tối ưu phi tuyến được nhóm mô tả ở https://ddl.stanford.edu/people/jonathan-goh . Không đồng nhất bộ điều khiển MARTY với MPC trong demo.
-- Biomimetics MIT, Cheetah 3 convex MPC: https://www.youtube.com/watch?v=q6zxCvCxhic . Video robot thật của nhóm MIT. Nghiên cứu IROS 2018: https://dspace.mit.edu/entities/publication/96d12c0a-997a-4e3f-a3e8-75a9c8072231 . Đầu vào tối ưu là lực tiếp xúc, khác mô hình ngang ô tô.
+- AMZFormulaStudent, Winning Autonomous Trackdrive at FSG 2024: https://www.youtube.com/watch?v=X_9zMuQ9sNw . Xe điện tự hành dufour; mô tả hệ ROS 2, camera/LiDAR và NMPC ở https://www.amzracing.ch/en/cars/2024 . Cảnh góc nhìn bên ngoài ©FSG media team, ảnh thumbnail ©FSG Schulte theo chú thích tác giả. Chỉ nhúng tại kênh chính thức.
 
 Video chính thức giữ ở nguồn gốc; gói không sao chép các video YouTube. Các tư liệu thực nghiệm của nhóm tác giả không phải kiểm chứng phần cứng của demo Chương 4.
