@@ -35,6 +35,15 @@ courses:
         download: /assets/teaching/hki-2026-2027/lap-lo-trinh-di-chuyen/chuong-3.zip
         mode: Trình duyệt
         size: 1.0 MB
+      - number: 4
+        chapter: Thiết lập lộ trình di chuyển dựa trên tối ưu
+        title: Chi phí, SQP, IPOPT và MPC
+        summary: Bốn thí nghiệm về chi phí và giới hạn, SQP từng bước, kiểm lại quỹ đạo IPOPT và vòng MPC với chân trời dự báo, nhiễu và ngân sách tính toán.
+        url: /teaching/lap-lo-trinh-di-chuyen/chuong-4/
+        demo: /teaching/lap-lo-trinh-di-chuyen/chuong-4/demo/
+        download: /assets/teaching/hki-2026-2027/lap-lo-trinh-di-chuyen/chuong-4.zip
+        mode: Trình duyệt và Python
+        size: 0.3 MB
   - slug: he-dieu-hanh-robot
     title: Hệ điều hành robot
     level: Đại học
