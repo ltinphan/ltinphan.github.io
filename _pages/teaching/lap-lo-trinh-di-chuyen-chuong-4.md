@@ -47,7 +47,7 @@ Ba video bên dưới gồm hai đoạn ghi từ demo của chương và một �
 
 Trong video MPCC, hãy quan sát xe và đường đua. [Repo của Alex Liniger / ETH](https://github.com/alexliniger/MPCC) giải thích cách bản Matlab dùng tìm kiếm để chọn hành lang rồi tối ưu chuyển động. Clip được chuyển từ GIF gốc sang MP4 theo giấy phép Apache-2.0, giữ kích thước và diễn biến gốc. Đây là tư liệu mô phỏng của tác giả.
 
-### Xe và robot thật
+### Xe tự hành thật
 
 **Stanford MARTY:** quan sát hướng thân xe khi trượt hình số 8, rồi nêu vì sao mô hình không trượt của ví dụ lớp học chưa đủ. Video dùng để thảo luận phạm vi mô hình; không gán bộ điều khiển của MARTY thành MPC. Xem khoảng 00:10–00:35.
 
@@ -55,13 +55,13 @@ Trong video MPCC, hãy quan sát xe và đường đua. [Repo của Alex Liniger
 
 [Nguồn video: Stanford](https://www.youtube.com/watch?v=nTK56vPb8Zo) · [Mô tả kỹ thuật của Dynamic Design Lab](https://ddl.stanford.edu/people/jonathan-goh).
 
-**MIT Cheetah 3:** xác định trạng thái, đầu vào và ràng buộc tiếp xúc. Nghiên cứu dùng MPC lồi để tối ưu lực tiếp xúc của robot; bài toán khác mô hình gia tốc ngang ô tô trong demo.
+**AMZ dufour — xe điện tự hành:** xem Trackdrive FSG 2024, khoảng 00:30–00:55, rồi chỉ ra trạng thái, đầu vào và các giới hạn quan trọng khi vào cua. [Mô tả chính thức của AMZ](https://www.amzracing.ch/en/cars/2024) nêu hệ thống dùng ROS 2, camera/LiDAR và NMPC cho xe điện này. Liên hệ bài học với giới hạn lái, lực kéo/phanh và độ bám của ô tô.
 
-<iframe width="100%" height="420" src="https://www.youtube-nocookie.com/embed/q6zxCvCxhic?rel=0" title="Biomimetics MIT — Cheetah 3 với điều khiển dự báo lồi trên robot thật" loading="lazy" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="100%" height="420" src="https://www.youtube-nocookie.com/embed/X_9zMuQ9sNw?start=30&end=55&rel=0" title="AMZ dufour — xe điện tự hành tại Trackdrive FSG 2024" loading="lazy" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-[Nguồn video: Biomimetics MIT](https://www.youtube.com/watch?v=q6zxCvCxhic) · [Di Carlo và cộng sự, IROS 2018](https://dspace.mit.edu/entities/publication/96d12c0a-997a-4e3f-a3e8-75a9c8072231).
+[Nguồn video: AMZFormulaStudent](https://www.youtube.com/watch?v=X_9zMuQ9sNw). Theo chú thích của nhóm, cảnh quay bên ngoài thuộc ©FSG media team, ảnh thumbnail ©FSG Schulte. Giữ video nhúng tại kênh gốc.
 
-Các video xe và robot thật là thí nghiệm của nhóm tác giả. Chúng chưa kiểm chứng phần cứng cho demo của lớp. [Nguồn tư liệu và thay đổi định dạng](/assets/teaching/hki-2026-2027/lap-lo-trinh-di-chuyen/chuong-4/MEDIA-SOURCES.md) · [Giấy phép MPCC](/assets/teaching/hki-2026-2027/lap-lo-trinh-di-chuyen/chuong-4/MPCC-LICENSE.txt).
+Các video xe thật là thí nghiệm của nhóm tác giả. Chúng chưa kiểm chứng phần cứng cho demo của lớp. [Nguồn tư liệu và thay đổi định dạng](/assets/teaching/hki-2026-2027/lap-lo-trinh-di-chuyen/chuong-4/MEDIA-SOURCES.md) · [Giấy phép MPCC](/assets/teaching/hki-2026-2027/lap-lo-trinh-di-chuyen/chuong-4/MPCC-LICENSE.txt).
 
 ## Ảnh chụp trực tiếp từ demo
 
