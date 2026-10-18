@@ -405,7 +405,7 @@
               <option value="-1">Đi phía dưới</option>
             </select></label
           ><button id="ipopt-play">Phát / Dừng quỹ đạo</button><button id="ipopt-reset">Về mốc đầu</button
-          ><button id="ipopt-csv">Tải dữ liệu IPOPT CSV</button
+          ><button id="ipopt-record">Ghi video mô phỏng IPOPT</button><button id="ipopt-csv">Tải dữ liệu IPOPT CSV</button
           ><label>Tiến độ phát lại<input id="ipopt-progress" type="range" min="0" max="600" value="0" /></label>
         </div>
         <canvas
@@ -473,7 +473,7 @@
         </div>
         <div class="controls">
           <button id="mpc-first">Về chu kỳ đầu</button><button id="mpc-step">Chu kỳ tiếp</button><button id="mpc-play">Phát / Dừng các chu kỳ</button
-          ><button id="mpc-csv">Tải dữ liệu MPC CSV</button
+          ><button id="mpc-record">Ghi video mô phỏng MPC</button><button id="mpc-csv">Tải dữ liệu MPC CSV</button
           ><label>Chu kỳ đang xem<input id="mpc-frame" type="range" min="0" max="39" value="8" /></label>
         </div>
         <canvas
@@ -4238,6 +4238,104 @@
       };
       window.addEventListener("resize", drawActive);
       runCost();
+
+      // Record the same numerical replay displayed by the demo; no camera or microphone.
+      async function recordSimulation(kind) {
+        const button = $("#" + kind + "-record"),
+          original = button.textContent;
+        if (!window.MediaRecorder || !HTMLCanvasElement.prototype.captureStream) {
+          button.textContent = "Trình duyệt chưa hỗ trợ ghi hình";
+          return;
+        }
+        if (kind === "mpc" && mpcDirty) runMPC();
+        ipoptPlaying = false;
+        mpcPlaying = false;
+        button.disabled = true;
+        const out = document.createElement("canvas");
+        out.width = 1440;
+        out.height = 1080;
+        const ctx = out.getContext("2d");
+        const mime = ["video/webm;codecs=vp9", "video/webm;codecs=vp8", "video/webm"].find((t) => MediaRecorder.isTypeSupported(t));
+        const stream = out.captureStream(30),
+          chunks = [];
+        const recorder = new MediaRecorder(stream, { mimeType: mime, videoBitsPerSecond: 6000000 });
+        recorder.ondataavailable = (e) => {
+          if (e.data.size) chunks.push(e.data);
+        };
+        const draw = (index) => {
+          if (kind === "ipopt") {
+            ipoptIndex = index;
+            $("#ipopt-progress").value = index;
+            drawIPOPT();
+          } else {
+            mpcIndex = index;
+            drawMPC();
+          }
+          ctx.fillStyle = "#fff";
+          ctx.fillRect(0, 0, 1440, 1080);
+          ctx.fillStyle = "#95001a";
+          ctx.font = "bold 36px Georgia";
+          ctx.fillText(kind === "ipopt" ? "IPOPT · Quỹ đạo xe đạp động học" : "MPC · Chân trời lùi và phản hồi", 42, 54);
+          ctx.fillStyle = "#44525c";
+          ctx.font = "23px system-ui";
+          const d = kind === "ipopt" ? selectedIPOPT() : mpcData;
+          ctx.fillText(
+            kind === "ipopt"
+              ? "Phát lại nghiệm Python/CasADi/IPOPT · biên thêm " + fmt(d.margin, 2) + " m"
+              : "QP giải trong trình duyệt · N=" + d.options.N + " · Δt=0,2 s",
+            42,
+            94
+          );
+          const top = $("#" + kind + "-canvas"),
+            bottom = $(kind === "ipopt" ? "#clearance-canvas" : "#input-canvas");
+          const fit = (c, x, y, w, h) => {
+            const q = Math.min(w / c.width, h / c.height);
+            ctx.drawImage(c, x + (w - c.width * q) / 2, y + (h - c.height * q) / 2, c.width * q, c.height * q);
+          };
+          fit(top, 35, 115, 1370, 575);
+          fit(bottom, 35, 710, 1370, 270);
+          ctx.font = "22px system-ui";
+          ctx.fillStyle = "#222";
+          const status =
+            kind === "ipopt"
+              ? "t = " + fmt(index * 0.01, 2) + " s · hở kiểm dày nhỏ nhất " + fmt(d.sampled_clearance_m, 6) + " m"
+              : "Chu kỳ " +
+                d.frames[index].k +
+                " · t = " +
+                fmt(d.frames[index].t, 1) +
+                " s · " +
+                (d.frames[index].accepted ? "nghiệm được nhận" : "chưa nhận nghiệm");
+          ctx.fillText(status, 42, 1010);
+          ctx.fillStyle = "#536571";
+          ctx.font = "19px system-ui";
+          ctx.fillText("Teaching · tinrobotics.com · Mô phỏng số của mô hình trong Chương 4", 42, 1050);
+        };
+        const max = kind === "ipopt" ? 600 : mpcData.frames.length - 1;
+        const duration = kind === "ipopt" ? 9000 : 12000;
+        draw(0);
+        recorder.start();
+        const started = performance.now();
+        const done = new Promise((resolve) => (recorder.onstop = resolve));
+        await new Promise((resolve) => {
+          function step(now) {
+            const f = Math.min(1, (now - started) / duration);
+            draw(Math.round(f * max));
+            button.textContent = "Đang ghi " + Math.round(f * 100) + "%";
+            if (f < 1) requestAnimationFrame(step);
+            else resolve();
+          }
+          requestAnimationFrame(step);
+        });
+        recorder.stop();
+        await done;
+        stream.getTracks().forEach((t) => t.stop());
+        download("chuong4-" + kind + "-mophong.webm", new Blob(chunks, { type: recorder.mimeType }), recorder.mimeType);
+        button.textContent = original;
+        button.disabled = false;
+      }
+      $("#ipopt-record").onclick = () =>
+        recordSimulation("ipopt").catch((e) => showStatus("#ipopt-result", "Không ghi được video: " + e.message, true));
+      $("#mpc-record").onclick = () => recordSimulation("mpc").catch((e) => showStatus("#mpc-result", "Không ghi được video: " + e.message, true));
     </script>
   </body>
 </html>
