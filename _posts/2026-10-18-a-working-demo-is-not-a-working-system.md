@@ -15,7 +15,7 @@ A sensor drops out for 200 ms. A timestamp drifts. An edge case nobody labelled 
 
 ## The gap is not knowledge, it is diagnosis
 
-The students who struggle are rarely the ones who do not understand the theory. They understand it better than I did at their age. What they lack is the habit of asking *which assumption just broke*, and the tools to answer it.
+The students who struggle are rarely the ones who do not understand the theory. They understand it better than I did at their age. What they lack is the habit of asking _which assumption just broke_, and the tools to answer it.
 
 A demo is built on assumptions that are never written down: the clock is shared, the bus is not saturated, the sensor is calibrated, the map is current, the compute is not thermally throttled. A system is what remains when you remove those assumptions one at a time and the behaviour stays within bounds.
 
@@ -62,4 +62,4 @@ I suspect the answers overlap more than either side expects.
 
 ---
 
-*Smart Vehicle OS is taught at NTT University. The failure catalogue above is drawn from deployed systems; the course structure is an ongoing experiment and I will write about what worked and what did not at the end of the semester.*
+_Smart Vehicle OS is taught at NTT University. The failure catalogue above is drawn from deployed systems; the course structure is an ongoing experiment and I will write about what worked and what did not at the end of the semester._
