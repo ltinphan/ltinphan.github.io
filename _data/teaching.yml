@@ -54,6 +54,25 @@ courses:
           - title: "ETH MPCC: video mô phỏng do tác giả công bố — Alex Liniger, Apache-2.0"
             url: /assets/teaching/hki-2026-2027/lap-lo-trinh-di-chuyen/chuong-4/eth-mpcc-simulation.mp4
             poster: /assets/teaching/hki-2026-2027/lap-lo-trinh-di-chuyen/chuong-4/eth-mpcc-poster.png
+      - number: 5
+        title: Phối hợp giao thông, người đi bộ và vùng khuất
+        summary: Tách lịch hai ô tô qua giao lộ, so phản ứng khi người đi bộ cắt ngang và tính vận tốc theo khoảng nhìn thấy. Có kiểm tiếp xúc theo khoảng, dữ liệu tái lập và video về xe tự hành.
+        url: /teaching/lap-lo-trinh-di-chuyen/chuong-5/
+        demo: /teaching/lap-lo-trinh-di-chuyen/chuong-5/demo/
+        download: /assets/teaching/hki-2026-2027/lap-lo-trinh-di-chuyen/chuong-5.zip
+        mode: Trình duyệt và video
+        size: 1 MB
+        videos:
+          - title: "Hai ô tô qua giao lộ: đặt chỗ theo ưu tiên — ghi từ demo của chương"
+            url: /assets/teaching/hki-2026-2027/lap-lo-trinh-di-chuyen/chuong-5/intersection-simulation.mp4
+            poster: /assets/teaching/hki-2026-2027/lap-lo-trinh-di-chuyen/chuong-5/intersection-poster.png
+          - title: "Ô tô nhường người đi bộ: trễ 0,2 s — ghi từ demo của chương"
+            url: /assets/teaching/hki-2026-2027/lap-lo-trinh-di-chuyen/chuong-5/crossing-simulation.mp4
+            poster: /assets/teaching/hki-2026-2027/lap-lo-trinh-di-chuyen/chuong-5/crossing-poster.png
+          - title: "Vận tốc trước vùng khuất: kiểm điều kiện dừng — ghi từ demo của chương"
+            url: /assets/teaching/hki-2026-2027/lap-lo-trinh-di-chuyen/chuong-5/occlusion-simulation.mp4
+            poster: /assets/teaching/hki-2026-2027/lap-lo-trinh-di-chuyen/chuong-5/occlusion-poster.png
+
   - slug: he-dieu-hanh-robot
     title: Hệ điều hành robot
     level: Đại học
