@@ -70,7 +70,7 @@ Bài Waymo còn kể một sự kiện khác có người đi xe đạp ngã. Ng
 
 Với mỗi phần, nộp cấu hình gốc và ít nhất hai biến thể có chủ đích, dữ liệu JSON/CSV, hình giải thích và nhận xét. Giữ ít nhất một trường hợp không đạt. Báo riêng tiếp xúc, hoàn thành và chỉ số phù hợp; với vùng khuất chỉ dùng điều kiện dừng đang được mô hình hóa.
 
-Phần mở rộng có thể thêm người dừng hoặc quay lại, hoặc vật cản động cho đường Dubins / RRT*. Ghi rõ phần nào đã triển khai và chạy, phần nào mới là thiết kế. RRT*–FND trong đề cương cần xác định đúng tài liệu biến thể trước khi hiện thực; không tự định nghĩa tên viết tắt.
+Phần mở rộng có thể thêm người dừng hoặc quay lại, hoặc vật cản động cho đường Dubins / RRT\*. Ghi rõ phần nào đã triển khai và chạy, phần nào mới là thiết kế. RRT\*–FND trong đề cương cần xác định đúng tài liệu biến thể trước khi hiện thực; không tự định nghĩa tên viết tắt.
 
 ## Tài liệu và phạm vi
 
