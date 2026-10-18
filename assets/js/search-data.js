@@ -72,7 +72,18 @@ ninja.data = [{
               handler: () => {
                 window.location.href = "/blog/";
               },
-            },{id: "post-run-huggingface-models-locally-for-free",
+            },{id: "post-a-working-demo-is-not-a-working-system",
+      
+        title: "A Working Demo Is Not a Working System",
+      
+      description: "Why a robotics course should start from failure, not from architecture diagrams.",
+      section: "Posts",
+      handler: () => {
+        
+          window.location.href = "/blog/2026/a-working-demo-is-not-a-working-system/";
+        
+      },
+    },{id: "post-run-huggingface-models-locally-for-free",
       
         title: "Run Huggingface Models Locally For Free",
       
