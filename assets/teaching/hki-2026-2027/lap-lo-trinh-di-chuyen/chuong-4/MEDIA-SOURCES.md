@@ -8,6 +8,6 @@
 ## Video ô tô tự hành thật, chỉ nhúng từ kênh chính thức
 
 - Stanford / Dynamic Design Lab, MARTY figure 8 drift: https://www.youtube.com/watch?v=nTK56vPb8Zo . Video xe thật của Stanford; dùng để bàn về trượt và giới hạn mô hình. Kỹ thuật lập quỹ đạo tối ưu phi tuyến được nhóm mô tả ở https://ddl.stanford.edu/people/jonathan-goh . Không đồng nhất bộ điều khiển MARTY với MPC trong demo.
-- AMZFormulaStudent, Winning Autonomous Trackdrive at FSG 2024: https://www.youtube.com/watch?v=X_9zMuQ9sNw . Xe điện tự hành dufour; mô tả hệ ROS 2, camera/LiDAR và NMPC ở https://www.amzracing.ch/en/cars/2024 . Cảnh góc nhìn bên ngoài ©FSG media team, ảnh thumbnail ©FSG Schulte theo chú thích tác giả. Chỉ nhúng tại kênh chính thức.
+- AMZFormulaStudent, Winning Autonomous Trackdrive at FSG 2024: https://www.youtube.com/watch?v=X_9zMuQ9sNw . Xe điện tự hành dufour; mô tả hệ ROS 2, camera/LiDAR và NMPC ở https://www.amzracing.ch/en/cars/2024 . Cảnh góc nhìn bên ngoài ©FSG media team, ảnh thumbnail ©FSG Schulte theo chú thích tác giả. Xem trực tiếp trên kênh chính thức.
 
-Video chính thức giữ ở nguồn gốc; gói không sao chép các video YouTube. Các tư liệu thực nghiệm của nhóm tác giả không phải kiểm chứng phần cứng của demo Chương 4.
+Video chính thức giữ ở nguồn gốc; Teaching có nút mở video, bài giảng Google Slides nhúng video; gói không sao chép các video YouTube. Các tư liệu thực nghiệm của nhóm tác giả không phải kiểm chứng phần cứng của demo Chương 4.
