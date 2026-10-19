@@ -1,7 +1,7 @@
 ---
 layout: teaching-lab
 title: "Chương 2: ICP, Doppler và cập nhật Gaussian"
-description: Công nghệ định vị và lộ trình di chuyển · Thạc sĩ · HKI 2026–2027
+description: Công nghệ định vị và lộ trình di chuyển · Thạc sĩ
 permalink: /teaching/cong-nghe-dinh-vi-va-lo-trinh-di-chuyen/chuong-2/
 course_slug: cong-nghe-dinh-vi-va-lo-trinh-di-chuyen
 chapter_number: 2

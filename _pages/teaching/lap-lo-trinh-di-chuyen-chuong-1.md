@@ -1,7 +1,7 @@
 ---
 layout: teaching-lab
 title: "Chương 1: Ba đường đi, ba kết luận"
-description: Lập lộ trình di chuyển · Đại học · HKI 2026–2027
+description: Lập lộ trình di chuyển · Đại học
 permalink: /teaching/lap-lo-trinh-di-chuyen/chuong-1/
 course_slug: lap-lo-trinh-di-chuyen
 chapter_number: 1

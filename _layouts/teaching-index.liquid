@@ -3,7 +3,6 @@ layout: page
 ---
 <link rel="stylesheet" href="{{ '/assets/css/teaching.css' | relative_url }}">
 <div class="teaching" lang="vi">
-  <p class="teaching-term">{{ site.data.teaching.semester }}</p>
   <p>
     Chọn học phần để xem hướng dẫn theo chương, chạy thí nghiệm trên trình duyệt hoặc tải mã thực hành. Mỗi bài ghi rõ môi trường cần dùng và phạm vi
     của mô hình.
@@ -21,7 +20,7 @@ layout: page
               </h3>
               <p>{{ course.summary }}</p>
               {% if course.labs.size > 0 %}
-                <p class="teaching-meta">{{ course.labs.size }} bài thực hành · {{ site.data.teaching.semester }}</p>
+                <p class="teaching-meta">{{ course.labs.size }} bài thực hành</p>
               {% else %}
                 <p class="teaching-meta">Tài liệu đang được cập nhật</p>
               {% endif %}

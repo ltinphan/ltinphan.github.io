@@ -1,7 +1,7 @@
 ---
 layout: teaching-lab
 title: "Chương 1: Node, topic và giao tiếp trong ROS 2"
-description: Hệ điều hành robot · Đại học · HKI 2026–2027
+description: Hệ điều hành robot · Đại học
 permalink: /teaching/he-dieu-hanh-robot/chuong-1/
 course_slug: he-dieu-hanh-robot
 chapter_number: 1

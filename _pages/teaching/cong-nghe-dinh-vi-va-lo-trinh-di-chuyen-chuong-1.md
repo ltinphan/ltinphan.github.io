@@ -1,7 +1,7 @@
 ---
 layout: teaching-lab
 title: "Chương 1: Mô hình xe đạp và quãng đường dừng"
-description: Công nghệ định vị và lộ trình di chuyển · Thạc sĩ · HKI 2026–2027
+description: Công nghệ định vị và lộ trình di chuyển · Thạc sĩ
 permalink: /teaching/cong-nghe-dinh-vi-va-lo-trinh-di-chuyen/chuong-1/
 course_slug: cong-nghe-dinh-vi-va-lo-trinh-di-chuyen
 chapter_number: 1

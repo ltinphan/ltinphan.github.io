@@ -1,14 +1,14 @@
 ---
 layout: teaching-lab
 title: "Chương 2: Log và tên tài nguyên trong ROS 2"
-description: Hệ điều hành robot · Đại học · HKI 2026–2027
+description: Hệ điều hành robot · Đại học
 permalink: /teaching/he-dieu-hanh-robot/chuong-2/
 course_slug: he-dieu-hanh-robot
 chapter_number: 2
 lang: vi
 ---
 
-Môn Hệ điều hành robot (077603), bậc Đại học, HKI 2026–2027. Môi trường mẫu: ROS 2 Jazzy, Ubuntu 24.04, Python. Tất cả ví dụ chuyển động chỉ dùng turtlesim. Không chạy các phép thử gửi nhầm lệnh trên robot thật.
+Môn Hệ điều hành robot (077603), bậc Đại học. Môi trường mẫu: ROS 2 Jazzy, Ubuntu 24.04, Python. Tất cả ví dụ chuyển động chỉ dùng turtlesim. Không chạy các phép thử gửi nhầm lệnh trên robot thật.
 
 ## Chuẩn bị trên Ubuntu
 

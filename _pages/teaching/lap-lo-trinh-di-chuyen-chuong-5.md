@@ -1,7 +1,7 @@
 ---
 layout: teaching-lab
 title: "Chương 5: Phối hợp giao thông, người đi bộ và vùng khuất"
-description: Lập lộ trình di chuyển · Đại học · HKI 2026–2027
+description: Lập lộ trình di chuyển · Đại học
 permalink: /teaching/lap-lo-trinh-di-chuyen/chuong-5/
 course_slug: lap-lo-trinh-di-chuyen
 chapter_number: 5

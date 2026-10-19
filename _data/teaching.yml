@@ -1,5 +1,4 @@
 # Add future chapters to the matching labs list; course and chapter pages use the shared layouts.
-semester: HKI 2026–2027
 courses:
   - slug: lap-lo-trinh-di-chuyen
     title: Lập lộ trình di chuyển
