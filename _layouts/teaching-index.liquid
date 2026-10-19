@@ -3,7 +3,7 @@ layout: page
 ---
 <link rel="stylesheet" href="{{ '/assets/css/teaching.css' | relative_url }}">
 <div class="teaching" lang="vi">
-  <p class="teaching-term">{{ site.data.teaching.semester }} · Trường Đại học Nguyễn Tất Thành</p>
+  <p class="teaching-term">{{ site.data.teaching.semester }}</p>
   <p>
     Chọn học phần để xem hướng dẫn theo chương, chạy thí nghiệm trên trình duyệt hoặc tải mã thực hành. Mỗi bài ghi rõ môi trường cần dùng và phạm vi
     của mô hình.
@@ -11,7 +11,7 @@ layout: page
   {% for level in (1..2) %}
     {% if level == 1 %}{% assign degree = 'Đại học' %}{% else %}{% assign degree = 'Thạc sĩ' %}{% endif %}
     <section aria-labelledby="degree-{{ level }}">
-      <h2 id="degree-{{ level }}">{{ degree }}</h2>
+      <h2 id="degree-{{ level }}">Bậc {{ degree }}</h2>
       <div class="teaching-courses">
         {% for course in site.data.teaching.courses %}
           {% if course.level == degree %}

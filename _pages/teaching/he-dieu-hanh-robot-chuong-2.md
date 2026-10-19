@@ -8,7 +8,7 @@ chapter_number: 2
 lang: vi
 ---
 
-Môn Hệ điều hành robot (077603), NTT, HKI 2026–2027. Môi trường mẫu: ROS 2 Jazzy, Ubuntu 24.04, Python. Tất cả ví dụ chuyển động chỉ dùng turtlesim. Không chạy các phép thử gửi nhầm lệnh trên robot thật.
+Môn Hệ điều hành robot (077603), bậc Đại học, HKI 2026–2027. Môi trường mẫu: ROS 2 Jazzy, Ubuntu 24.04, Python. Tất cả ví dụ chuyển động chỉ dùng turtlesim. Không chạy các phép thử gửi nhầm lệnh trên robot thật.
 
 ## Chuẩn bị trên Ubuntu
 
