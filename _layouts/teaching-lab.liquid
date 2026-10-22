@@ -11,16 +11,11 @@ layout: page
     <span>Chương {{ lab.number }}</span>
   </nav>
   <p>{{ lab.summary }}</p>
-  <div class="teaching-actions teaching-actions-primary">
-    {% if lab.demo -%}
-      <a href="{{ lab.demo | relative_url }}">Mở demo tương tác</a>
-    {%- endif %}
-    <a href="{{ lab.download | relative_url }}" download
-      >Tải gói thực hành <span class="teaching-size">(ZIP, {{ lab.size }})</span></a
-    >
-  </div>
   {% if lab.demo %}
-    <p class="teaching-meta">Demo chạy trực tiếp trong trình duyệt. Để dùng ngoại tuyến, giải nén gói tải về rồi mở demo.html.</p>
+    <div class="teaching-actions teaching-actions-primary">
+      <a href="{{ lab.demo | relative_url }}">Mở demo tương tác</a>
+    </div>
+    <p class="teaching-meta">Demo chạy trực tiếp trong trình duyệt.</p>
   {% else %}
     <p class="teaching-meta">
       Thực hành trên Ubuntu 24.04 và ROS 2 Jazzy. Đây là bài chạy trong môi trường ROS 2, không chạy trực tiếp trên trình duyệt.

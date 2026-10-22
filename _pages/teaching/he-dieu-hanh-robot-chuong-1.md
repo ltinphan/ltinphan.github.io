@@ -19,7 +19,7 @@ sudo apt update
 sudo apt install ros-jazzy-turtlesim ros-jazzy-rqt-graph ros-jazzy-rqt-console python3-colcon-common-extensions
 ```
 
-Giải nén gói này thành thư mục `~/robot_os_ws`, để bên trong có `src/robot_os_ch1`. Các lệnh sau chạy bằng Bash. Không chạy các lệnh apt trên macOS. Trên macOS/Windows, dùng máy Ubuntu, máy ảo hoặc container đã chuẩn bị.
+Đặt mã bài thực hành trong thư mục `~/robot_os_ws`, để bên trong có `src/robot_os_ch1`. Các lệnh sau chạy bằng Bash. Không chạy các lệnh apt trên macOS. Trên macOS/Windows, dùng máy Ubuntu, máy ảo hoặc container đã chuẩn bị.
 
 ```bash
 source /opt/ros/jazzy/setup.bash

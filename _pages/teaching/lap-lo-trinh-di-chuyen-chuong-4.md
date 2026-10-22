@@ -12,7 +12,7 @@ lang: vi
 
 Mở demo và giữ cấu hình gốc cho lần chạy đầu tiên. Bốn phần dùng những mô hình riêng để làm rõ từng ý: ví dụ một bước cho chi phí, bài toán đại số cho SQP, xe đạp phi tuyến cho IPOPT và mô hình ngang tuyến tính cho MPC. Đừng dùng kết quả của mô hình này để kết luận cho mô hình khác.
 
-Phần chi phí, SQP và MPC tính ngay trên trình duyệt. Phần IPOPT **phát lại kết quả đã chạy bằng Python, CasADi và IPOPT**; muốn thay bài toán hoặc giải lại, dùng mã Python trong gói tải về.
+Phần chi phí, SQP và MPC tính ngay trên trình duyệt. Phần IPOPT **phát lại kết quả đã chạy bằng Python, CasADi và IPOPT**; trên trang, bạn chọn bộ kết quả mẫu để đối chiếu các phép kiểm.
 
 ## Thực hiện
 
@@ -23,9 +23,9 @@ Phần chi phí, SQP và MPC tính ngay trên trình duyệt. Phần IPOPT **ph�
 5. **Ngân sách và phản hồi:** với N=5, giảm còn một lượt quét rồi chạy lại. Chu kỳ 11 tại 2,2 s chưa đạt điều kiện nhận, dù phần dư ràng buộc có thể đã nhỏ. Khôi phục 1200 lượt, sau đó dùng N=10 và bật tác động cộng 0,15 m/s tại 2,4 s để quan sát phản hồi. Ghi cả cấu hình và nguyên nhân dừng nếu có.
 6. **Trạng thái đầu không đủ khoảng dừng:** bật tùy chọn tương ứng. Từ vị trí 3,4 m và vận tốc ngang 1,3 m/s hướng ra biên 3,5 m, khoảng còn lại chỉ 0,1 m. Ngay cả khi giảm vận tốc bằng gia tốc cực đại 1,5 m/s² tức thì, mô hình cần khoảng 0,5633 m. Tăng số vòng bộ giải không thay đổi khoảng dừng ấy.
 
-## Chạy lại IPOPT
+## Nguồn kết quả IPOPT
 
-Gói tải về có `python/trajectory_ipopt.py`, phiên bản thư viện, dữ liệu JSON/CSV mẫu và hướng dẫn tạo môi trường Python. Mã đã được kiểm tra bằng Python 3.12. Kết quả chạy lại ghi vào tệp riêng; thời gian và số vòng có thể thay đổi theo môi trường.
+Kết quả mẫu được tạo bằng Python 3.12, CasADi và IPOPT. Demo cho phép chọn kết quả đã tính và kiểm lại chuyển động; việc thay bài toán hoặc giải lại cần một môi trường Python riêng.
 
 Ví dụ xe đạp dùng tâm trục sau, chiều dài cơ sở 2,8 m, 30 khoảng × 0,2 s và tích phân RK4. Vật cản cho điểm theo dõi có tâm (9,0) và bán kính hiệu dụng 1,6 m. Góc dùng radian. Đây chưa phải phép kiểm toàn bộ footprint hình chữ nhật của xe.
 

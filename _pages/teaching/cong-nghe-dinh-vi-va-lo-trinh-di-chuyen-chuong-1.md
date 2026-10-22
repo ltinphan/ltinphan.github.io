@@ -16,7 +16,7 @@ lang: vi
 
 ## Báo cáo kết quả
 
-Lưu cấu hình, kết quả trước và sau khi đổi tham số, cùng một giải thích dựa trên mô hình. Giữ cả những lần sai số lớn hoặc thuật toán chưa hội tụ. Gói tải về có mã và dữ liệu để đối chiếu.
+Lưu cấu hình, kết quả trước và sau khi đổi tham số, cùng một giải thích dựa trên mô hình. Giữ cả những lần sai số lớn hoặc thuật toán chưa hội tụ.
 
 ## Phạm vi mô hình
 

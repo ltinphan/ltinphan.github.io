@@ -21,7 +21,7 @@ source /opt/ros/jazzy/setup.bash
 mkdir -p ~/robot_os_ch2_ws/src
 ```
 
-Chép thư mục `src/robot_os_ch2` của gói này vào `~/robot_os_ch2_ws/src/`. Trong gốc workspace:
+Đặt thư mục mã `src/robot_os_ch2` vào `~/robot_os_ch2_ws/src/`. Trong gốc workspace:
 
 ```bash
 cd ~/robot_os_ch2_ws

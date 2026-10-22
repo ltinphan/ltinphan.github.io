@@ -12,18 +12,14 @@ courses:
         summary: So sánh đường thẳng, đường gãy khúc và đường cong khi cùng xét vật cản, bán kính quay và biên an toàn.
         url: /teaching/lap-lo-trinh-di-chuyen/chuong-1/
         demo: /teaching/lap-lo-trinh-di-chuyen/chuong-1/demo/
-        download: /assets/teaching/hki-2026-2027/lap-lo-trinh-di-chuyen/chuong-1.zip
         mode: Trình duyệt
-        size: 0.3 MB
       - number: 2
         chapter: Cơ bản về thiết lập lộ trình di chuyển
         title: RRT, PRM và kiểm tra va chạm
         summary: Quan sát cách cây RRT và roadmap PRM tạo kết nối. Thử khe hẹp, vách kín và phản ví dụ hai đầu cạnh tự do.
         url: /teaching/lap-lo-trinh-di-chuyen/chuong-2/
         demo: /teaching/lap-lo-trinh-di-chuyen/chuong-2/demo/
-        download: /assets/teaching/hki-2026-2027/lap-lo-trinh-di-chuyen/chuong-2.zip
         mode: Trình duyệt
-        size: 0.5 MB
       - number: 3
         chapter: Thiết lập lộ trình di chuyển dựa trên tìm kiếm
         title: Dijkstra, A*, rủi ro và RRT*
@@ -31,18 +27,14 @@ courses:
           batch BIT* minh họa."
         url: /teaching/lap-lo-trinh-di-chuyen/chuong-3/
         demo: /teaching/lap-lo-trinh-di-chuyen/chuong-3/demo/
-        download: /assets/teaching/hki-2026-2027/lap-lo-trinh-di-chuyen/chuong-3.zip
         mode: Trình duyệt
-        size: 1.0 MB
       - number: 4
         chapter: Thiết lập lộ trình di chuyển dựa trên tối ưu
         title: Chi phí, SQP, IPOPT và MPC
         summary: Bốn thí nghiệm về chi phí và giới hạn, SQP từng bước, kiểm lại quỹ đạo IPOPT và vòng MPC với chân trời dự báo, nhiễu và ngân sách tính toán.
         url: /teaching/lap-lo-trinh-di-chuyen/chuong-4/
         demo: /teaching/lap-lo-trinh-di-chuyen/chuong-4/demo/
-        download: /assets/teaching/hki-2026-2027/lap-lo-trinh-di-chuyen/chuong-4.zip
         mode: Trình duyệt, Python và video
-        size: 1.2 MB
         videos:
           - title: "IPOPT: quỹ đạo xe đạp động học — ghi từ demo của chương"
             url: /assets/teaching/hki-2026-2027/lap-lo-trinh-di-chuyen/chuong-4/ipopt-simulation.mp4
@@ -58,9 +50,7 @@ courses:
         summary: Tách lịch hai ô tô qua giao lộ, so phản ứng khi người đi bộ cắt ngang và tính vận tốc theo khoảng nhìn thấy. Có kiểm tiếp xúc theo khoảng, dữ liệu tái lập và video về xe tự hành.
         url: /teaching/lap-lo-trinh-di-chuyen/chuong-5/
         demo: /teaching/lap-lo-trinh-di-chuyen/chuong-5/demo/
-        download: /assets/teaching/hki-2026-2027/lap-lo-trinh-di-chuyen/chuong-5.zip
         mode: Trình duyệt và video
-        size: 1 MB
         videos:
           - title: "Hai ô tô qua giao lộ: đặt chỗ theo ưu tiên — ghi từ demo của chương"
             url: /assets/teaching/hki-2026-2027/lap-lo-trinh-di-chuyen/chuong-5/intersection-simulation.mp4
@@ -83,9 +73,7 @@ courses:
         title: Node, topic và giao tiếp trong ROS 2
         summary: Quan sát graph, message và các tình huống sai topic, sai kiểu hoặc khác miền bằng turtlesim.
         url: /teaching/he-dieu-hanh-robot/chuong-1/
-        download: /assets/teaching/hki-2026-2027/he-dieu-hanh-robot/chuong-1.zip
         mode: ROS 2 Jazzy
-        size: 479 KB
         videos:
           - url: /assets/teaching/hki-2026-2027/he-dieu-hanh-robot/chuong-1/01_circle.mp4
             title: Chạy turtlesim và quan sát đường tròn
@@ -98,9 +86,7 @@ courses:
         title: Log và tên tài nguyên trong ROS 2
         summary: Thử mức log, namespace, tên relative/private và remapping với hai turtlesim.
         url: /teaching/he-dieu-hanh-robot/chuong-2/
-        download: /assets/teaching/hki-2026-2027/he-dieu-hanh-robot/chuong-2.zip
         mode: ROS 2 Jazzy
-        size: 129 KB
         videos:
           - url: /assets/teaching/hki-2026-2027/he-dieu-hanh-robot/chuong-2/01_relative_r1.mp4
             title: Tên relative trong namespace r1
@@ -124,9 +110,7 @@ courses:
         summary: Hai thí nghiệm để đối chiếu nghiệm giải tích, sai số tích phân và ảnh hưởng của độ trễ trong mô hình chuyển động.
         url: /teaching/cong-nghe-dinh-vi-va-lo-trinh-di-chuyen/chuong-1/
         demo: /teaching/cong-nghe-dinh-vi-va-lo-trinh-di-chuyen/chuong-1/demo/
-        download: /assets/teaching/hki-2026-2027/cong-nghe-dinh-vi-va-lo-trinh-di-chuyen/chuong-1.zip
         mode: Trình duyệt
-        size: 0.1 MB
       - number: 2
         chapter: Nguyên lý và công nghệ định vị
         title: ICP, Doppler và cập nhật Gaussian
@@ -134,6 +118,4 @@ courses:
           định.
         url: /teaching/cong-nghe-dinh-vi-va-lo-trinh-di-chuyen/chuong-2/
         demo: /teaching/cong-nghe-dinh-vi-va-lo-trinh-di-chuyen/chuong-2/demo/
-        download: /assets/teaching/hki-2026-2027/cong-nghe-dinh-vi-va-lo-trinh-di-chuyen/chuong-2.zip
         mode: Trình duyệt
-        size: 0.2 MB
