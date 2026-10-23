@@ -1,6 +1,12 @@
 .teaching {
   line-height: 1.7;
 }
+.teaching img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1.25rem auto;
+}
 .teaching-term {
   color: var(--global-theme-color);
   font-weight: 600;
