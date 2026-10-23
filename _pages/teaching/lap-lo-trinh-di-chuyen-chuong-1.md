@@ -32,4 +32,4 @@ Ghi phạm vi vận hành (ODD) của bài: loại đường, môi trường, v�
 
 ### Tài liệu đọc thêm
 
-[Software Architecture — University of Toronto / Coursera](https://www.coursera.org/learn/intro-self-driving-cars/lecture/RQCqM/lesson-3-software-architecture).
+[Introduction to Self-Driving Cars — University of Toronto / Coursera](https://www.coursera.org/learn/intro-self-driving-cars). Tìm bài _Software Architecture_ trong khóa học.

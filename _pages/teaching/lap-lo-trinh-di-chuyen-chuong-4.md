@@ -96,4 +96,4 @@ Với đường tròn này, gia tốc ngang danh định ở 8 m/s là 3,2 m/s²
 
 ### Tài liệu đọc thêm
 
-[Pure Pursuit — University of Toronto / Coursera](https://www.coursera.org/learn/intro-self-driving-cars/lecture/44N7x/lesson-2-geometric-lateral-control-pure-pursuit).
+[Introduction to Self-Driving Cars — University of Toronto / Coursera](https://www.coursera.org/learn/intro-self-driving-cars). Tìm bài _Geometric Lateral Control — Pure Pursuit_ trong khóa học.

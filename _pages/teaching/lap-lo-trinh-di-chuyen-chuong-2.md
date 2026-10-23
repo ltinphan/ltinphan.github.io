@@ -34,4 +34,4 @@ Phân biệt bản đồ định vị, lưới chiếm chỗ và mạng làn đ�
 
 ### Tài liệu đọc thêm
 
-[Environment Representation — University of Toronto / Coursera](https://www.coursera.org/learn/intro-self-driving-cars/lecture/CwcBD/lesson-4-environment-representation).
+[Introduction to Self-Driving Cars — University of Toronto / Coursera](https://www.coursera.org/learn/intro-self-driving-cars). Tìm bài _Environment Representation_ trong khóa học.
