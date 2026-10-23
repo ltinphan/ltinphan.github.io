@@ -77,3 +77,17 @@ Phần mở rộng có thể thêm người dừng hoặc quay lại, hoặc v�
 [LaValle, Chương 7: bài toán có thời gian và nhiều robot](https://lavalle.pl/planning/ch7.pdf) · [Sharon và cộng sự, CBS](https://mapf.info/index.php/Main.AFeln15a) · [Trang tác giả ORCA](https://gamma.cs.unc.edu/ORCA/).
 
 Các mô phỏng đã được đối chiếu với các phép tính mẫu và 56 cấu hình kiểm số. Mô hình tuyến thẳng, hướng cố định và gia tốc hằng theo đoạn chưa có lốp, độ dốc, cơ cấu phanh hoặc giới hạn jerk đầy đủ. Chưa là một planner giao thông hoàn chỉnh, triển khai ROS 2 hay kiểm chứng xe thật. [Nguồn hình và video](/assets/teaching/hki-2026-2027/lap-lo-trinh-di-chuyen/chuong-5/MEDIA-SOURCES.md).
+
+## Chọn hành vi bằng trạng thái và điều kiện chuyển
+
+![Máy trạng thái minh họa tiến, giảm tốc, dừng và tiếp tục](/assets/teaching/planning-foundations/behaviour.png)
+
+Viết bốn trạng thái: **đi theo tuyến → giảm tốc → dừng chờ → tiếp tục**. Trên mỗi mũi tên, ghi điều kiện chuyển dựa trên vùng xung đột, dữ liệu còn mới, đủ khoảng dừng và khoảng trống đã được xác nhận. Quyền ưu tiên là một đầu vào của quyết định, không bảo đảm xe khác sẽ nhường.
+
+Khi đang dừng, yêu cầu điều kiện “đã trống đủ lâu” để tránh đổi trạng thái liên tục vì nhiễu. Nếu dữ liệu quá cũ hoặc không xác định được vùng xung đột, đánh dấu trạng thái không đủ thông tin và gọi chính sách xử lý đã thiết kế. Chọn trạng thái “giảm tốc” mới là quyết định hành vi. Ta còn phải tính quỹ đạo phanh theo giới hạn xe và phần đường đang có.
+
+**Bảng thử cần bổ sung:** đường trống, xe trước dừng, xe cắt ngang, người đi bộ, vùng khuất và dữ liệu trễ. Với mỗi hàng, ghi điều kiện đầu, hành vi mong muốn, thời điểm kích hoạt, khoảng hở nhỏ nhất và có đủ khoảng dừng hay không. Các demo hiện có chưa triển khai toàn bộ máy trạng thái và tình huống dữ liệu cũ; hãy dùng bài thiết kế này để giải thích cách ghép những phép thử riêng thành một hệ thống.
+
+### Tài liệu đọc thêm
+
+[Motion Planning — Behaviour Planning — University of Toronto / Coursera](https://www.coursera.org/learn/motion-planning-self-driving-cars).

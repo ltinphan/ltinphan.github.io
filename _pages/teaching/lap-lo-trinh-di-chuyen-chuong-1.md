@@ -21,3 +21,15 @@ Lưu cấu hình, kết quả trước và sau khi đổi tham số, cùng một
 ## Phạm vi mô hình
 
 Demo dùng hình học lấy mẫu trong bản đồ tĩnh. Kết quả của mô hình chưa chứng minh khả năng vận hành an toàn trên xe thật.
+
+## Liên hệ với kiến trúc ô tô tự hành
+
+Sau khi kiểm ba đường, hãy xét thêm một tình huống: nếu có xe đang đỗ phía trước, xe của ta nên đi vòng hay dừng chờ? Tuyến cho biết nơi cần đi qua; hành vi thu hẹp những chuyển động được phép; quỹ đạo mô tả chuyển động theo thời gian; bộ điều khiển thực hiện lệnh lái, ga và phanh.
+
+Ghi phạm vi vận hành (ODD) của bài: loại đường, môi trường, vùng hoạt động và giới hạn vận tốc. Đây là điều kiện mà hệ thống được thiết kế để hoạt động, không phải nhãn bảo đảm an toàn. Demo chỉ có bản đồ hai chiều đã biết; chưa mô phỏng nhận thức và định vị.
+
+**Câu hỏi thảo luận:** nếu bản đồ vẫn mở được nhưng dữ liệu vị trí đã cũ, có nên tiếp tục dùng quỹ đạo vừa tính? Hãy nêu dữ liệu bộ giám sát cần kiểm và cách xử lý nếu dữ liệu không còn dùng được. Nếu chọn dừng, cần tính cả chuyển động phanh và khả năng thực hiện; chỉ ngừng gửi lệnh thì chưa đủ.
+
+### Tài liệu đọc thêm
+
+[Software Architecture — University of Toronto / Coursera](https://www.coursera.org/learn/intro-self-driving-cars/lecture/RQCqM/lesson-3-software-architecture).

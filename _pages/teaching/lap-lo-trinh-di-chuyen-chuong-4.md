@@ -75,9 +75,25 @@ Hai ảnh đầu so khoảng hở khi chỉ thay biên tại nút; hai ảnh sau
 
 ![Ảnh chụp MPC N bằng 5, một lượt quét: dự đoán tại chu kỳ 11 chưa được nhận](/assets/teaching/hki-2026-2027/lap-lo-trinh-di-chuyen/chuong-4/sim73.png)
 
+## Nối quỹ đạo với điều khiển bám đường
+
+[Chạy bài thực hành Pure Pursuit và xe đạp động học](/teaching/lap-lo-trinh-di-chuyen/chuong-4/bam-duong/). Bài này tính chuyển động ngay trong trình duyệt bằng mô hình xe đạp. Khi so kết quả, nhớ rằng phần IPOPT phát lại nghiệm đã tính, còn phần MPC ở trên dùng mô hình chuyển động ngang khác.
+
+![Hình học Pure Pursuit tại tâm trục sau](/assets/teaching/planning-foundations/pursuit.png)
+
+Giữ đường tròn bán kính 20 m, chiều dài cơ sở 2,8 m và sai lệch đầu 0,5 m. So vận tốc 4, 8, 12 m/s với khoảng nhìn trước 3, 6, 10 m. Mỗi lần chạy tối đa 20 s nếu bộ điều khiển vẫn tìm được điểm đích hợp lệ. Với sai lệch đầu 0,5 m, cấu hình 12 m/s và khoảng nhìn trước 3 m dừng khoảng 2,98 s vì mất giao điểm; khi so RMSE, nhớ rằng lần này chưa chạy đủ 20 s. Ghi RMSE, sai số lớn nhất, thời lượng thực chạy và thời gian lệnh chạm giới hạn.
+
+Khoảng nhìn trước là khoảng cách thẳng từ tâm trục sau đến điểm đích trên đường tham chiếu. Demo chọn giao điểm phía trước, không lấy khoảng cách dọc cung rồi gán thành khoảng cách thẳng. Lệnh lái chịu giới hạn góc và tốc độ thay đổi; đây là các giá trị minh họa đã ghi rõ trên trang.
+
+Với đường tròn này, gia tốc ngang danh định ở 8 m/s là 3,2 m/s². Vì vậy, xe có thể bám khá sát trong mô hình không trượt nhưng vẫn vượt ngưỡng thiết kế 2,5 m/s² mà bài tập chọn. Hãy giải thích vì sao nhận xét “RMSE nhỏ nên chuyển động phù hợp” còn thiếu điều kiện. Với xe và mặt đường khác, ngưỡng phù hợp cần được xác định lại.
+
 ## Đọc thêm
 
 - [MIT Underactuated Robotics — Trajectory Optimization](https://underactuated.mit.edu/trajopt.html)
 - [Tài liệu CasADi](https://web.casadi.org/docs/)
 - [Tài liệu IPOPT](https://coin-or.github.io/Ipopt/)
 - [Rawlings, Mayne và Diehl — Model Predictive Control](https://sites.engineering.ucsb.edu/~jbraw/mpc/MPC-book-2nd-edition-5th-printing.pdf)
+
+### Tài liệu đọc thêm
+
+[Pure Pursuit — University of Toronto / Coursera](https://www.coursera.org/learn/intro-self-driving-cars/lecture/44N7x/lesson-2-geometric-lateral-control-pure-pursuit).

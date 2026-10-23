@@ -3,8 +3,8 @@ courses:
   - slug: lap-lo-trinh-di-chuyen
     title: Lập lộ trình di chuyển
     level: Đại học
-    summary: Biểu diễn bài toán chuyển động, tìm kiếm đường và đánh giá tính hợp lệ của lộ trình. Các thí nghiệm cho phép thay
-      tham số và đối chiếu kết quả ngay trên trình duyệt.
+    summary: Từ chọn tuyến và xử lý tình huống đến tạo quỹ đạo và điều khiển bám đường cho ô tô tự hành. Qua các bài thực hành
+      trên trình duyệt, sinh viên kiểm tra mô hình xe, giới hạn chuyển động và cách xử lý tình huống giao thông.
     labs:
       - number: 1
         chapter: Giới thiệu về lộ trình di chuyển
@@ -16,15 +16,14 @@ courses:
       - number: 2
         chapter: Cơ bản về thiết lập lộ trình di chuyển
         title: RRT, PRM và kiểm tra va chạm
-        summary: Quan sát cách cây RRT và roadmap PRM tạo kết nối. Thử khe hẹp, vách kín và phản ví dụ hai đầu cạnh tự do.
+        summary: Quan sát cách cây RRT và roadmap PRM tạo kết nối. Thử khe hẹp, vách kín và trường hợp hai đầu cạnh không va chạm nhưng đoạn nối lại cắt qua vật cản.
         url: /teaching/lap-lo-trinh-di-chuyen/chuong-2/
         demo: /teaching/lap-lo-trinh-di-chuyen/chuong-2/demo/
         mode: Trình duyệt
       - number: 3
         chapter: Thiết lập lộ trình di chuyển dựa trên tìm kiếm
         title: Dijkstra, A*, rủi ro và RRT*
-        summary: "Bốn phần tương tác: tìm kiếm trên lưới, chi phí dưới bất định, cải thiện cây RRT* và ưu tiên cạnh trong một
-          batch BIT* minh họa."
+        summary: "Thực hành tìm kiếm trên lưới, so sánh chi phí khi có bất định, cải thiện cây RRT* và chọn thứ tự xét cạnh qua một batch BIT* minh họa."
         url: /teaching/lap-lo-trinh-di-chuyen/chuong-3/
         demo: /teaching/lap-lo-trinh-di-chuyen/chuong-3/demo/
         mode: Trình duyệt
@@ -47,7 +46,7 @@ courses:
             poster: /assets/teaching/hki-2026-2027/lap-lo-trinh-di-chuyen/chuong-4/eth-mpcc-poster.png
       - number: 5
         title: Phối hợp giao thông, người đi bộ và vùng khuất
-        summary: Tách lịch hai ô tô qua giao lộ, so phản ứng khi người đi bộ cắt ngang và tính vận tốc theo khoảng nhìn thấy. Có kiểm tiếp xúc theo khoảng, dữ liệu tái lập và video về xe tự hành.
+        summary: Điều chỉnh thời điểm hai ô tô qua giao lộ, so sánh cách xe nhường người đi bộ và chọn vận tốc theo khoảng nhìn thấy. Kiểm tra cả chuyển động giữa các mẫu thời gian và đối chiếu với video xe tự hành.
         url: /teaching/lap-lo-trinh-di-chuyen/chuong-5/
         demo: /teaching/lap-lo-trinh-di-chuyen/chuong-5/demo/
         mode: Trình duyệt và video

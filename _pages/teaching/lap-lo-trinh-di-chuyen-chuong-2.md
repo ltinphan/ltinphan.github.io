@@ -21,3 +21,17 @@ Lưu cấu hình, kết quả trước và sau khi đổi tham số, cùng một
 ## Phạm vi mô hình
 
 Cây và roadmap trong demo xét robot đĩa, cạnh thẳng và bản đồ đã biết. Phần thân chữ nhật là một minh họa riêng, không thay đổi mô hình của thuật toán.
+
+## Từ robot đĩa sang ô tô
+
+Lấy tâm trục sau làm điểm theo dõi, rồi vẽ rõ hai trục bánh xe và phần thân nhô ra trước, sau. Đầu xe có thể quét qua vùng mà nét đường của điểm tham chiếu không đi qua. Khi đổi điểm tham chiếu, cần đổi cách tính chuyển động và footprint tương ứng.
+
+![Ba loại bản đồ phục vụ các câu hỏi khác nhau](/assets/teaching/planning-foundations/maps.png)
+
+Phân biệt bản đồ định vị, lưới chiếm chỗ và mạng làn đường. Demo RRT/PRM đang dùng lưới vật cản và robot đĩa. Nó chưa có mạng làn, quy tắc giao thông, giới hạn góc lái hoặc tốc độ thay đổi góc lái.
+
+**Bài mở rộng trên giấy:** chọn một cạnh thẳng mà demo chấp nhận, ghép nó với cạnh kế tiếp thành một góc gãy và giải thích tại sao ô tô không thể đổi hướng tức thì. Muốn nâng thành bộ lập đường cho xe, cần một phép sinh chuyển động theo mô hình xe và kiểm toàn thân dọc chuyển động đó; chỉ thêm biến hướng vào trạng thái vẫn chưa giải quyết được các giới hạn đó.
+
+### Tài liệu đọc thêm
+
+[Environment Representation — University of Toronto / Coursera](https://www.coursera.org/learn/intro-self-driving-cars/lecture/CwcBD/lesson-4-environment-representation).
