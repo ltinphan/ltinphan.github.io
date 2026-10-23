@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Bám đường Pure Pursuit · Lập lộ trình di chuyển</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: light-dark(#fff, #16191e);
+        --fg: light-dark(#202b35, #edf0f4);
+        --muted: light-dark(#566879, #bcc8d3);
+        --line: light-dark(#d8e0e8, #475463);
+        --blue: light-dark(#045ea7, #78bcf4);
+        --gold: light-dark(#856600, #f3cd6f);
+        --red: light-dark(#a11b32, #ff9dad);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--fg);
+        font:
+          17px/1.65 system-ui,
+          sans-serif;
+      }
+      main {
+        max-width: 1150px;
+        margin: auto;
+        padding: 26px 22px;
+      }
+      a {
+        color: var(--blue);
+      }
+      h1 {
+        font-size: clamp(1.7rem, 4vw, 2.4rem);
+        line-height: 1.25;
+      }
+      h2 {
+        font-size: 1.25rem;
+      }
+      form {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 18px;
+        align-items: end;
+        margin: 24px 0;
+      }
+      label {
+        display: grid;
+        gap: 5px;
+      }
+      select,
+      button,
+      input {
+        font: inherit;
+        padding: 7px 12px;
+        background: var(--bg);
+        color: var(--fg);
+        border: 1px solid var(--line);
+        border-radius: 4px;
+      }
+      button {
+        cursor: pointer;
+      }
+      button:focus-visible,
+      select:focus-visible,
+      input:focus-visible,
+      a:focus-visible {
+        outline: 3px solid var(--gold);
+        outline-offset: 3px;
+      }
+      canvas {
+        display: block;
+        width: 100%;
+        border: 1px solid var(--line);
+      }
+      .plots {
+        display: grid;
+        grid-template-columns: 1.1fr 1fr;
+        gap: 20px;
+      }
+      .caption {
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+      .metrics {
+        display: flex;
+        gap: 12px 28px;
+        flex-wrap: wrap;
+        padding: 15px 0;
+      }
+      .metrics strong {
+        font-variant-numeric: tabular-nums;
+      }
+      .formula {
+        font-family: Georgia, serif;
+        font-size: 1.15em;
+        overflow-wrap: anywhere;
+      }
+      #timeline {
+        width: min(100%, 600px);
+      }
+      .warning {
+        color: var(--red);
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        margin: 12px 0;
+      }
+      th,
+      td {
+        border-bottom: 1px solid var(--line);
+        padding: 8px;
+        text-align: left;
+      }
+      @media (max-width: 720px) {
+        .plots {
+          grid-template-columns: 1fr;
+        }
+        main {
+          padding: 18px 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <nav>
+        <a href="/teaching/">Teaching</a> / <a href="/teaching/lap-lo-trinh-di-chuyen/">Lập lộ trình di chuyển</a> /
+        <a href="/teaching/lap-lo-trinh-di-chuyen/chuong-4/">Chương 4</a>
+      </nav>
+      <h1>Có đường rồi, ô tô có bám được không?</h1>
+      <p>
+        Giữ đường tham chiếu là một đường tròn bán kính 20 m. Pure Pursuit chọn một điểm phía trước trên đường, tính góc lái và cập nhật chuyển động
+        từ <strong>tâm trục sau</strong>. Đổi một tham số, rồi so cả sai số và giới hạn sử dụng trong một lần chạy tối đa 20 giây.
+      </p>
+      <form id="controls">
+        <label
+          >Vận tốc (m/s)<select id="speed">
+            <option>4</option>
+            <option>8</option>
+            <option>12</option>
+          </select></label
+        >
+        <label
+          >Khoảng nhìn trước (m)<select id="lookahead">
+            <option>3</option>
+            <option selected>6</option>
+            <option>10</option>
+          </select></label
+        >
+        <label
+          >Sai lệch đầu (m)<select id="offset">
+            <option>0</option>
+            <option selected>0.5</option>
+            <option>1.5</option>
+          </select></label
+        >
+        <button type="submit">Chạy và so kết quả</button><button id="export" type="button">Lưu kết quả JSON</button>
+      </form>
+      <p id="status" role="status" aria-live="polite"></p>
+      <div class="metrics" id="metrics"></div>
+      <div class="plots">
+        <section>
+          <h2>Đường tham chiếu và chuyển động đã tính</h2>
+          <canvas id="scene" width="850" height="850" aria-label="Đường tròn tham chiếu, đường tâm trục sau và điểm nhìn trước"></canvas>
+          <p class="caption">
+            Xám: tham chiếu · xanh: đường đã tính · vàng: dây nhìn trước. Hình xe chỉ để nhận biết hướng; bài này chưa kiểm va chạm thân xe hay ranh
+            làn.
+          </p>
+        </section>
+        <section>
+          <h2>Sai lệch tâm trục sau theo thời gian</h2>
+          <canvas id="errors" width="850" height="450" aria-label="Đồ thị sai số khoảng cách từ tâm trục sau tới đường tròn theo thời gian"></canvas>
+          <h2>Góc lái thực áp và lệnh yêu cầu</h2>
+          <canvas id="steering" width="850" height="450" aria-label="Đồ thị góc lái và giới hạn góc lái theo thời gian"></canvas>
+          <p class="caption">Xanh: góc thực áp · vàng: lệnh sau giới hạn góc · đỏ: biên ±25°. Tốc độ thay đổi góc lái giới hạn ở 40°/s.</p>
+        </section>
+      </div>
+      <label for="timeline">Xem từng thời điểm: <output id="time-label">0,00 s</output></label
+      ><input type="range" id="timeline" min="0" max="1000" value="0" step="1" />
+      <p id="frame" class="caption"></p>
+      <h2>Hình học và giả định</h2>
+      <p class="formula">
+        <i>κ</i> = 2<i>y</i><sub>t</sub>/<i>L</i><sub>d</sub>², &nbsp; <i>δ</i><sub>cmd</sub> = arctan(<i>Lκ</i>), &nbsp; <i>ψ̇</i> =
+        <i>v</i> tan(<i>δ</i>)/<i>L</i>.
+      </p>
+      <p>
+        Điểm đích là giao điểm phía trước giữa đường tròn tham chiếu và đường tròn nhìn trước đặt tại tâm trục sau. <i>L</i><sub>d</sub> là khoảng
+        cách thẳng tới đích; <i>y</i><sub>t</sub> là tọa độ ngang của đích trong hệ trục xe. Góc trong mô hình tính bằng radian, đồ thị hiển thị độ.
+      </p>
+      <p>
+        Chiều dài cơ sở 2,8 m; giới hạn góc lái ±25°; giới hạn tốc độ góc lái 40°/s; chu kỳ 0,02 s; vận tốc dọc không đổi. Các giá trị là cấu hình
+        minh họa. Mỗi khoảng dùng nghiệm chính xác của mô hình xe đạp khi giữ góc lái; giới hạn tốc độ góc lái được áp bằng bước cập nhật rời rạc.
+      </p>
+      <p>
+        <strong>Kiểm thêm gia tốc ngang:</strong> bài tập chọn ngưỡng thiết kế 2,5 m/s². Trên đường tròn 20 m, vận tốc danh định để đạt ngưỡng là
+        √(2,5 × 20) ≈ 7,07 m/s. Kết quả động học có thể vẫn bám tốt ở 8 hoặc 12 m/s nhưng vượt ngưỡng này. Mô hình chưa tính trượt lốp, động lực học
+        thân xe, bộ điều khiển ga/phanh hay độ bám mặt đường.
+      </p>
+      <h2>Thử và giải thích</h2>
+      <ol>
+        <li>Giữ vận tốc 4 m/s, chạy khoảng nhìn trước 3, 6, 10 m. So sai số ban đầu, RMSE và thời gian chạm giới hạn.</li>
+        <li>Giữ khoảng nhìn trước 6 m, so vận tốc 4, 8, 12 m/s. Phân biệt việc bám hình học với điều kiện gia tốc ngang của bài tập.</li>
+        <li>Đổi sai lệch đầu 0 và 1,5 m. Giải thích phản ứng đầu quá trình và lý do cần cùng thời lượng để so sánh.</li>
+      </ol>
+      <p>
+        Nếu không còn giao điểm nhìn trước hợp lệ, phép tính dừng với lý do rõ ràng. Đây là dừng thí nghiệm số; chưa mô phỏng một thao tác phanh an
+        toàn. RMSE lấy trên các mốc trạng thái, gồm mốc đầu. “Thời gian giới hạn” đếm các khoảng mà lệnh bị cắt hoặc tốc độ thay đổi bị giới hạn.
+      </p>
+      <h2>Đọc thêm</h2>
+      <p>
+        <a href="https://publications.ri.cmu.edu/implementation-of-the-pure-pursuit-path-tracking-algorithm"
+          >R. Craig Coulter — Implementation of the Pure Pursuit Path Tracking Algorithm</a
+        >;
+        <a href="https://www.coursera.org/learn/intro-self-driving-cars/lecture/44N7x/lesson-2-geometric-lateral-control-pure-pursuit"
+          >University of Toronto / Coursera — Pure Pursuit</a
+        >. Mã mô phỏng và đồ họa ở đây được biên soạn riêng cho bài thực hành, không sử dụng mã bài tập hoặc đáp án của Coursera.
+      </p>
+    </main>
+    <script src="model.js"></script>
+    <script>
+      "use strict";
+      const $ = (id) => document.getElementById(id);
+      let result,
+        frameIndex = 0;
+      const f = (x, n = 3) => x.toLocaleString("vi-VN", { minimumFractionDigits: n, maximumFractionDigits: n });
+      // Canvas resolves light-dark() via a hidden DOM sample, matching the active theme.
+      function palette() {
+        const sample = document.createElement("span");
+        sample.style.display = "none";
+        document.body.append(sample);
+        const out = {};
+        for (const n of ["fg", "muted", "blue", "gold", "red", "bg", "line"]) {
+          sample.style.color = `var(--${n})`;
+          out[n] = getComputedStyle(sample).color;
+        }
+        sample.remove();
+        return out;
+      }
+      function draw() {
+        if (!result) return;
+        const c = palette(),
+          q = result.rows[frameIndex],
+          ctx = $("scene").getContext("2d"),
+          W = 850,
+          scale = 15,
+          X = (x) => W / 2 + x * scale,
+          Y = (y) => W / 2 - y * scale;
+        ctx.clearRect(0, 0, W, W);
+        ctx.strokeStyle = c.line;
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.arc(X(0), Y(0), 20 * scale, 0, 2 * Math.PI);
+        ctx.stroke();
+        ctx.strokeStyle = c.blue;
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        result.rows.slice(0, frameIndex + 1).forEach((p, i) => (i ? ctx.lineTo(X(p.x), Y(p.y)) : ctx.moveTo(X(p.x), Y(p.y))));
+        ctx.stroke();
+        const goal = TrackingModel.target(q.x, q.y, result.options.lookahead);
+        if (goal) {
+          ctx.strokeStyle = c.gold;
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.moveTo(X(q.x), Y(q.y));
+          ctx.lineTo(X(goal.x), Y(goal.y));
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.arc(X(goal.x), Y(goal.y), 6, 0, 7);
+          ctx.fillStyle = c.gold;
+          ctx.fill();
+        }
+        ctx.save();
+        ctx.translate(X(q.x), Y(q.y));
+        ctx.rotate(-q.yaw);
+        ctx.strokeStyle = c.blue;
+        ctx.fillStyle = c.bg;
+        ctx.lineWidth = 3;
+        ctx.fillRect(-1.2 * scale, -0.9 * scale, 4.4 * scale, 1.8 * scale);
+        ctx.strokeRect(-1.2 * scale, -0.9 * scale, 4.4 * scale, 1.8 * scale);
+        ctx.fillStyle = c.blue;
+        ctx.beginPath();
+        ctx.arc(0, 0, 5, 0, 7);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.lineTo(3.2 * scale, 0);
+        ctx.stroke();
+        ctx.restore();
+        ctx.font = `${Math.max(22, (12 * W) / Math.max($("scene").clientWidth, 1))}px system-ui`;
+        ctx.fillStyle = c.muted;
+        ctx.fillText("x (m)", W - 110, W / 2 + 40);
+        ctx.fillText("y (m)", W / 2 + 15, 32);
+        plot("errors", [{ key: "error", color: c.blue }], Math.max(0.6, result.maxError * 1.12), [], c);
+        plot(
+          "steering",
+          [
+            { key: "steer", color: c.blue },
+            { key: "command", color: c.gold },
+          ],
+          28,
+          [25, -25],
+          c,
+          180 / Math.PI
+        );
+        $("time-label").textContent = f(q.t, 2) + " s";
+        $("frame").textContent = `Thời điểm ${f(q.t, 2)} s · sai lệch ${f(q.error)} m · góc lái ${f(
+          (q.steer * 180) / Math.PI,
+          2
+        )}° · gia tốc ngang mô hình ${f(q.lateral, 2)} m/s².`;
+      }
+      function plot(id, series, limit, bounds, c, factor = 1) {
+        const cv = $(id),
+          g = cv.getContext("2d"),
+          left = 80,
+          top = 50,
+          w = 730,
+          h = 330,
+          xx = (t) => left + (t / 20) * w,
+          yy = (v) => top + h / 2 - ((v / limit) * h) / 2;
+        g.clearRect(0, 0, 850, 450);
+        g.strokeStyle = c.line;
+        g.lineWidth = 1;
+        g.strokeRect(left, top, w, h);
+        g.font = `${Math.max(20, (12 * 850) / Math.max(cv.clientWidth, 1))}px system-ui`;
+        g.fillStyle = c.muted;
+        for (let t = 0; t <= 20; t += 5) {
+          g.fillText(String(t), xx(t) - 8, 410);
+        }
+        for (const v of [-limit, 0, limit]) g.fillText(f(v, 1), 3, yy(v) + 7);
+        g.fillText("t (s)", 760, 440);
+        g.fillText(id === "errors" ? "e (m)" : "δ (°)", left + 8, 30);
+        g.strokeStyle = c.line;
+        g.beginPath();
+        g.moveTo(left, yy(0));
+        g.lineTo(left + w, yy(0));
+        g.stroke();
+        for (const b of bounds) {
+          g.strokeStyle = c.red;
+          g.setLineDash([9, 7]);
+          g.beginPath();
+          g.moveTo(left, yy(b));
+          g.lineTo(left + w, yy(b));
+          g.stroke();
+          g.setLineDash([]);
+        }
+        for (const s of series) {
+          g.strokeStyle = s.color;
+          g.lineWidth = 3;
+          g.beginPath();
+          let started = false;
+          for (const r of result.rows) {
+            if (r[s.key] === null) continue;
+            const x = xx(r.t),
+              y = yy(r[s.key] * factor);
+            if (started) g.lineTo(x, y);
+            else {
+              g.moveTo(x, y);
+              started = true;
+            }
+          }
+          g.stroke();
+        }
+        g.strokeStyle = c.muted;
+        g.lineWidth = 1.5;
+        g.beginPath();
+        g.moveTo(xx(result.rows[frameIndex].t), top);
+        g.lineTo(xx(result.rows[frameIndex].t), top + h);
+        g.stroke();
+      }
+      function run() {
+        result = TrackingModel.run({ speed: Number($("speed").value), lookahead: Number($("lookahead").value), offset: Number($("offset").value) });
+        frameIndex = result.rows.length - 1;
+        $("timeline").max = frameIndex;
+        $("timeline").value = frameIndex;
+        $("status").textContent =
+          result.reason === "completed"
+            ? `Đã tính đủ ${f(result.time, 2)} s với ${result.rows.length} mốc trạng thái.`
+            : `Dừng tại ${f(result.time, 2)} s: không tìm được giao điểm nhìn trước hợp lệ.`;
+        $("metrics").replaceChildren();
+        for (const [label, value] of [
+          ["RMSE", f(result.rmse) + " m"],
+          ["Sai số lớn nhất", f(result.maxError) + " m"],
+          ["Thời gian giới hạn góc", f(result.saturationTime, 2) + " s"],
+          ["Bị giới hạn tốc độ lái", f(result.rateLimitTime, 2) + " s"],
+          ["Gia tốc ngang lớn nhất", f(result.peakLateral, 2) + " m/s²"],
+        ]) {
+          const el = document.createElement("span");
+          el.textContent = label + ": ";
+          const strong = document.createElement("strong");
+          strong.textContent = value;
+          el.append(strong);
+          $("metrics").append(el);
+        }
+        if (result.peakLateral > TrackingModel.P.lateralLimit) {
+          const warn = document.createElement("p");
+          warn.className = "warning";
+          warn.textContent = "Vượt ngưỡng gia tốc ngang 2,5 m/s² đã chọn. Sai số bám nhỏ vẫn chưa đủ để nhận chuyển động.";
+          $("metrics").append(warn);
+        }
+        draw();
+      }
+      $("controls").addEventListener("submit", (e) => {
+        e.preventDefault();
+        run();
+      });
+      $("timeline").addEventListener("input", () => {
+        frameIndex = Number($("timeline").value);
+        draw();
+      });
+      $("export").addEventListener("click", () => {
+        const blob = new Blob([JSON.stringify(result, null, 2)], { type: "application/json" }),
+          url = URL.createObjectURL(blob),
+          a = document.createElement("a");
+        a.href = url;
+        a.download = "pure-pursuit-result.json";
+        a.click();
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+      });
+      matchMedia("(prefers-color-scheme: dark)").addEventListener("change", draw);
+      new ResizeObserver(draw).observe($("scene"));
+      run();
+    </script>
+  </body>
+</html>
