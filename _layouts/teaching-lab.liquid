@@ -3,7 +3,7 @@ layout: page
 ---
 {% assign course = site.data.teaching.courses | where: 'slug', page.course_slug | first %}
 {% assign lab = course.labs | where: 'number', page.chapter_number | first %}
-<link rel="stylesheet" href="{{ '/assets/css/teaching.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/teaching.css' | relative_url }}?v=2">
 <div class="teaching teaching-lesson" lang="vi">
   <nav class="teaching-breadcrumb" aria-label="Đường dẫn bài thực hành">
     <a href="{{ '/teaching/' | relative_url }}">Teaching</a><span aria-hidden="true">/</span>
