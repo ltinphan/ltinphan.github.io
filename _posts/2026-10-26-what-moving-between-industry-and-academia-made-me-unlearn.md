@@ -7,7 +7,15 @@ tags: [career, robotics, research]
 categories: robotics
 ---
 
-I have spent the last several years moving between two worlds that each like to explain the other one to themselves. I built warehouse robots in Tokyo, left for Seoul to do a PhD in legged robots, and came back to Ho Chi Minh City to work on manipulation. When people ask about those moves, they usually ask about the hardware, as if the interesting part were the actuators. It was not. The interesting part was what each move forced me to unlearn.
+I have spent the last several years moving between two worlds that each like to explain the other one to themselves. I did a PhD on legged robots in Seoul, then went to Tokyo to build warehouse robots, and now I am back in Ho Chi Minh City working on manipulation. When people ask about those moves, they usually ask about the hardware, as if the interesting part were the actuators. It was not. The interesting part was what each move forced me to unlearn.
+
+## A data problem wearing a robot costume
+
+Seoul is where I went the other way: into research, for a PhD on how legged machines walk. I went in expecting a controls problem. I came out convinced it was mostly something else.
+
+For years the field had treated locomotion as a matter of better models and tighter controllers, and there was real, hard-won progress in that direction. But the honest conclusion, after spending that time inside it, was that we did not yet have the compute or the data to make general locomotion cheap. What looked like a robotics problem was, underneath, a data problem wearing a robot costume.
+
+That is a harder thing to unlearn than it sounds, because it changes what the word _progress_ means. If the bottleneck is data, then a demo that works on one robot, in one lab, under one carefully held set of conditions is not a preview of the future. It is a sample of one. And a sample of one does not generalize, no matter how cleanly the video cuts. The habit I had to break was treating an impressive single result as evidence about a general capability, when the actual constraint was sitting one layer below the thing everyone was celebrating.
 
 ## The last mile is the product
 
@@ -17,25 +25,17 @@ In the lab, the environment cooperates. The floor is level, the lighting is the 
 
 I had been taught to think of deployment as the final step in a long sequence, the thing you get to once everything else is done. Tokyo taught me it is the product. The integration, the failure modes, the operator who finds the gap in your assumptions and does not care that the assumption was reasonable — that is the thing you are actually selling. The robot is just the part you could already build in the lab. What separates a company from a lab is everything that happens after the lab stops being involved.
 
-## A data problem wearing a robot costume
-
-Seoul was the opposite direction: out of industry and into research, for a PhD on how legged machines walk. I went in expecting a controls problem. I came out convinced it was mostly something else.
-
-For years the field had treated locomotion as a matter of better models and tighter controllers, and there was real, hard-won progress in that direction. But the honest conclusion, after spending that time inside it, was that we did not yet have the compute or the data to make general locomotion cheap. What looked like a robotics problem was, underneath, a data problem wearing a robot costume.
-
-That is a harder thing to unlearn than it sounds, because it changes what the word _progress_ means. If the bottleneck is data, then a demo that works on one robot, in one lab, under one carefully held set of conditions is not a preview of the future. It is a sample of one. And a sample of one does not generalize, no matter how cleanly the video cuts. The habit I had to break was treating an impressive single result as evidence about a general capability, when the actual constraint was sitting one layer below the thing everyone was celebrating.
-
 ## The unlearning is the skill
 
-Looking back, the through-line between Tokyo and Seoul was not any piece of hardware. It was the same realization arriving from two directions: some problems you cannot skip.
+Looking back, the through-line between Seoul and Tokyo was not any piece of hardware. It was the same realization arriving from two directions: some problems you cannot skip.
 
-Tokyo said you cannot skip the last mile, no matter how much of the rest you have already finished. Seoul said you cannot skip the data, no matter how elegant the model sitting on top of it. Both are versions of the same mistake, which is mistaking the part you enjoy for the part that matters.
+Seoul said you cannot skip the data, no matter how elegant the model sitting on top of it. Tokyo said you cannot skip the last mile, no matter how much of the rest you have already finished. Both are versions of the same mistake, which is mistaking the part you enjoy for the part that matters.
 
-This is, I think, the most underrated skill a person can build across a career that crosses industry and research: the ability to notice which problems are being skipped, and to say so before the schedule runs out. It is not a technical skill, and it cannot be taught in a lecture. It is only acquired by being in the room when the skip happens and watching what it costs. Both transitions cost me a version of that lesson, and it was worth more than everything technical I picked up along the way.
+This is, I think, the most underrated skill a person can build across a career that crosses research and industry: the ability to notice which problems are being skipped, and to say so before the schedule runs out. It is not a technical skill, and it cannot be taught in a lecture. It is only acquired by being in the room when the skip happens and watching what it costs. Both transitions cost me a version of that lesson, and it was worth more than everything technical I picked up along the way.
 
 ## Coming back, and staying honest
 
-Now I am back in industry, working on manipulation, and I teach Smart Vehicle OS at NTT University on the side. The teaching is not a side project in the way people assume. It is the thing that keeps me honest.
+Now I am back in Ho Chi Minh City, working on manipulation, and I teach Smart Vehicle OS at NTT University on the side. The teaching is not a side project in the way people assume. It is the thing that keeps me honest.
 
 A classroom does not let you get away with the kind of confidence a demo video does. Students ask the question you were hoping nobody would ask, because they do not yet know which assumptions are supposed to be sacred. They will find the one you buried, and they will do it in front of the rest of the class. Every term I have to say out loud what is actually generalizable and what is just a demo that got lucky. Saying it out loud is how I check that I actually believe it, and it is the reason I have not stopped teaching even when the work gets busy.
 
