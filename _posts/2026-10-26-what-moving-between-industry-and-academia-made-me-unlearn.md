@@ -1,7 +1,7 @@
 ---
 layout: post
 title: What Moving Between Industry and Academia Made Me Unlearn
-date: 2026-10-26 09:00:00
+date: 2026-10-26 00:00:00
 description: The career moves that mattered most were the lessons I had to unlearn, not the skills I picked up.
 tags: [career, robotics, research]
 categories: robotics
