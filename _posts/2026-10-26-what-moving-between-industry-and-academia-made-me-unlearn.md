@@ -7,7 +7,7 @@ tags: [career, robotics, research]
 categories: robotics
 ---
 
-I have spent the last several years moving between two worlds that each like to explain the other one to themselves. I did a PhD on legged robots in Seoul, then went to Tokyo to build warehouse robots, and now I am back in Ho Chi Minh City working on manipulation. When people ask about those moves, they usually ask about the hardware, as if the interesting part were the actuators. It was not. The interesting part was what each move forced me to unlearn.
+I have spent the last several years moving between two worlds that each like to explain the other one to themselves. I did a PhD on legged robots in Seoul, later built warehouse robots in Tokyo, and now I am back in Ho Chi Minh City working on manipulation. When people ask about those moves, they usually ask about the hardware, as if the interesting part were the actuators. It was not. The interesting part was what each move forced me to unlearn.
 
 ## A data problem wearing a robot costume
 
@@ -19,7 +19,7 @@ That is a harder thing to unlearn than it sounds, because it changes what the wo
 
 ## The last mile is the product
 
-Tokyo was my first real job in industry, and it taught me a lesson I was not ready for. A robot that works in the lab and dies on a customer's floor is not ninety percent done. It is zero percent done.
+Tokyo is where I learned a lesson I was not ready for. A robot that works in the lab and dies on a customer's floor is not ninety percent done. It is zero percent done.
 
 In the lab, the environment cooperates. The floor is level, the lighting is the lighting you set, and the person operating the machine is the same person who wrote the code. On a customer's site, none of that holds. The floor has a slope nobody mentioned in the spec. The operator does something you never simulated, because it was the obvious thing to do and no one thought it needed simulating. The robot that looked finished in the demo video spends its first week on site discovering an entire category of failure that did not exist in your test suite.
 
