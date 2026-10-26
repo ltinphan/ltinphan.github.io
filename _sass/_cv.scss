@@ -15,6 +15,33 @@ table.table-cv {
   }
 }
 
+.cv {
+  .table-cv-map {
+    display: table;
+    table-layout: fixed;
+
+    td {
+      overflow-wrap: anywhere;
+    }
+
+    td:first-child {
+      width: 6rem;
+    }
+  }
+
+  .date-column {
+    .table-cv {
+      width: 100%;
+    }
+
+    .badge,
+    .location {
+      white-space: normal;
+      line-height: 1.4;
+    }
+  }
+}
+
 a.btncv {
   color: var(--global-text-color) !important;
   border: 1px solid var(--global-text-color) !important;

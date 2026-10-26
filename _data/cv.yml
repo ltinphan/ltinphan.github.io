@@ -1,110 +1,163 @@
+---
 - title: General Information
   type: map
   contents:
-    - name: Full Name in Vietnamese
-      value: Phan Lương Tín
-    - name: Full Name in English
-      value: Luong Tin Phan, in short Tin Phan
-    - name: Languages
-      value: English, Vietnamese, Korean(reading and writing), French(reading and writing)
-
-- title: Education
-  type: time_table
-  contents:
-    - title: PhD
-      institution: Sungkyunkwan University, Suwon, South Korea
-      year: 2020
-      description:
-        - A PhD student in the Department of Mechanical Engineering.
-        - Research on quadruped locomotion and control.
-        - title: Thesis on Running Quadruped with Articulated Spine
-          contents:
-            - Dynamics of Running Quadruped with Articulated Spine.
-            - Control Strategy for Running Quadruped.
-    - title: Bachelor of Engineering
-      institution: Danang University of Technology, Danang, Vietnam
-      year: 2012
-      description:
-        - A student of the PFIEV program which is a cooperation program between the French Ministry of Foreign Affairs and the Vietnamese Ministry of Education and Training.
-        - Major in Automatic Control
-
+    - name: Name
+      value: Luong Tin Phan, Ph.D.
+    - name: Label
+      value: Robotics Technology Leader | Motion Planning & Control | Physical AI |
+        Industrial Functional Safety
+    - name: Email
+      value: luongtin@gmail.com
+    - name: Phone
+      value: "+84 8-7777-4753"
+    - name: Url
+      value: https://tinrobotics.com/
+    - name: Summary
+      value: Robotics engineering leader with a Ph.D. in robotics (quadruped locomotion
+        control, Sungkyunkwan University) and a track record of taking robots from R&D
+        to continuous industrial deployment. Built and owned motion planning, real-time
+        control and multi-robot coordination stacks for AMRs, automated parking and
+        autonomous vehicles, including Vietnam's first robot Fleet Management System
+        running 24-hour, 6-day-a-week operations at major FDI manufacturing sites. Leads
+        engineering teams and system architecture for safe, always-on operation, with
+        hands-on delivery against ISO 13849-1 (safety of machinery control systems),
+        ISO 3691-4 (driverless industrial trucks) and ISO 14644 Class 6 cleanroom environments.
+        Currently heading R&D for Physical AI on humanoid and quadruped platforms and
+        LLM-enabled service robots.
+    - name: LinkedIn
+      value: <a href="https://linkedin.com/in/luongtinphan">https://linkedin.com/in/luongtinphan</a>
+    - name: Google Scholar
+      value: <a href="https://scholar.google.com/citations?user=3RO0jCIAAAAJ">https://scholar.google.com/citations?user=3RO0jCIAAAAJ</a>
+    - name: Portfolio
+      value: <a href="https://nextrobotics.io/portfolio/nextarm">https://nextrobotics.io/portfolio/nextarm</a>
 - title: Experience
   type: time_table
   contents:
-    - title: Robotics Engineer
-      institution: Rapyuta Robotics, Tokyo, Japan
-      year: 2020 - 2021
+    - title: Chief of Revenue & Operations / Head of R&D
+      institution: Next Robotics, Ho Chi Minh City, Vietnam
+      year: 2025-05 - Present
       description:
-        - Developed and implemented AMR motion algorithms for various applications.
-        - Collaborated with cross-functional teams to enhance AMR capabilities.
-        - title: Multiple Projects.
-          contents:
-            - Autonomous mobile robots.
-            - Autonomous forklifts.
-    - title: Robotics Engineer/Researcher
-      institution: VinAI Research, Hanoi, Vietnam
-      year: 2021
+        - Head of Robotics & AI Solutions
+        - Own presales and client acquisition end to end, from solution design and cost
+          estimation for strategic bids to contract closing; delivered the company's all-time-high
+          sales in 2026.
+        - Oversee hardware outsourcing, procurement and inventory for cost efficiency,
+          and direct project delivery from planning to on-time, high-quality execution.
+        - Opened new markets with two ongoing projects in Japan and Korea, and won the
+          first Physical AI project with a new strategic customer.
+        - "Lead the R&D team on new strategic products: Physical AI for humanoids and
+          quadrupeds, and LLM-based interaction for service robots."
+    - title: Technical Lead
+      institution: Next Robotics (FPT Software spin-off), Ho Chi Minh City, Vietnam
+      year: 2022-10 - 2025-05
       description:
-        - Developed motion planning algorithms for autonomous driving.
-        - Developed and implemented a novel trajectory optimization method.
-
+        - "Product Owner and system architect of the Fleet Management System (FMS) for
+          AMRs: multi-robot coordination and motion planning; the first robot FMS developed
+          in Vietnam."
+        - Achieved 2 mm AMR positioning accuracy, about 5 times more precise than the
+          typical industry level.
+        - Led the engineering team from architecture to on-site commissioning at major
+          FDI manufacturing sites; 50+ robots running continuously in 24-hour, 6-day-a-week
+          operations.
+        - "Engineered deployments to industrial safety standards: ISO 13849-1 (safety-related
+          parts of control systems), ISO 3691-4 (driverless industrial trucks/AGVs), and
+          ISO 14644 Class 6 cleanroom environments."
     - title: Solution Architect
-      institution: NextG, FPT Software, Ho Chi Minh, Vietnam.
-      year: 2021-2022
+      institution: FPT Software, Ho Chi Minh City, Vietnam
+      year: 2021-10 - 2022-10
       description:
-        - Designed and implemented solutions for various clients.
-        - Collaborated with cross-functional teams to deliver high-quality solutions.
-        - title: Multiple Projects.
-          contents:
-            - Autonomous mobile robots.
-            - Autonomous driving cars.
-
-    - title: Senior Robotics Engineer/Tech Lead
-      institution: Next Robotics, Ho Chi Minh, Vietnam
-      year: 2022 - present
+        - Motion Planning owner and architect for automated car parking and AMR products;
+          approximately 10 cm parking accuracy and 3 cm AMR positioning accuracy.
+        - Delivered Vietnam's first complete automated parking system (perpendicular,
+          parallel and angled) and the first multi-AMR warehouse deployments in Vietnam.
+    - title: Robotics Software Engineer
+      institution: VinAI Research, Ho Chi Minh City, Vietnam
+      year: 2021-03 - 2021-10
       description:
-        - Leading a team of robotics engineers to develop and implement advanced robotics solutions.
-        - Collaborating with cross-functional teams to deliver high-quality solutions.
-        - Managing multiple projects in AMR solutions in various industries (e.g., warehouse, manufacturing, semiconductor).
-        - title: Multiple Projects.
-          contents:
-            - Autonomous mobile robots.
-            - Autonomous forklifts.
-
-- title: Honors and Awards
+        - Developed motion planning and control for autonomous vehicles using camera and
+          RTK-GNSS localization over DDS middleware; supported public-road testing.
+        - Contributed to Vietnam's first autonomous vehicle operating on normal roads
+          at high speed.
+    - title: Robotics Software Engineer
+      institution: Rapyuta Robotics, Tokyo, Japan
+      year: 2020-03 - 2021-04
+      description:
+        - Developed AMR behaviors and LiDAR SLAM on ROS, including an autonomous forklift
+          with partners.
+        - Tested and benchmarked robot performance; set up and configured safety devices
+          (SICK laser scanners, proximity sensors).
+    - title: Academic Leadership (part-time, concurrent)
+      institution: Nguyen Tat Thanh University; University of Greenwich Vietnam
+      year: 2022-11 - Present
+      description:
+        - Director, automa Lab (NTTU); helped launch the undergraduate Electric Vehicle
+          major.
+        - Lecturer; designed syllabi for Self-Driving Operating Systems and Motion Planning.
+- title: Education
   type: time_table
   contents:
-    - year: 2023
-      items:
-        - NextAMR - Top 10 Qualcomm Vietnam Innovation Challenge
-    - year: 2022
-      items:
-        - NextAMR - Sao Khuê 2022
-    - year: 2021
-      items:
-        - Silver Prize - OpenCV Spatial AI Challenge 2021
-    - year: 2013
-      items:
-        - Full scholarship for the Ph.D program from Sungkyunkwan University.
-
-- title: Academic Interests
+    - title: Combined M.S./Ph.D., Robotics (Quadruped Robots)
+      institution: Sungkyunkwan University, Korea
+      year: 2013-03 - 2020-02
+      description:
+        - Full scholarship.
+        - "Thesis: Control Strategy for a Running Quadruped Robot with an Articulated
+          Spine. Advisor: Prof. Hyouk Ryeol Choi."
+        - "Publications: 2 journal articles, 2 IEEE/RSJ IROS papers, 2 URAI papers."
+    - title: Engineer Degree, Automation (PFIEV Program)
+      institution: Danang University of Technology, Vietnam
+      year: 2007-09 - 2012-08
+      description: []
+- title: Awards
+  type: time_table
+  contents:
+    - year: "2020"
+      title: Silver Prize, OpenCV Spatial AI Competition
+      institution: OpenCV
+    - year: "2013"
+      title: Full scholarship for the combined M.S./Ph.D. program
+      institution: Sungkyunkwan University
+- title: Skills
   type: nested_list
   contents:
-    - title: Legged Robots.
+    - title: Robotics
       items:
-        - Quadruped Robot: Dynamics and Control.
-        - Quadruped Robot: Gait Planning and Optimization.
-    - title: Autonomous Driving Vehicle.
+        - Motion planning
+        - Real-time control
+        - Multi-robot coordination & fleet management
+        - Legged locomotion
+        - SLAM & localization (LiDAR, camera, RTK-GNSS)
+    - title: Software
       items:
-        - Autonomous Driving: Perception and Navigation.
-        - Autonomous Driving: Path Planning and Control.
-        - Quadruped Robot: Gait Planning and Optimization.
-    - title: Autonomous Mobile Robots.
+        - C++
+        - Python
+        - ROS
+        - DDS
+        - System & software architecture for continuous, safe operation
+    - title: Leadership
       items:
-        - Autonomous Mobile Robots.
-        - Fleet Management System.
-
-- title: Other Interests
-  type: list
+        - Engineering team building & leadership
+        - Product ownership
+        - R&D roadmapping
+        - Customer & partner delivery (Vietnam, Japan, Korea)
+    - title: Emerging
+      items:
+        - Physical AI for humanoids & quadrupeds
+        - LLM integration for service robots
+    - title: Standards & Safety
+      items:
+        - "ISO 13849-1: Functional safety of machinery control systems"
+        - "ISO 3691-4: Driverless industrial trucks / AGVs"
+        - "ISO 14644 Class 6: Cleanroom deployment"
+- title: Languages
+  type: map
   contents:
-    - <u>Hobbies:</u> Sports, Music, Reading.
+    - name: Vietnamese
+      value: Native
+    - name: English
+      value: Fluent
+    - name: French
+      value: Basic conversation
+    - name: Korean
+      value: Basic conversation
