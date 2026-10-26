@@ -72,7 +72,18 @@ ninja.data = [{
               handler: () => {
                 window.location.href = "/blog/";
               },
-            },{id: "post-a-working-demo-is-not-a-working-system",
+            },{id: "post-what-moving-between-industry-and-academia-made-me-unlearn",
+      
+        title: "What Moving Between Industry and Academia Made Me Unlearn",
+      
+      description: "The career moves that mattered most were the lessons I had to unlearn, not the skills I picked up.",
+      section: "Posts",
+      handler: () => {
+        
+          window.location.href = "/blog/2026/what-moving-between-industry-and-academia-made-me-unlearn/";
+        
+      },
+    },{id: "post-a-working-demo-is-not-a-working-system",
       
         title: "A Working Demo Is Not a Working System",
       
