@@ -2,7 +2,8 @@
 layout: about
 title: about
 permalink: /
-# subtitle: <a href='#'>Affiliations</a>. Address. Contacts. Motto. Etc.
+subtitle: Robotics Technology Leader · Physical AI · Motion Planning & Control
+description: Luong Tin Phan, Ph.D. — Chief of Revenue & Operations / Head of R&D at Next Robotics, focusing on Physical AI for humanoids and quadrupeds, motion planning and control.
 
 profile:
   align: right
@@ -25,10 +26,12 @@ latest_posts:
   limit: 3 # leave blank to include all the blog posts
 ---
 
-I am Phan Lương Tín (academic English name: Luong Tin Phan), a Robotics Expert with a Ph.D. in Mechanical Engineering (specializing in Robotics) from Sungkyunkwan University, South Korea. My expertise spans motion planning, control systems, and integration for legged robots, autonomous vehicles, and multi-robot coordination in industrial environments.
+I am **Phan Lương Tín (Luong Tin Phan)**, a robotics technology leader and **Chief of Revenue & Operations / Head of R&D at [Next Robotics](https://nextrobotics.io/)**. I lead Robotics & AI Solutions, connecting research and engineering with product development, customer delivery and business growth in Vietnam, Japan and Korea.
 
-Currently, I lead core robotics products at Next Robotics as Technical Lead, including the development of Vietnam’s first fleet management system for autonomous mobile robots, deployed in large-scale logistics operations. I also run the AutoMa Lab and lead academic programs and applied research at Nguyen Tat Thanh University and the University of Greenwich (Vietnam), facilitating bilingual instruction, research supervision, and curriculum development in Robotics and AI.
+My current research and R&D focus is **Physical AI for humanoid and quadruped robots**, alongside **LLM-enabled interaction for service robots**. Building on motion planning, real-time control and legged locomotion, I work toward intelligent robots that can operate reliably and safely in the physical world.
 
-I previously contributed to robotics initiatives in Japan and Vietnam, focusing on industrial automation, warehouse robotics, and autonomous driving technologies in real-world deployments.
+My experience spans autonomous mobile robots, automated parking, autonomous vehicles and multi-robot coordination. As Technical Lead at Next Robotics, I was the product owner and system architect of its Fleet Management System, taking AMR deployments from R&D to continuous industrial operation. Earlier roles at FPT Software, VinAI Research and Rapyuta Robotics shaped my approach to robotics software, system architecture and industrial safety.
 
-My research on quadruped locomotion and autonomous systems is ongoing, with recent publications in IROS, IEEE Transactions on Industrial Electronics and Intelligent Service Robotics
+I hold a Ph.D. from Sungkyunkwan University, South Korea, where I studied control strategies for a running quadruped robot with an articulated spine. Alongside my industry work, I direct **automa Lab** at Nguyen Tat Thanh University and teach at NTTU and the University of Greenwich Vietnam, developing courses in self-driving operating systems and motion planning.
+
+[View my full CV]({{ '/cv/' | relative_url }}) · [Explore my publications]({{ '/publications/' | relative_url }})
