@@ -1,0 +1,64 @@
+---
+layout: post
+title: Teaching Robots to Touch: Where Manipulation Data Actually Comes From
+date: 2026-11-02 09:00:00
+description: Dexterous manipulation is bottlenecked less by hardware than by how we collect contact-rich demonstration data.
+tags: [manipulation, physical-ai, data-collection]
+categories: robotics
+---
+
+Ask a room of robotics people which part of a humanoid robot worries them most, and most eyes still go to the legs. Walking is the visible hard problem. It is what gets the standing ovations at demos, what people picture when they hear the word _robot_.
+
+I think that attention is pointed at the wrong end of the machine. Over the past year, dexterous hands have quietly stopped being an accessory and started being treated as the product. Funding announcements around hand-focused robotics companies have been running unusually large, and more telling than any single round is the framing: the hand is now discussed as infrastructure, the thing everything else hangs off, not a peripheral bolted onto an otherwise complete robot.
+
+That re-pricing tracks something anyone who has done manipulation research learned the hard way. Locomotion forgives you. A legged robot that slips recovers, tries again, and the demo continues. Contact does not forgive. The moment a fingertip closes on an object, you are fighting friction that lies, surfaces that deform under load, and a sensor budget that never seems to live where the uncertainty actually is. A hand needs far more than five degrees of freedom to matter, and each one adds another place the controller can be subtly wrong.
+
+## The hardware stopped being the bottleneck
+
+Here is the uncomfortable part: while hands were getting better and cheaper, they were also getting ahead of us. We can now build a multi-finger hand with sensing at the fingertips. What we cannot yet do, at anything resembling scale, is collect the data to train one.
+
+The core problem is old and unglamorous. To learn contact-rich behaviour, a policy needs demonstrations of contact-rich behaviour. The standard way to get them is teleoperation: a human drives the real robot hand, the system records what happened. It works, and most of the results we celebrate were trained this way. But a full teleoperation rig means the robot arm, the hand, the workspace, and the operator all have to be occupied for every single demonstration. The robot is the scarcest resource in its own data pipeline.
+
+The operator's job is brutal in a specific way. A high-DoF hand means coordinating many finger joints simultaneously, in real time, through an interface that maps human motion onto a different geometry. People manage it, but slowly and unevenly, and the resulting demonstrations carry that unevenness. Collecting thousands of trials this way takes weeks and a great deal of patience.
+
+The obvious alternative is to skip the robot and record human hands directly — gloves, motion capture, plain video. That solves the equipment problem and creates a worse one. Human motion has to be estimated from whatever the sensors saw, then retargeted onto a robot hand with a different number of joints, different link lengths, and a different workspace. The retargeted trajectory is not the motion a human made; it is the best approximation a different hand can make of it. And crucially, it comes with no actions. You have video of what a hand looked like, not a record of what was commanded. Training a policy on retargeted human motion means bridging that gap, and the gap does not close for free.
+
+So the field has been stuck between two bad options: real actions at human-impossible cost, or human-cost data with no actions.
+
+## A different split of the problem
+
+A recent line of work — DexPort, from Xie and colleagues — caught my attention because it attacks the problem from a direction I had not fully considered: instead of making teleoperation cheaper, it changes what the operator actually does.
+
+The setup is a hand-held device: the same robot hand used at deployment, mounted with a camera, attached to a grip the operator can wave around freely. No robot arm is involved during collection at all. Because the hand doing the demonstrating is literally the hand that will later do the work, the embodiment gap — the tax every retargeting scheme pays — mostly disappears.
+
+The clever part is how finger control is handled. The operator does not drive each joint. Instead, the system maintains a library of skills: pre-programmed finger behaviours like close around whatever is in the palm, or re-grip, or a specific in-hand rotation. The operator's wrist motion places the hand, and then they trigger or adjust a skill for the fingers. The human handles positioning; the library handles coordination.
+
+I like this framing because it is honest about what teleoperation is actually bad at. Humans are superb at positioning objects in space — we do it all day. What we are bad at is specifying, in real time and through an abstraction layer, the exact joint trajectory of ten-plus finger joints. DexPort splits the task along that line: human does what humans are good at, the skill library does what software is good at.
+
+The reported numbers, from the paper itself, are worth pausing on. Over 2,500 demonstrations collected without a robot arm, across laboratory and in-the-wild settings. Policies trained on recorded commands substantially outperformed ones trained on measured states — the paper reports roughly 11% to 64% on their tasks, which is a huge spread for what sounds like a boring data-logging detail. And adding in-the-wild data roughly doubled success rates on some tasks, from about 36% to 78%.
+
+Two lessons there. First, what you log matters as much as how much: commanding a joint target and recording that command is a different dataset from recording where the joints ended up, and behavior cloning can tell the difference. Second, the data being "messy" — collected in unstructured environments, on a handheld rig — did not hurt it. It helped. Which supports something I have believed for a while: diversity of demonstration data beats cleanliness of demonstration data, at least past a floor of quality.
+
+## What this means for how we build data engines
+
+Stepping back from one paper, I think there are three shifts worth naming.
+
+First, the data engine is becoming the product. When the hand is infrastructure and the policy is trained on demonstrations, the durable asset is not the robot — it is the pipeline that turns human effort into robot training data. Whoever makes that conversion cheaper, at equal quality, wins whatever comes next in manipulation.
+
+Second, "teleoperation" is dissolving as a category. The old image was a human puppeteering a full robot through every motion. What is emerging is closer to supervision: a human specifies intent — where to go, which skill to use — and automated layers handle execution details. That is a fundamentally better division of labour, and it scales because the human contribution gets smaller per demonstration without getting less important.
+
+Third, embodiment gaps are a design constraint, not a post-hoc problem to be cleaned up in preprocessing. Using the same hand for collection and deployment is one answer. Building retargeting into the collection interface is another. Whatever the approach, the lesson is the same: the mismatch between how data was gathered and how the robot will act has to be attacked at the source, not patched over afterward.
+
+## The open questions I keep coming back to
+
+None of this closes the problem. A few things stay open.
+
+Does a policy learned against one hand's skill library transfer to a hand with a different degree-of-freedom layout? The skill library is doing real work in the DexPort scheme, and skills are written against a specific morphology. If every new hand means re-writing the library, some of the cost saving moves to engineering time.
+
+And there is the question behind the question: does skill-mediated collection still capture the long tail? A library encodes the coordinations somebody thought to program. The strange, creative, emergent finger strategies that humans improvising freely might produce — do those survive a structured interface? The history of robotics suggests the interesting failures live in the long tail, and structured collection is a bet that they do not matter. I am not sure that bet is right, and I do not think anyone is yet.
+
+Where does the uncertainty live now — the sensor, the contact model, or the policy? A year ago I would have said the sensor. With collection devices like these, I would move my answer toward the policy, and I suspect the field's answer will keep migrating that direction as collection gets cheaper. The hand stopped being the hard part. What the hand learns from is the hard part now.
+
+---
+
+_Some numbers cited above come from the DexPort paper (Xie et al., 2026), which I have linked throughout; I read the paper itself and report its figures as the authors present them. Funding-environment observations are qualitative and reflect the general tone of recent announcements, not audited totals._
