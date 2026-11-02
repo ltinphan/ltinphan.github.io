@@ -72,7 +72,18 @@ ninja.data = [{
               handler: () => {
                 window.location.href = "/blog/";
               },
-            },{id: "post-what-moving-between-industry-and-academia-made-me-unlearn",
+            },{id: "post-teaching-robots-to-touch-where-manipulation-data-actually-comes-from",
+      
+        title: "Teaching Robots to Touch: Where Manipulation Data Actually Comes From",
+      
+      description: "Dexterous manipulation is bottlenecked less by hardware than by how we collect contact-rich demonstration data.",
+      section: "Posts",
+      handler: () => {
+        
+          window.location.href = "/blog/2026/where-manipulation-data-actually-comes-from/";
+        
+      },
+    },{id: "post-what-moving-between-industry-and-academia-made-me-unlearn",
       
         title: "What Moving Between Industry and Academia Made Me Unlearn",
       
