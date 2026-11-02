@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Teaching Robots to Touch: Where Manipulation Data Actually Comes From
+title: "Teaching Robots to Touch: Where Manipulation Data Actually Comes From"
 date: 2026-11-02 09:00:00
 description: Dexterous manipulation is bottlenecked less by hardware than by how we collect contact-rich demonstration data.
 tags: [manipulation, physical-ai, data-collection]
