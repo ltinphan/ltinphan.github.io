@@ -72,18 +72,7 @@ ninja.data = [{
               handler: () => {
                 window.location.href = "/blog/";
               },
-            },{id: "post-",
-      
-        title: "",
-      
-      description: "",
-      section: "Posts",
-      handler: () => {
-        
-          window.location.href = "/blog/2026/2026-11-02-where-manipulation-data-actually-comes-from/";
-        
-      },
-    },{id: "post-what-moving-between-industry-and-academia-made-me-unlearn",
+            },{id: "post-what-moving-between-industry-and-academia-made-me-unlearn",
       
         title: "What Moving Between Industry and Academia Made Me Unlearn",
       
