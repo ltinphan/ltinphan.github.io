@@ -1,8 +1,8 @@
 # PathFinder browser adaptation
 
-Source: https://github.com/ltinphan/PathFinder/tree/63491c92e4614737b4b86e6812019db4db2fc3e9/web
+Source: https://github.com/ltinphan/PathFinder/tree/8fa365d88223871db75e1de66cd6d7ef421d8524/web
 
-Pinned fork commit: `63491c92e4614737b4b86e6812019db4db2fc3e9`
+Pinned fork commit: `8fa365d88223871db75e1de66cd6d7ef421d8524`
 Upstream: https://github.com/kevinwang1975/PathFinder
 Upstream base: `d067f683a942d3978975a24ac9e4b5fa2c418d49`
 Original author: Kevin Wang. Browser adaptation: Luong Tin Phan.
@@ -14,3 +14,5 @@ Changes from Java: incremental JS search; 4/8 directions; consistent Manhattan/o
 When updating, test the fork (node --test web/tests/\*.test.mjs), copy the six files, and update this pinned commit. Do not embed an unpinned remote runtime.
 
 RRT, RRT* and PRM are new extensions by Luong Tin Phan, not features of the upstream Java project. sampling.mjs adds deterministic continuous sampling, segment/rectangle collision checks, RRT* rewiring with descendant cost propagation, and a finite-roadmap Dijkstra query for PRM. Length units and finite-budget limitations are described in the UI and fork documentation.
+
+RRT stops at its first collision-free connection to the exact goal. Its tree, path, random generator and counters then stay fixed while RRT\* continues improving and PRM continues constructing its roadmap up to their trial limits. Module URLs are versioned with rrt-stop-20261106 to avoid stale browser/CDN code.
