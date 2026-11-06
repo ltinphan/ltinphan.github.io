@@ -1,8 +1,8 @@
 # PathFinder browser adaptation
 
-Source: https://github.com/ltinphan/PathFinder/tree/0cc544d4a85f1b48b560a0fb52a31e2a7c056936/web
+Source: https://github.com/ltinphan/PathFinder/tree/63491c92e4614737b4b86e6812019db4db2fc3e9/web
 
-Pinned fork commit: `0cc544d4a85f1b48b560a0fb52a31e2a7c056936`
+Pinned fork commit: `63491c92e4614737b4b86e6812019db4db2fc3e9`
 Upstream: https://github.com/kevinwang1975/PathFinder
 Upstream base: `d067f683a942d3978975a24ac9e4b5fa2c418d49`
 Original author: Kevin Wang. Browser adaptation: Luong Tin Phan.
