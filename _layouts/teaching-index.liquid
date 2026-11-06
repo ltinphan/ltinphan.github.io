@@ -16,6 +16,11 @@ layout: page
                 <a href="{{ '/teaching/' | append: course.slug | append: '/' | relative_url }}">{{ course.title }}</a>
               </h3>
               <p>{{ course.summary }}</p>
+              {% if course.simulator %}
+                <p class="teaching-actions">
+                  <a href="{{ course.simulator.url | relative_url }}">{{ course.simulator.title }} →</a>
+                </p>
+              {% endif %}
               {% if course.labs.size > 0 %}
                 <p class="teaching-meta">{{ course.labs.size }} bài thực hành</p>
               {% else %}

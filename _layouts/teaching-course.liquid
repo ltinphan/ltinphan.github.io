@@ -8,6 +8,13 @@ layout: page
     <a href="{{ '/teaching/' | relative_url }}">Teaching</a><span aria-hidden="true">/</span><span>{{ course.title }}</span>
   </nav>
   <p>{{ course.summary }}</p>
+  {% if course.simulator %}
+    <h2>{{ course.simulator.title }}</h2>
+    <p>{{ course.simulator.summary }}</p>
+    <p class="teaching-actions teaching-actions-primary">
+      <a href="{{ course.simulator.url | relative_url }}">Chạy mô phỏng thuật toán →</a>
+    </p>
+  {% endif %}
   <h2>Bài thực hành theo chương</h2>
   {% if course.labs.size > 0 %}
     <p>Đọc hướng dẫn trước khi chạy và lưu kết quả của từng lần thực hành để đối chiếu.</p>
