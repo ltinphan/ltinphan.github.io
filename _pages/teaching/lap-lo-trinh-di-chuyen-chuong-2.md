@@ -8,6 +8,8 @@ chapter_number: 2
 lang: vi
 ---
 
+Thử thêm [mô phỏng RRT, RRT\* và PRM](/teaching/lap-lo-trinh-di-chuyen/mo-phong-thuat-toan/?mode=sampling): giữ cùng bản đồ, đổi seed và số lần thử để quan sát cây, các nhánh nối lại và mạng kết nối.
+
 ## Thực hiện
 
 1. Chạy seed 7 với cấu hình gốc, đổi giữa RRT và PRM. Đọc số đỉnh, số cạnh và đường kết quả.

@@ -18,7 +18,7 @@ layout: page
               <p>{{ course.summary }}</p>
               {% if course.simulator %}
                 <p class="teaching-actions">
-                  <a href="{{ course.simulator.url | relative_url }}">{{ course.simulator.title }} · A* và Dijkstra →</a>
+                  <a href="{{ course.simulator.url | relative_url }}">{{ course.simulator.title }} →</a>
                 </p>
               {% endif %}
               {% if course.labs.size > 0 %}
