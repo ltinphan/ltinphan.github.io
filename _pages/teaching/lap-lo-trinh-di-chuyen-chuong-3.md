@@ -8,6 +8,8 @@ chapter_number: 3
 lang: vi
 ---
 
+Thử thêm [mô phỏng thuật toán A\* và Dijkstra](/teaching/lap-lo-trinh-di-chuyen/mo-phong-thuat-toan/): tự vẽ vật cản, đặt điểm đầu–đích và quan sát từng lần lấy ô ra khỏi hàng đợi trên cùng một bản đồ.
+
 ## Thực hiện
 
 1. Trên cùng lưới 8 hướng và bản đồ trung tâm, so Dijkstra với A\* octile. Đối chiếu chi phí 18,49 m và số lượt mở rộng 175 so với 42.

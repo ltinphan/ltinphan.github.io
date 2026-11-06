@@ -3,6 +3,10 @@ courses:
   - slug: lap-lo-trinh-di-chuyen
     title: Lập lộ trình di chuyển
     level: Đại học
+    simulator:
+      url: /teaching/lap-lo-trinh-di-chuyen/mo-phong-thuat-toan/
+      title: Mô phỏng thuật toán
+      summary: Vẽ vật cản, đặt điểm đầu–đích và so sánh từng bước A* với Dijkstra trên cùng bản đồ.
     summary: Từ chọn tuyến và xử lý tình huống đến tạo quỹ đạo và điều khiển bám đường cho ô tô tự hành. Qua các bài thực hành
       trên trình duyệt, sinh viên kiểm tra mô hình xe, giới hạn chuyển động và cách xử lý tình huống giao thông.
     labs:
