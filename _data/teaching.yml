@@ -6,7 +6,7 @@ courses:
     simulator:
       url: /teaching/lap-lo-trinh-di-chuyen/mo-phong-thuat-toan/
       title: Mô phỏng thuật toán
-      summary: Vẽ vật cản, đặt điểm đầu–đích và chạy từng bước A*, Dijkstra, RRT, RRT* và PRM. So sánh tìm kiếm trên lưới với cách xây cây và mạng lấy mẫu.
+      summary: Vẽ vật cản, đặt điểm đầu–đích và chạy từng bước BFS, DFS, A*, Dijkstra, RRT, RRT* và PRM. Quan sát hàng đợi, ngăn xếp, cây và mạng lấy mẫu trên cùng bản đồ.
     summary: Từ chọn tuyến và xử lý tình huống đến tạo quỹ đạo và điều khiển bám đường cho ô tô tự hành. Qua các bài thực hành
       trên trình duyệt, sinh viên kiểm tra mô hình xe, giới hạn chuyển động và cách xử lý tình huống giao thông.
     labs:
